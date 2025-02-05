@@ -1,9 +1,11 @@
+import Rounting from "./routes/Rounting"
 
 
 function App() {
 
   return (
     <>
+      <Rounting />
     </>
   )
 }
