@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null)
 
-    const registerUser = async (email, password) => {
+    const registerUser = async ({ email, password }) => {
         try {
             const userCredential = await createUserWithEmailAndPassword(
                 auth, 
@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
     }
 
 return (
-    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, registerUser }}>{children}</AuthContext.Provider>
 )
 }
 
