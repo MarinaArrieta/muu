@@ -12,7 +12,9 @@ const Header = () => {
             <nav>
                 <UnorderedList styleType="''">
                     <ListItem>Nosotros</ListItem>
-                    <ListItem>Ingresar</ListItem>
+                    <ListItem>
+                        <Link to="/login">Iniciar Sesión</Link>
+                    </ListItem>
                     <ListItem>
                         <Link to="/register">Registrarse</Link>
                     </ListItem>

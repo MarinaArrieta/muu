@@ -1,12 +1,10 @@
-import Rounting from "./routes/Rounting"
+import AppLayout from "./components/layout/AppLayout"
 
 
 function App() {
 
   return (
-    <>
-      <Rounting />
-    </>
+    <AppLayout />
   )
 }
 
