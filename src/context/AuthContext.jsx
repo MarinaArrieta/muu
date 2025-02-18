@@ -59,7 +59,8 @@ export const AuthProvider = ({ children }) => {
             .then(() => {
                 // deleteStorage('order')
                 toast({
-                    title: 'Sign off correct',
+                    title: 'Se cerró la sesión',
+                    description: 'Vuelve pronto',
                     status: 'info',
                     isClosable: true,
                     duration: 3000,
