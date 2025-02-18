@@ -1,12 +1,22 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
-import { createContext, useContext, useState } from 'react'
+import { 
+    createUserWithEmailAndPassword, 
+    signInWithEmailAndPassword, 
+    signOut 
+} from 'firebase/auth'
+import { 
+    createContext, 
+    useContext, 
+    useState 
+} from 'react'
 import { auth } from '../firebase/config'
+import { useToast } from '@chakra-ui/react'
 
 const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null)
+    const toast = useToast()
 
     const login = ({ email, password }) => {
         signInWithEmailAndPassword(auth, email, password)
@@ -44,8 +54,24 @@ export const AuthProvider = ({ children }) => {
         };
     }
 
+    const logout = () => {
+        signOut(auth)
+            .then(() => {
+                // deleteStorage('order')
+                toast({
+                    title: 'Sign off correct',
+                    status: 'info',
+                    isClosable: true,
+                    duration: 3000,
+                })
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
     return (
-        <AuthContext.Provider value={{ user, registerUser, login }}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={{ user, registerUser, login, logout }}>{children}</AuthContext.Provider>
     )
 }
 
