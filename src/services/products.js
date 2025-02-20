@@ -7,7 +7,7 @@ export const createProduct = async (name, uid) => {
         uid,
         // isCompleted:false,
     });
-    console.log("Document written with ID: ", doc.id);
+    console.log("Hola, Document written with ID: ", doc.id);
     return doc;
 }
 

@@ -1,7 +1,7 @@
 import { 
     createUserWithEmailAndPassword, 
     signInWithEmailAndPassword, 
-    signOut 
+    signOut,
 } from 'firebase/auth'
 import { 
     createContext, 
@@ -17,21 +17,6 @@ export const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null)
     const toast = useToast()
-
-    const login = ({ email, password }) => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                // ...
-                setUser(user.uid)
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage)
-            });
-    }
 
     const registerUser = async ({ email, password }) => {
 
@@ -54,6 +39,23 @@ export const AuthProvider = ({ children }) => {
         };
     }
 
+    console.log("Soy user del state", user)
+    const login = ({ email, password }) => {
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                // ...
+                setUser(user.uid)
+                console.log(user.uid)
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage)
+            });
+    }
+
     const logout = () => {
         signOut(auth)
             .then(() => {
@@ -65,6 +67,13 @@ export const AuthProvider = ({ children }) => {
                     isClosable: true,
                     duration: 3000,
                 })
+                if(auth.currentUser) {
+                    console.log('Sesión abierta')
+                } else {
+                    console.log('Sesión cerrada')
+                    setUser(null)
+                }
+                
             })
             .catch((error) => {
                 console.log(error)

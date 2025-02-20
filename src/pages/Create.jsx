@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { createProduct } from '../services/products'
+import { Input } from '@chakra-ui/react'
 
 export const Create = () => {
 
@@ -10,7 +11,7 @@ export const Create = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const { user } = useAuth()
-  console.log(user)
+  console.log('Hola soy: ',user)
 
   const handleChange = (e) => {
     setValues({
@@ -23,6 +24,7 @@ export const Create = () => {
     e.preventDefault()
     setLoading(true)
     try {
+      // console.log(user, 'user')
       const product = await createProduct(values.name, user)
       console.log(product)
     } catch (error) {
@@ -37,13 +39,13 @@ export const Create = () => {
     <form onSubmit={onSubmit}>
       <h1>Create Todo</h1>
       <div>
-        <input
+        <Input
           id='name'
           name='name'
           type="text"
           value={values.name}
           onChange={handleChange}
-          placeholder='Name'
+          placeholder='Enter product Name'
         />
       </div>
       {error && <p>There was an error</p>}
