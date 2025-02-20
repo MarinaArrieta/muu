@@ -10,19 +10,20 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link as RouterLink} from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { email, password } from "../../components/utils/validation";
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
     const [show, setShow] = useState(false);
     const handleClick = () => setShow(!show);
     const { register, formState, handleSubmit } = useForm();
     const { errors } = formState;
-
     const { login, signInWithGoogle } = useAuth()
+    const navigate = useNavigate();
     console.log(errors);
-    console.log('soy login',login)
+    console.log('soy login', login)
 
     const handleGoogleSignIn = async () => {
         const user = await signInWithGoogle();
@@ -32,8 +33,9 @@ export const Login = () => {
     }
 
     const onSubmit = (data) => {
+        console.log('data del user', data)
         login(data)
-        console.log('data del user',data)
+        navigate('/')
     }
     console.log('estoy en login');
 
@@ -68,10 +70,10 @@ export const Login = () => {
                     </InputGroup>
                     <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
                 </FormControl>
-                <Button as={Link} to='/' mt={4} colorScheme="teal" type="submit" width="100%">Iniciar sesión</Button>
-                {/* <Button onClick={handleGoogleSignIn} mt={4} colorScheme="teal" type="button" width="100%">
+                <Button mt={4} colorScheme="teal" type="submit" width="100%" >Iniciar sesión</Button>
+                <Button onClick={handleGoogleSignIn} mt={4} colorScheme="teal" type="button" width="100%">
                     Iniciar sesión con google
-                </Button> */}
+                </Button>
             </form>
         </Box>
     );
