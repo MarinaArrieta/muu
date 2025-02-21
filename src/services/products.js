@@ -1,4 +1,4 @@
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "../firebase/config";
 
 export const createProduct = async (name, uid) => {
@@ -11,4 +11,17 @@ export const createProduct = async (name, uid) => {
     return doc;
 }
 
-// export default createProduct
+export const getProducts = async () => {
+    const data = await getDocs(collection(db, "productos"));
+    let products = [];
+    data.forEach((doc) => {
+        products.push({ id: doc.id, ...doc.data() });
+    });
+    console.log(products);
+    return products;
+    // data.forEach((doc) => {
+    //     console.log(`${doc.id} => ${doc.data()}`);
+    // });
+}
+
+getProducts();
