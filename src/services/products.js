@@ -19,12 +19,7 @@ export const getProducts = async () => {
     });
     console.log(products);
     return products;
-    // data.forEach((doc) => {
-    //     console.log(`${doc.id} => ${doc.data()}`);
-    // });
 }
-
-// getProducts();
 
 
 export const getUsers = async (uid) => {
@@ -36,9 +31,4 @@ export const getUsers = async (uid) => {
     });
     console.log(products);
     return products;
-    // data.forEach((doc) => {
-    //     console.log(`${doc.id} => ${doc.data()}`);
-    // });
 }
-
-// getProducts();
