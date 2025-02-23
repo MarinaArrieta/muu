@@ -29,6 +29,5 @@ export const getUsers = async (uid) => {
     data.forEach((doc) => {
         products.push({ id: doc.id, ...doc.data() });
     });
-    console.log(products);
     return products;
 }

@@ -1,26 +1,30 @@
 import { useState, useEffect } from "react"
-import { getProducts } from "../services/products"
+import { getProducts, getUsers } from "../services/products"
 import { Box, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Heading, Image, Stack, Text, VStack } from "@chakra-ui/react"
+import { useAuth } from "../context/AuthContext"
 
 const Home = () => {
 
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+  const { user } = useAuth()
 
   useEffect(() => {
     const getData = async () => {
       try {
         const data = await getProducts()
+        data.map((product) => console.log(product))
         setProducts(data)
-        // setLoading(false)
       } catch (error) {
         setError(true)
       } finally {
         setLoading(false)
       }
     }
-    getData()
+    if (user){
+      getData()
+    }
   }, [])
 
   return (
