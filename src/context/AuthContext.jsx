@@ -1,11 +1,13 @@
 import { 
     createUserWithEmailAndPassword, 
+    onAuthStateChanged, 
     signInWithEmailAndPassword, 
     signOut,
 } from 'firebase/auth'
 import { 
     createContext, 
     useContext, 
+    useEffect, 
     useState 
 } from 'react'
 import { auth } from '../firebase/config'
@@ -17,6 +19,22 @@ export const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null)
     const toast = useToast()
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+              // User is signed in, see docs for a list of available properties
+              // https://firebase.google.com/docs/reference/js/auth.user
+              const uid = user.uid;
+              setUser(uid)
+                console.log('estas logueado')
+              // ...
+            } else {
+              setUser(null)
+              console.log('estabas logueado')
+            }
+          });
+    }, [])
 
     const registerUser = async ({ email, password }) => {
 
