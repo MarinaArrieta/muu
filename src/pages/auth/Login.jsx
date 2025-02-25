@@ -10,7 +10,6 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { Link as RouterLink} from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { email, password } from "../../components/utils/validation";
 import { useNavigate } from 'react-router-dom';
@@ -30,14 +29,13 @@ export const Login = () => {
         if (user) {
             console.log("Usuario autenticado con Google:", user);
         }
-    }
+    };
 
     const onSubmit = (data) => {
         console.log('data del user', data)
         login(data)
         navigate('/')
     }
-    console.log('estoy en login');
 
     return (
         <Box maxW="400px" mx="auto" mt="10">
