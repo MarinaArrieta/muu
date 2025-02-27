@@ -22,7 +22,6 @@ export const Login = () => {
     const { login, signInWithGoogle } = useAuth()
     const navigate = useNavigate();
     console.log(errors);
-    console.log('soy login', login)
 
     const handleGoogleSignIn = async () => {
         const user = await signInWithGoogle();

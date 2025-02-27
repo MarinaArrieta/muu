@@ -13,7 +13,6 @@ import {
 } from 'react'
 import { auth } from '../firebase/config'
 import { useToast } from '@chakra-ui/react'
-// import { GoogleAuthProvider } from 'firebase/auth/web-extension'
 import { GoogleAuthProvider } from "firebase/auth";
 
 const AuthContext = createContext()
@@ -29,12 +28,14 @@ export const AuthProvider = ({ children }) => {
                 // User is signed in, see docs for a list of available properties
                 // https://firebase.google.com/docs/reference/js/auth.user
                 const uid = user.uid;
-                setUser(uid)
+                const email = user.email;
+                console.log('Usuario logueado:', email)
+                setUser(uid, email)
                 console.log('estas logueado')
                 // ...
             } else {
                 setUser(null)
-                console.log('estabas logueado')
+                console.log('estabas logueado...')
             }
         });
     }, [])
@@ -66,9 +67,7 @@ export const AuthProvider = ({ children }) => {
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
-                // ...
                 setUser(user.uid)
-                console.log(user.uid)
             })
             .catch((error) => {
                 const errorCode = error.code;

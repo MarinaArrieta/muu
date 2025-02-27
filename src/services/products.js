@@ -1,4 +1,10 @@
-import { collection, addDoc, getDocs, where } from "firebase/firestore";
+import { 
+    collection, 
+    addDoc, 
+    getDocs, 
+    where,
+    query,
+} from "firebase/firestore";
 import { db } from "../firebase/config";
 
 export const createProduct = async (name, uid) => {
@@ -13,11 +19,12 @@ export const createProduct = async (name, uid) => {
 
 export const getProducts = async () => {
     const data = await getDocs(collection(db, "productos"));
+    console.log(data)
     let products = [];
     data.forEach((doc) => {
-        products.push({ id: doc.id, ...doc.data() });
+        products.push({ ...doc.data(), id: doc.id });
     });
-    console.log(products);
+    console.log('Los productos son: ',products);
     return products;
 }
 
@@ -27,7 +34,7 @@ export const getUsers = async (uid) => {
     const data = await getDocs(q);
     let products = [];
     data.forEach((doc) => {
-        products.push({ id: doc.id, ...doc.data() });
+        products.push({ ...doc.data(), id: doc.id });
     });
     return products;
 }

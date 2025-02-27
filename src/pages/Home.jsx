@@ -1,6 +1,19 @@
 import { useState, useEffect } from "react"
 import { getProducts, getUsers } from "../services/products"
-import { Box, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Heading, Image, Stack, Text, VStack } from "@chakra-ui/react"
+import { 
+  Box, 
+  Button, 
+  ButtonGroup, 
+  Card, 
+  CardBody, 
+  CardFooter, 
+  Divider, 
+  Heading, 
+  Image, 
+  Stack, 
+  Text, 
+  VStack 
+} from "@chakra-ui/react"
 import { useAuth } from "../context/AuthContext"
 
 const Home = () => {
@@ -13,7 +26,10 @@ const Home = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const data = await getProducts()
+        console.log('algo')
+        const data = await getProducts(products)
+        // const data = await getUsers(user)
+        console.log(data)
         data.map((product) => console.log(product))
         setProducts(data)
       } catch (error) {
@@ -30,6 +46,7 @@ const Home = () => {
 
   return (
     <Box>
+      <Text>Bienvenido {user ? user : "a loguearse"}</Text>
       {error && <Text>There was an error</Text>}
       {loading && <Text>Loading...</Text>}
       {products.map((product) => (
