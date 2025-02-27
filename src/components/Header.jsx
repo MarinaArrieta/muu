@@ -10,14 +10,13 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase/config'
 
 const Header = () => {
-    const { logout } = useAuth()
 
+    const { logout } = useAuth()
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    // Verificar si el usuario está autenticado
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
-            setIsAuthenticated(!!user); // Si hay un usuario, isAuthenticated será true
+            setIsAuthenticated(!!user);
         });
         return () => unsubscribe();
     }, []);
@@ -36,12 +35,6 @@ const Header = () => {
                 <NavLink as={Link} to="create">
                     Crear Orden
                 </NavLink>
-                {/* <NavLink as={Button} onClick={logout}>
-                    Cerrar sesión
-                </NavLink>
-                <NavLink as={Link} to="login">
-                    Iniciar sesión
-                </NavLink> */}
                 {isAuthenticated ? (
                     <NavLink as="button" onClick={logout}>
                         Cerrar sesión
