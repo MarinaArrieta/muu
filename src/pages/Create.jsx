@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { createProduct } from '../services/products'
-import { Input } from '@chakra-ui/react'
+import { Box, Button, FormControl, FormLabel, Input, Text } from '@chakra-ui/react'
 
 export const Create = () => {
 
@@ -11,7 +11,7 @@ export const Create = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const { user } = useAuth()
-  console.log('Hola soy: ',user)
+  console.log('Hola soy: ', user)
 
   const handleChange = (e) => {
     setValues({
@@ -36,20 +36,24 @@ export const Create = () => {
   }
 
   return (
-    <form onSubmit={onSubmit}>
-      <h1>Create Todo</h1>
-      <div>
-        <Input
-          id='name'
-          name='name'
-          type="text"
-          value={values.name}
-          onChange={handleChange}
-          placeholder='Enter product Name'
-        />
-      </div>
-      {error && <p>There was an error</p>}
-      <button type="submit">{loading ? 'Creando...' : 'Crear Todo'}</button>
-    </form>
+    <Box maxW="400px" mx="auto" mt="10">
+      <form onSubmit={onSubmit}>
+        <FormControl>
+          <FormLabel htmlFor="email" color='#ed5940'>Crear Orden</FormLabel>
+          <Input
+            id='name'
+            name='name'
+            type="text"
+            value={values.name}
+            onChange={handleChange}
+            placeholder='Enter product Name'
+            _placeholder={{ color: '#c7b65e' }}
+            borderColor='#f7b3cd'
+          />
+        </FormControl>
+        {error && <Text>There was an error</Text>}
+        <Button mt={4} type="submit" width="100%" colorScheme='pink'>{loading ? 'Creando...' : 'Crear Orden'}</Button>
+      </form>
+    </Box>
   )
 }

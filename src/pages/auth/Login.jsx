@@ -73,7 +73,7 @@ export const Login = () => {
                 </FormControl>
                 <Button mt={4} colorScheme="teal" type="submit" width="100%" colorScheme='pink'>Iniciar sesión</Button>
                 <Button onClick={handleGoogleSignIn} mt={4} colorScheme='pink' type="button" width="100%">
-                    Iniciar sesión con google
+                    Iniciar con Google
                 </Button>
             </form>
         </Box>

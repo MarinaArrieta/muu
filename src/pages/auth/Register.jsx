@@ -34,7 +34,7 @@ export const Register = () => {
                         type="email"
                         id="email"
                         placeholder="Ingresa tu nombre/usuario"
-                        _placeholder={{ color: '#8d803e' }}
+                        _placeholder={{ color: '#c7b65e' }}
                         borderColor='#f7b3cd'
                         {...register("email", email)}
                     />
