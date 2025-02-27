@@ -46,7 +46,7 @@ const Home = () => {
 
   return (
     <Box>
-      <Text>Bienvenido {user ? user : "a loguearse"}</Text>
+      <Text>{user ? ('Bienvenido a MUU' + user) : ""}</Text>
       {error && <Text>There was an error</Text>}
       {loading && <Text>Loading...</Text>}
       {products.map((product) => (
