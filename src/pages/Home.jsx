@@ -1,20 +1,21 @@
 import { useState, useEffect } from "react"
 import { getProducts, getUsers } from "../services/products"
-import { 
-  Box, 
-  Button, 
-  ButtonGroup, 
-  Card, 
-  CardBody, 
-  CardFooter, 
-  Divider, 
-  Heading, 
-  Image, 
-  Stack, 
-  Text, 
-  VStack 
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Card,
+  CardBody,
+  CardFooter,
+  Divider,
+  Heading,
+  Image,
+  Stack,
+  Text,
+  VStack
 } from "@chakra-ui/react"
 import { useAuth } from "../context/AuthContext"
+import { RiShoppingCartFill } from "react-icons/ri";
 
 const Home = () => {
 
@@ -39,43 +40,44 @@ const Home = () => {
         setLoading(false)
       }
     }
-    if (user){
+    if (user) {
       getData()
     }
   }, [])
 
   return (
-    <Box>
+    <Box >
       <Text align='center' color='#ed5940'>{user ? ('Bienvenido a MUU ' + user) : ""}</Text>
-      {error && <Text>There was an error</Text>}
-      {loading && <Text>Loading...</Text>}
+      {error && <Text color='#ff2600'>There was an error</Text>}
+      {loading && <Text color='#ed5940'>Loading...</Text>}
       {products.map((product) => (
         <VStack key={product.id}>
-          <Card maxW='sm'>
+          <Card maxW='sm' bg='#f2e8d700' shadow='unset'>
             <CardBody>
               <Image
                 src={product.image_url}
                 alt={product.name}
+                filter='drop-shadow(2px 5px 4px #211714)'
                 borderRadius='lg'
               />
               <Stack mt='6' spacing='3'>
-                <Heading size='md'>{product.name}</Heading>
-                <Text>
+                <Heading size='md' color='#ff77ad'>{product.name}</Heading>
+                <Text color='#5f5525'>
                   {product.description}
                 </Text>
-                <Text color='blue.600' fontSize='2xl'>
-                  $ {product.price}
+                <Text color='#ed5940' fontSize='2xl'>
+                  $ {product.price} c/u
                 </Text>
               </Stack>
             </CardBody>
             <Divider />
             <CardFooter>
               <ButtonGroup spacing='2'>
-                <Button variant='solid' colorScheme='blue'>
-                  Buy now
+                <Button variant='solid' colorScheme='pink'>
+                  Comprar
                 </Button>
-                <Button variant='ghost' colorScheme='blue'>
-                  Add to cart
+                <Button variant='solid' colorScheme='pink'>
+                  <RiShoppingCartFill />
                 </Button>
               </ButtonGroup>
             </CardFooter>
