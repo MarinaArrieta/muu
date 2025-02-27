@@ -50,8 +50,8 @@ const Home = () => {
   return (
     <Grid templateColumns='repeat(2, 1fr)' gap={6}>
       {/* <Text align='center' color='#ed5940'>{user ? ('Bienvenido a MUU ' + user) : ""}</Text> */}
-      {error && <Text color='#ff2600'>There was an error</Text>}
-      {loading && <Text color='#ed5940'>Loading...</Text>}
+      {error && <Text as='b' color='#ff2600'>There was an error</Text>}
+      {loading && <Text as='b' color='#ed5940'>Loading...</Text>}
       {products.map((product) => (
         <VStack key={product.id}>
           <Card maxW='sm' bg='#f2e8d700' shadow='unset'>

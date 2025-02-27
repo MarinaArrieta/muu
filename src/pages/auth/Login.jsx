@@ -73,7 +73,7 @@ export const Login = () => {
                     </InputGroup>
                     <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
                 </FormControl>
-                <Button mt={4} colorScheme="teal" type="submit" width="100%" colorScheme='pink'>Iniciar sesión</Button>
+                <Button mt={4} type="submit" width="100%" colorScheme='pink'>Iniciar sesión</Button>
                 <Button onClick={handleGoogleSignIn} mt={4} colorScheme='pink' type="button" width="100%">
                     Iniciar con Google
                 </Button>

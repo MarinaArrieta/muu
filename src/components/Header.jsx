@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase/config'
 import logo from '../../public/logo3.png'
+import helado1 from '../assets/helado1.png'
 import helado from '../assets/helado.png'
 
 const Header = () => {
@@ -33,8 +34,17 @@ const Header = () => {
                 <Image
                     position="absolute"
                     left="0"
-                    w='100%'
+                    w='40%'
                     src={helado}
+                    filter='opacity(0.5)'
+                    // filter='drop-shadow(2px 4px 6px pink)'
+                    alt='Logo vaca'
+                />
+                <Image
+                    position="absolute"
+                    right="0"
+                    w='40%'
+                    src={helado1}
                     filter='opacity(0.5)'
                     // filter='drop-shadow(2px 4px 6px pink)'
                     alt='Logo vaca'
@@ -43,13 +53,13 @@ const Header = () => {
                     position="relative"
                     boxSize='170px'
                     objectFit='cover'
-                    h= '205px'
-                    filter= 'drop-shadow(0px 0px 10px #ffff00)'
+                    h='205px'
+                    filter='drop-shadow(0px 0px 10px #ffff00)'
                     src={logo}
                     alt='Logo vaca'
                 />
             </Stack>
-            <HStack color='#f3a631' as='b' bg= '#e0d4be' p= '5px'>
+            <HStack color='#f3a631' as='b' bg='#e0d4be' p='5px'>
                 {/* <ListItem>Nosotros</ListItem> */}
                 <Link as={RouterLink} to="/" fontSize='xs'>
                     Home
