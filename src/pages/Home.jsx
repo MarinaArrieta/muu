@@ -48,7 +48,10 @@ const Home = () => {
   }, [])
 
   return (
-    <Grid templateColumns='repeat(1, 1fr)' gap={6}>
+    <Grid 
+      templateColumns={{ base: "1fr", sm: "1fr", lg: "repeat(3, 1fr)" }} 
+      gap={6}
+    >
       {/* <Text align='center' color='#ed5940'>{user ? ('Bienvenido a MUU ' + user) : ""}</Text> */}
       {error && <Text as='b' color='#ff2600'>There was an error</Text>}
       {loading && <Text as='b' color='#ed5940'>Loading...</Text>}

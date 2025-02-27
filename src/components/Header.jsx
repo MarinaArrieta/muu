@@ -57,7 +57,7 @@ const Header = () => {
                     alt='Logo vaca'
                 />
             </Stack>
-            <HStack color='#f3a631' as='b' bg='#e0d4be' p='5px'>
+            <HStack color='#7e6909' as='b' bg='#e0d4be' p='5px'>
                 {/* <ListItem>Nosotros</ListItem> */}
                 <Link as={RouterLink} to="/" fontSize='xs'>
                     Home
