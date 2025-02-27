@@ -33,15 +33,15 @@ const Header = () => {
                     Registrarse
                 </NavLink>
                 <NavLink as={Link} to="create">
-                    Crear Orden
+                    Orden
                 </NavLink>
                 {isAuthenticated ? (
                     <NavLink as="button" onClick={logout}>
-                        Cerrar sesión
+                        Logout
                     </NavLink>
                 ) : (
                     <NavLink as="button" to="login">
-                        Iniciar sesión
+                        Login
                     </NavLink>
                 )}
             </HStack>
