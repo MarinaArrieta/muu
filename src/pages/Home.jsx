@@ -8,7 +8,9 @@ import {
   CardBody,
   CardFooter,
   Divider,
+  Grid,
   Heading,
+  HStack,
   Image,
   Stack,
   Text,
@@ -46,8 +48,8 @@ const Home = () => {
   }, [])
 
   return (
-    <Box >
-      <Text align='center' color='#ed5940'>{user ? ('Bienvenido a MUU ' + user) : ""}</Text>
+    <Grid templateColumns='repeat(2, 1fr)' gap={6}>
+      {/* <Text align='center' color='#ed5940'>{user ? ('Bienvenido a MUU ' + user) : ""}</Text> */}
       {error && <Text color='#ff2600'>There was an error</Text>}
       {loading && <Text color='#ed5940'>Loading...</Text>}
       {products.map((product) => (
@@ -85,7 +87,7 @@ const Home = () => {
         </VStack>
       ))}
       {!products && <Text>No products available</Text>}
-    </Box>
+    </Grid>
   )
 }
 
