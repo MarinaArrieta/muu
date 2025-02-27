@@ -1,13 +1,18 @@
 import {
     Heading,
     HStack,
-    Button
+    Button,
+    Image,
+    Stack,
+    VStack,
+    Center
 } from '@chakra-ui/react'
 import { Link, NavLink, Link as RouterLink } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase/config'
+import logo  from '../../public/logo.png'
 
 const Header = () => {
 
@@ -22,8 +27,18 @@ const Header = () => {
     }, []);
 
     return (
-        <HStack>
-            <Heading>MUU</Heading>
+        <VStack>
+            <Stack direction='column'>
+                <Image
+                    boxSize='150px'
+                    objectFit='cover'
+                    src={logo}
+                    alt='Logo vaca'
+                />
+                <Center>
+                    <Heading>MUU</Heading>
+                </Center>
+            </Stack>
             <HStack>
                 {/* <ListItem>Nosotros</ListItem> */}
                 <Link as={RouterLink} to="/" fontSize='xs'>
@@ -45,7 +60,7 @@ const Header = () => {
                     </NavLink>
                 )}
             </HStack>
-        </HStack>
+        </VStack>
     )
 }
 
