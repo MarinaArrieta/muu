@@ -102,12 +102,12 @@ export const AuthProvider = ({ children }) => {
                     isClosable: true,
                     duration: 3000,
                 })
-                if (auth.currentUser) {
-                    console.log('Sesión abierta')
-                } else {
-                    console.log('Sesión cerrada')
-                    setUser(null)
-                }
+                // if (auth.currentUser) {
+                //     console.log('Sesión abierta')
+                // } else {
+                //     console.log('Sesión cerrada')
+                //     setUser(null)
+                // }
 
             })
             .catch((error) => {
