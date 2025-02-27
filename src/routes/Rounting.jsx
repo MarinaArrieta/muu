@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import Home from '../pages/Home'
 import { Login } from '../pages/auth/Login'
 import { Create } from '../pages/Create'
+import { Cart } from '../pages/Cart'
 
 const Rounting = () => {
   return (
@@ -11,6 +12,7 @@ const Rounting = () => {
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
         <Route path='/create' element={<Create />} />
+        <Route path='/cart' element={<Cart />} />
       </Routes>
   )
 }

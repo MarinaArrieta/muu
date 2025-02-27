@@ -64,12 +64,10 @@ const Header = () => {
             <HStack
                 color='#7e6909'
                 as='b'
-                // bg='#e0d4be'
                 bgGradient='linear(to-r, #fbeaec, #f5ebc4, #fbeaec)'
                 p='5px'
                 position="relative"
             >
-                {/* <ListItem>Nosotros</ListItem> */}
                 <Link
                     as={RouterLink}
                     to="/"
@@ -111,7 +109,7 @@ const Header = () => {
                         </Text>
                     </NavLink>
                 )}
-                <NavLink>
+                <NavLink as={Link} to="cart">
                     <Text fontSize={{ base: '18px', md: '25px', lg: '29px' }}>
                         <RiShoppingCartFill />
                     </Text>
