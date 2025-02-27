@@ -5,7 +5,8 @@ import {
     Image,
     Stack,
     VStack,
-    Center
+    Center,
+    Text
 } from '@chakra-ui/react'
 import { Link, NavLink, Link as RouterLink } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
@@ -31,12 +32,12 @@ const Header = () => {
     return (
         <VStack>
             <Stack direction='column'>
-            {/* w={{ base: "40%", lg: "28%" }}  */}
+                {/* w={{ base: "40%", lg: "28%" }}  */}
                 <Image
                     position="absolute"
                     left="0"
                     // w='40%'
-                    w={{ base: "40%", md:'40%', lg: "28%" }}
+                    w={{ base: "40%", md: '40%', lg: "28%" }}
                     src={helado}
                     filter='opacity(0.5)'
                     alt='Logo vaca'
@@ -44,7 +45,7 @@ const Header = () => {
                 <Image
                     position="absolute"
                     right="0"
-                    w={{ base: "40%", md:'40%', lg: "28%" }}
+                    w={{ base: "40%", md: '40%', lg: "28%" }}
                     src={helado1}
                     filter='opacity(0.5)'
                     alt='Logo vaca'
@@ -61,22 +62,45 @@ const Header = () => {
             </Stack>
             <HStack color='#7e6909' as='b' bg='#e0d4be' p='5px'>
                 {/* <ListItem>Nosotros</ListItem> */}
-                <Link as={RouterLink} to="/" fontSize='xs'>
-                    Home
+                <Link
+                    as={RouterLink}
+                    to="/"
+                >
+                    <Text
+                        fontSize={{ base: '18px', md: '25px', lg: '29px' }}
+                    >
+                        Home
+                    </Text>
                 </Link>
-                <NavLink as={Link} to="register">
-                    Registrarse
+                <NavLink as={Link} to="register" fontSize='lg'>
+                    <Text
+                        fontSize={{ base: '18px', md: '25px', lg: '29px' }}
+                    >
+                        Registrarse
+                    </Text>
                 </NavLink>
-                <NavLink as={Link} to="create">
-                    Orden
+                <NavLink as={Link} to="create" fontSize='lg'>
+                    <Text
+                        fontSize={{ base: '18px', md: '25px', lg: '29px' }}
+                    >
+                        Orden
+                    </Text>
                 </NavLink>
                 {isAuthenticated ? (
-                    <NavLink as="button" onClick={logout}>
-                        Logout
+                    <NavLink as="button" onClick={logout} fontSize='lg'>
+                        <Text
+                            fontSize={{ base: '18px', md: '25px', lg: '29px' }}
+                        >
+                            Logout
+                        </Text>
                     </NavLink>
                 ) : (
-                    <NavLink as="button" to="login">
-                        Login
+                    <NavLink as="button" to="login" fontSize='lg'>
+                        <Text
+                            fontSize={{ base: '18px', md: '25px', lg: '29px' }}
+                        >
+                            Login
+                        </Text>
                     </NavLink>
                 )}
             </HStack>
