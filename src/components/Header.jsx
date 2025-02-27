@@ -37,7 +37,6 @@ const Header = () => {
                     w='40%'
                     src={helado}
                     filter='opacity(0.5)'
-                    // filter='drop-shadow(2px 4px 6px pink)'
                     alt='Logo vaca'
                 />
                 <Image
@@ -46,7 +45,6 @@ const Header = () => {
                     w='40%'
                     src={helado1}
                     filter='opacity(0.5)'
-                    // filter='drop-shadow(2px 4px 6px pink)'
                     alt='Logo vaca'
                 />
                 <Image
