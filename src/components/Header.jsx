@@ -12,7 +12,8 @@ import { useAuth } from '../context/AuthContext'
 import { useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase/config'
-import logo  from '../../public/logo.png'
+import logo from '../../public/logo3.png'
+import helado from '../assets/helado.png'
 
 const Header = () => {
 
@@ -30,16 +31,28 @@ const Header = () => {
         <VStack>
             <Stack direction='column'>
                 <Image
-                    boxSize='150px'
+                    position="absolute"
+                    left="0"
+                    w='100%'
+                    src={helado}
+                    filter='opacity(0.5)'
+                    // filter='drop-shadow(2px 4px 6px pink)'
+                    alt='Logo vaca'
+                />
+                <Image
+                    position="relative"
+                    boxSize='170px'
                     objectFit='cover'
+                    h= '205px'
+                    filter= 'drop-shadow(0px 0px 10px #ffff00)'
                     src={logo}
                     alt='Logo vaca'
                 />
-                <Center>
-                    <Heading>MUU</Heading>
-                </Center>
+                {/* <Center>
+                    <Heading color='#ed5940'>MUU</Heading>
+                </Center> */}
             </Stack>
-            <HStack>
+            <HStack color='#f3a631' as='b'>
                 {/* <ListItem>Nosotros</ListItem> */}
                 <Link as={RouterLink} to="/" fontSize='xs'>
                     Home
