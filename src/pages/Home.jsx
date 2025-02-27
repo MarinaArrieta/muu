@@ -81,8 +81,8 @@ const Home = () => {
                 <Button variant='solid' colorScheme='pink'>
                   Comprar
                 </Button>
-                <Button variant='solid' colorScheme='pink'>
-                  <RiShoppingCartFill />
+                <Button variant='solid' colorScheme='pink' gap='5px'>
+                  Añadir <RiShoppingCartFill />
                 </Button>
               </ButtonGroup>
             </CardFooter>

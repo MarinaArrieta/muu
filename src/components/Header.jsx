@@ -16,6 +16,7 @@ import { auth } from '../firebase/config'
 import logo from '../../public/logo3.png'
 import helado1 from '../assets/helado1.png'
 import helado from '../assets/helado.png'
+import { RiShoppingCartFill } from "react-icons/ri";
 
 const Header = () => {
 
@@ -60,7 +61,14 @@ const Header = () => {
                     alt='Logo vaca'
                 />
             </Stack>
-            <HStack color='#7e6909' as='b' bg='#e0d4be' p='5px'>
+            <HStack
+                color='#7e6909'
+                as='b'
+                // bg='#e0d4be'
+                bgGradient='linear(to-r, #fbeaec, #f5ebc4, #fbeaec)'
+                p='5px'
+                position="relative"
+            >
                 {/* <ListItem>Nosotros</ListItem> */}
                 <Link
                     as={RouterLink}
@@ -103,6 +111,11 @@ const Header = () => {
                         </Text>
                     </NavLink>
                 )}
+                <NavLink>
+                    <Text fontSize={{ base: '18px', md: '25px', lg: '29px' }}>
+                        <RiShoppingCartFill />
+                    </Text>
+                </NavLink>
             </HStack>
         </VStack>
     )
