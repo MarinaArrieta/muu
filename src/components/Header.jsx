@@ -48,9 +48,6 @@ const Header = () => {
                     src={logo}
                     alt='Logo vaca'
                 />
-                {/* <Center>
-                    <Heading color='#ed5940'>MUU</Heading>
-                </Center> */}
             </Stack>
             <HStack color='#f3a631' as='b'>
                 {/* <ListItem>Nosotros</ListItem> */}
