@@ -47,8 +47,9 @@ export const Create = () => {
             value={values.name}
             onChange={handleChange}
             placeholder='Enter product Name'
-            _placeholder={{ color: '#c7b65e' }}
+            _placeholder={{ color: '#8d803e' }}
             borderColor='#f7b3cd'
+            focusBorderColor='#ffbb00'
           />
         </FormControl>
         {error && <Text>There was an error</Text>}

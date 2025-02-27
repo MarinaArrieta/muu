@@ -36,6 +36,7 @@ export const Register = () => {
                         placeholder="Ingresa tu nombre/usuario"
                         _placeholder={{ color: '#c7b65e' }}
                         borderColor='#f7b3cd'
+                        focusBorderColor='#ffbb00'
                         {...register("email", email)}
                     />
                     <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
@@ -50,6 +51,7 @@ export const Register = () => {
                             placeholder="Ingrese su contraseña"
                             _placeholder={{ color: '#8d803e' }}
                             borderColor='#f7b3cd'
+                            focusBorderColor='#ffbb00'
                             {...register("password", password)}
                         />
                         <InputRightElement width="4.5rem">
