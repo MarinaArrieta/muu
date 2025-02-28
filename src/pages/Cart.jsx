@@ -24,7 +24,7 @@ import {
     addDoc
 } from "firebase/firestore";
 import { db } from "../firebase/config";
-import { getProducts } from "../services/products"
+import { getProducts, getProductsFromCart } from "../services/products"
 
 const createItemCart = async (id_product, id_user) => {
     console.log("id_product:", id_product)
@@ -60,8 +60,8 @@ export const Cart = () => {
     useEffect(() => {
         const getData = async () => {
             try {
-                console.log('algo')
-                const data = await getProducts(products)
+                console.log('algo, user:', user)
+                const data = await getProductsFromCart(user)
                 console.log(data)
                 data.map((product) => console.log(product))
                 setProducts(data)
@@ -73,10 +73,10 @@ export const Cart = () => {
             }
         }
         if (user) {
+            console.log("user qui:", user)
             getData()
         }
-        getData()
-    }, [])
+    }, [user])
 
     const [count, setCount] = useState(1)
     const minValue = 0
