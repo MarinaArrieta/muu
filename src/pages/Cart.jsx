@@ -1,16 +1,23 @@
 import {
     Box,
     Button,
+    ButtonGroup,
     Card,
     CardBody,
     CardFooter,
+    CardHeader,
+    Divider,
     Heading,
     Image,
     Select,
+    SimpleGrid,
     Stack,
+    StackDivider,
     Text,
     VStack,
 } from "@chakra-ui/react";
+import { RiDeleteBinFill } from "react-icons/ri";
+import logo from '../../public/logo3.png'
 
 export const Cart = () => {
 
@@ -20,6 +27,8 @@ export const Cart = () => {
                 direction={{ base: 'column', sm: 'row' }}
                 overflow='hidden'
                 variant='outline'
+                bg='#f2e8d700'
+                border='1px solid #5f5525'
             >
                 <Image
                     objectFit='cover'
@@ -29,21 +38,48 @@ export const Cart = () => {
                 />
                 <Stack>
                     <CardBody>
-                        <Heading size='md'>The perfect latte</Heading>
-                        <Text py='2'>
+                        <Heading size='md' color='#ff77ad'>The perfect latte</Heading>
+                        <Text py='2' color='#5f5525'>
                             Elejí la cantidad de MUU que quieras comprar
                         </Text>
-                        <Select >
+                        <Select
+                            borderColor='#f7b3cd'
+                            focusBorderColor='#ffbb00'
+                        >
                             <option value='option1'>1</option>
                         </Select>
                     </CardBody>
-                    <CardFooter>
-                        <Button variant='solid' colorScheme='blue'>
-                            Realizar compra
+                    <CardFooter gap='5px' justify='end'>
+                        <Button variant='solid' colorScheme='orange'>
+                            <RiDeleteBinFill />
                         </Button>
                     </CardFooter>
                 </Stack>
             </Card>
+            <VStack>
+                <Card>
+                    <CardHeader bg='#5f5525'>
+                        <Heading size='md' color='#f2e8d7'>Total en mi carrito</Heading>
+                    </CardHeader>
+                    <CardBody bg='#f2e8d7'>
+                        <Stack divider={<StackDivider />} spacing='4'>
+                            <Box display='flex' alignItems='center' justify='center'>
+                                <Text pt='2' fontSize='lg' as='b' color='#5f5525'>
+                                🍨 $ 300
+                                </Text>
+                            </Box>
+                            <ButtonGroup gap='4' flexDirection='column'>
+                                <Button variant='solid' colorScheme='pink'>
+                                    Ver más productos
+                                </Button>
+                                <Button variant='solid' colorScheme='pink'>
+                                    Realizar compra
+                                </Button>
+                            </ButtonGroup>
+                        </Stack>
+                    </CardBody>
+                </Card>
+            </VStack>
         </VStack>
     );
 };
