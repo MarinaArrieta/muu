@@ -9,6 +9,7 @@ import {
   Grid,
   Heading,
   Image,
+  Select,
   Stack,
   Text,
   VStack
@@ -44,40 +45,53 @@ const Home = () => {
   }, [])
 
   return (
-    <Grid
-      templateColumns={{ base: "1fr", sm: "1fr", lg: "repeat(3, 1fr)" }}
-      gap={6}
-    >
-      {error && <Text as='b' color='#ff2600'>There was an error</Text>}
-      {loading && <Text as='b' color='#ed5940'>Loading...</Text>}
-      {products.map((product) => (
-        <VStack key={product.id}>
-          <Card maxW='sm' bg='#f2e8d700' shadow='unset'>
-            <CardBody>
-              <Image
-                src={product.image_url}
-                alt={product.name}
-                filter='drop-shadow(2px 5px 4px #211714)'
-                borderRadius='lg'
-              />
-              <Stack mt='6' spacing='3'>
-                <Heading size='md' color='#ff77ad'>{product.name}</Heading>
-                <Text color='#ed5940' fontSize='2xl'>
-                  $ {product.price} c/u
-                </Text>
-              </Stack>
-            </CardBody>
-            <Divider />
-            <CardFooter justify='end'>
-              <Button variant='solid' colorScheme='pink'>
-                <Link to={`${product.id}`}>Ver más</Link>
-              </Button>
-            </CardFooter>
-          </Card>
-        </VStack>
-      ))}
-      {!products && <Text>No products available</Text>}
-    </Grid>
+    <VStack>
+      <Select
+        placeholder="Filtrar por..."
+        w='50%'
+        borderColor='#f7b3cd'
+        focusBorderColor='#ffbb00'
+      >
+        <option value='palito'>Helado palitos</option>
+        <option value='cucurucho'>Cucuruchos</option>
+        <option value='pote'>Potes</option>
+      </Select>
+      <Grid
+        templateColumns={{ base: "1fr", sm: "1fr", lg: "repeat(3, 1fr)" }}
+        gap={6}
+        flexDirection='column'
+      >
+        {error && <Text as='b' color='#ff2600'>There was an error</Text>}
+        {loading && <Text as='b' color='#ed5940'>Loading...</Text>}
+        {products.map((product) => (
+          <VStack key={product.id}>
+            <Card maxW='sm' bg='#f2e8d700' shadow='unset'>
+              <CardBody>
+                <Image
+                  src={product.image_url}
+                  alt={product.name}
+                  filter='drop-shadow(2px 5px 4px #211714)'
+                  borderRadius='lg'
+                />
+                <Stack mt='6' spacing='3'>
+                  <Heading size='md' color='#ff77ad'>{product.name}</Heading>
+                  <Text color='#ed5940' fontSize='2xl'>
+                    $ {product.price} c/u
+                  </Text>
+                </Stack>
+              </CardBody>
+              <Divider />
+              <CardFooter justify='end'>
+                <Button variant='solid' colorScheme='pink'>
+                  <Link to={`${product.id}`}>Ver más</Link>
+                </Button>
+              </CardFooter>
+            </Card>
+          </VStack>
+        ))}
+        {!products && <Text>No products available</Text>}
+      </Grid>
+    </VStack>
   )
 }
 
