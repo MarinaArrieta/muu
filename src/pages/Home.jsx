@@ -2,7 +2,6 @@ import { useState, useEffect } from "react"
 import { getProducts } from "../services/products"
 import {
   Button,
-  ButtonGroup,
   Card,
   CardBody,
   CardFooter,
@@ -15,7 +14,7 @@ import {
   VStack
 } from "@chakra-ui/react"
 import { useAuth } from "../context/AuthContext"
-import { NavLink } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const Home = () => {
 
@@ -45,8 +44,8 @@ const Home = () => {
   }, [])
 
   return (
-    <Grid 
-      templateColumns={{ base: "1fr", sm: "1fr", lg: "repeat(3, 1fr)" }} 
+    <Grid
+      templateColumns={{ base: "1fr", sm: "1fr", lg: "repeat(3, 1fr)" }}
       gap={6}
     >
       {error && <Text as='b' color='#ff2600'>There was an error</Text>}
@@ -63,9 +62,6 @@ const Home = () => {
               />
               <Stack mt='6' spacing='3'>
                 <Heading size='md' color='#ff77ad'>{product.name}</Heading>
-                <Text color='#5f5525'>
-                  {product.description}
-                </Text>
                 <Text color='#ed5940' fontSize='2xl'>
                   $ {product.price} c/u
                 </Text>
@@ -73,13 +69,9 @@ const Home = () => {
             </CardBody>
             <Divider />
             <CardFooter justify='end'>
-              <ButtonGroup spacing='2'>
-                <NavLink as='button' to="product-detail" fontSize='lg' variant='solid' colorScheme='pink'>
-                        <Button variant='solid' colorScheme='pink'>
-                            Ver detalle
-                        </Button>
-                </NavLink>
-              </ButtonGroup>
+              <Button variant='solid' colorScheme='pink'>
+                <Link to={`${product.id}`}>Ver más</Link>
+              </Button>
             </CardFooter>
           </Card>
         </VStack>
