@@ -10,9 +10,9 @@ import { useAuth } from '../context/AuthContext'
 import { useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase/config'
-import { logo } from '../../public/logo3.png'
-import { helado1 } from '../assets/helado1.png'
-import { helado } from '../assets/helado.png'
+import logo from '../../public/logo3.png'
+import helado1 from '../assets/helado1.png'
+import helado from '../assets/helado.png'
 import { RiShoppingCartFill } from "react-icons/ri";
 
 const Header = () => {

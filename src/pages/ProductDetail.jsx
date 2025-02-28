@@ -17,8 +17,9 @@ import {
   VStack
 } from "@chakra-ui/react"
 import { useAuth } from "../context/AuthContext"
+import { IoMdCart } from "react-icons/io";
 
-const Home = () => {
+const ProductDetail = () => {
 
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -76,7 +77,7 @@ const Home = () => {
             <CardFooter justify='end'>
               <ButtonGroup spacing='2'>
                 <Button variant='solid' colorScheme='pink'>
-                  Ver detalles
+                    Agregar al <IoMdCart />
                 </Button>
               </ButtonGroup>
             </CardFooter>
@@ -88,4 +89,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default ProductDetail
