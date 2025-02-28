@@ -1,4 +1,5 @@
 import { getProducts } from "../services/products"
+import { addToCart } from './Cart'
 import { useState, useEffect } from "react"
 import {
     Button,
@@ -16,11 +17,13 @@ import {
 } from "@chakra-ui/react"
 import { IoMdCart } from "react-icons/io";
 import { useParams } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 
 const ProductDetail = () => {
     const [product, setProduct] = useState({})
     const { id } = useParams()
+    const { user } = useAuth()
     useEffect(() => {
         getProducts().then(
             (data) => {
@@ -31,6 +34,16 @@ const ProductDetail = () => {
             })
     }, [])
 
+
+    const addToCartClick = (e) => {
+        alert("aca2")
+        let product_id = e.target.dataset.id
+        let user_id = user
+        console.log(user_id)
+        console.log(user)
+        console.log("+++++++++++")
+        addToCart(product_id, user_id)
+    }
 
     return (
         <Grid
@@ -59,7 +72,7 @@ const ProductDetail = () => {
                     <Divider />
                     <CardFooter justify='end'>
                         <ButtonGroup spacing='2'>
-                            <Button variant='solid' colorScheme='pink'>
+                            <Button variant='solid' colorScheme='pink'  onClick={addToCartClick} data-id={product.id}>
                                 Agregar al <IoMdCart />
                             </Button>
                         </ButtonGroup>
