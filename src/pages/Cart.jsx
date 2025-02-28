@@ -78,24 +78,23 @@ export const Cart = () => {
         getData()
     }, [])
 
-    // const [count, setCount] = useState(1);
-
-    // const handleIncrease = () => setCount(count + 1);
-    // const handleDecrease = () => setCount(count - 1);
-
     const [count, setCount] = useState(1)
-  const minValue = 0
-  const maxValue = 1000
-//   console.log(data.stock)
+    const minValue = 0
+    const maxValue = 1000
 
-  const handleIncrease = () => {
-    if (count < maxValue) setCount(count + 1)
-  };
+    const handleIncrease = () => {
+        if (count < maxValue) setCount(count + 1)
+    };
 
-  const handleDecrease = () => {
-    if (count > minValue) setCount(count - 1)
-  };
+    const handleDecrease = () => {
+        if (count > minValue) setCount(count - 1)
+    };
 
+    const totalPrice = () => {
+        if (handleIncrease) {
+            handleIncrease(count) + 0
+        } else handleIncrease(count) - 0
+    }
 
     return (
         <VStack p='35px'>
