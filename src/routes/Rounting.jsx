@@ -14,7 +14,7 @@ const Rounting = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/create' element={<Create />} />
         <Route path='/cart' element={<Cart />} />
-        <Route path='/product-detail' element={<ProductDetail />} />
+        <Route path='/product-detail/:id' element={<ProductDetail />} />
       </Routes>
   )
 }

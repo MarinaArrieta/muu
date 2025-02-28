@@ -18,6 +18,21 @@ import { RiDeleteBinFill } from "react-icons/ri";
 
 export const Cart = () => {
 
+    const addToCart = async (e) => {
+        e.preventDefault()
+        setLoading(true)
+        try {
+          // console.log(user, 'user')
+          const product = await createProduct(values.name, user)
+          console.log(product)
+        } catch (error) {
+          setError(true)
+          console.log(error)
+        } finally {
+          setLoading(false)
+        }
+      }
+
     return (
         <VStack p='35px'>
             <Card
@@ -73,7 +88,7 @@ export const Cart = () => {
                                 <Button variant='solid' colorScheme='pink' w='90%'>
                                     Ver más productos
                                 </Button>
-                                <Button variant='solid' colorScheme='pink' w='90%' marginLeft='0'>
+                                <Button variant='solid' colorScheme='pink' w='90%' marginLeft='0' onClick={addToCart}>
                                     Realizar compra
                                 </Button>
                             </ButtonGroup>

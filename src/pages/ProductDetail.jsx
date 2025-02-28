@@ -1,4 +1,5 @@
 import { getProducts } from "../services/products"
+import { useState, useEffect } from "react"
 import {
     Button,
     ButtonGroup,
@@ -16,10 +17,20 @@ import {
 import { IoMdCart } from "react-icons/io";
 import { useParams } from 'react-router-dom'
 
-const ProductDetail = () => {
 
+const ProductDetail = () => {
+    const [product, setProduct] = useState({})
     const { id } = useParams()
-    const product = getProducts.find((e) => id === e.id)
+    useEffect(() => {
+        getProducts().then(
+            (data) => {
+                console.log('data:', data)
+                // const product = data.find((e) => id === e.uid)
+                const product = data.find((product) => product.id === id)
+                setProduct(product)
+            })
+    }, [])
+
 
     return (
         <Grid

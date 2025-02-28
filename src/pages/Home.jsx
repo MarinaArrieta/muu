@@ -42,6 +42,7 @@ const Home = () => {
     if (user) {
       getData()
     }
+    getData()
   }, [])
 
   return (
@@ -82,7 +83,7 @@ const Home = () => {
               <Divider />
               <CardFooter justify='end'>
                 <Button variant='solid' colorScheme='pink'>
-                  <Link to={`${product.id}`}>Ver más</Link>
+                  <Link to={`/product-detail/${product.id}`}>Ver más</Link>
                 </Button>
               </CardFooter>
             </Card>
