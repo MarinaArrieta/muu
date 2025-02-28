@@ -25,17 +25,12 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // User is signed in, see docs for a list of available properties
-                // https://firebase.google.com/docs/reference/js/auth.user
                 const uid = user.uid;
                 const email = user.email;
                 console.log('Usuario logueado:', email)
                 setUser(uid, email)
-                console.log('estas logueado')
-                // ...
             } else {
                 setUser(null)
-                console.log('estabas logueado...')
             }
         });
     }, [])
@@ -48,16 +43,26 @@ export const AuthProvider = ({ children }) => {
                 email,
                 password
             )
-            console.log(userCredential)
 
             const user = userCredential.user
-            console.log(user)
+            toast({
+                title: 'Usuario registrado correctamente',
+                position: 'top',
+                status: 'info',
+                isClosable: true,
+                duration: 3000,
+            })
 
             return user
         } catch (error) {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode, errorMessage)
+            toast({
+                title: 'Hubo un error al registrar el usuario',
+                description: 'Vuelve a intentarlo',
+                position: 'top',
+                status: 'error',
+                isClosable: true,
+                duration: 3000,
+            })
         };
     }
 
@@ -65,14 +70,26 @@ export const AuthProvider = ({ children }) => {
     const login = ({ email, password }) => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in 
                 const user = userCredential.user;
                 setUser(user.uid)
+                toast({
+                    title: 'Iniciaste sesión correctamente',
+                    description: 'Bienvenido a MUU',
+                    position: 'top',
+                    status: 'info',
+                    isClosable: true,
+                    duration: 3000,
+                })
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage)
+                toast({
+                    title: 'Hubo un error al cerrar la sesión',
+                    description: 'Vuelve a intentarlo',
+                    position: 'top',
+                    status: 'error',
+                    isClosable: true,
+                    duration: 3000,
+                })
             });
     }
 
@@ -83,35 +100,49 @@ export const AuthProvider = ({ children }) => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
             const user = result.user;
+            toast({
+                title: 'Iniciaste sesión correctamente',
+                description: 'Bienvenido a MUU',
+                position: 'top',
+                status: 'info',
+                isClosable: true,
+                duration: 3000,
+            })
 
-            console.log("Usuario autenticado:", user);
             return user;
         } catch (error) {
-            console.error("Error en Google Sign-In:", error.message);
+            toast({
+                title: 'Hubo un error al iniciar sesión',
+                description: 'Vuelve a intentarlo',
+                position: 'top',
+                status: 'error',
+                isClosable: true,
+                duration: 3000,
+            })
         }
     };
 
     const logout = () => {
         signOut(auth)
             .then(() => {
-                // deleteStorage('order')
                 toast({
-                    title: 'Se cerró la sesión',
+                    title: 'Se cerró la sesión correctamente',
                     description: 'Vuelve pronto',
+                    position: 'top',
                     status: 'info',
                     isClosable: true,
                     duration: 3000,
                 })
-                // if (auth.currentUser) {
-                //     console.log('Sesión abierta')
-                // } else {
-                //     console.log('Sesión cerrada')
-                //     setUser(null)
-                // }
-
             })
             .catch((error) => {
-                console.log(error)
+                toast({
+                    title: 'Hubo un error al cerrar la sesión',
+                    description: 'Vuelve a intentarlo',
+                    position: 'top',
+                    status: 'error',
+                    isClosable: true,
+                    duration: 3000,
+                })
             })
     }
 
