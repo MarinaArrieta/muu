@@ -153,6 +153,7 @@ export const Cart = () => {
                 </Card>
             ))}
             {!products && <Text>No products available</Text>}
+            {!user ? '' :
             <VStack w='100%'>
                 <Card w='100%'>
                     <CardHeader bg='#5f5525'>
@@ -180,7 +181,7 @@ export const Cart = () => {
                         </Stack>
                     </CardBody>
                 </Card>
-            </VStack>
+            </VStack>}
         </VStack>
     );
 };
