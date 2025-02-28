@@ -6,18 +6,15 @@ import {
     CardBody,
     CardFooter,
     CardHeader,
-    Divider,
     Heading,
     Image,
     Select,
-    SimpleGrid,
     Stack,
     StackDivider,
     Text,
     VStack,
 } from "@chakra-ui/react";
 import { RiDeleteBinFill } from "react-icons/ri";
-import logo from '../../public/logo3.png'
 
 export const Cart = () => {
 

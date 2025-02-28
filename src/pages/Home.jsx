@@ -48,7 +48,6 @@ const Home = () => {
     <VStack>
       <Select
         placeholder="Filtrar por..."
-        w='50%'
         borderColor='#f7b3cd'
         focusBorderColor='#ffbb00'
       >

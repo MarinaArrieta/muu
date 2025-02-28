@@ -3,7 +3,7 @@ import {
     Image,
     Stack,
     VStack,
-    Text
+    Text,
 } from '@chakra-ui/react'
 import { Link, NavLink, Link as RouterLink } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
