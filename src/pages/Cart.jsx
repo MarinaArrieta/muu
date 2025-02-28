@@ -56,23 +56,27 @@ export const Cart = () => {
                     </CardFooter>
                 </Stack>
             </Card>
-            <VStack>
-                <Card>
+            <VStack w='100%'>
+                <Card w='100%'>
                     <CardHeader bg='#5f5525'>
                         <Heading size='md' color='#f2e8d7'>Total en mi carrito</Heading>
                     </CardHeader>
                     <CardBody bg='#f2e8d7'>
                         <Stack divider={<StackDivider />} spacing='4'>
                             <Box display='flex' alignItems='center' justify='center'>
-                                <Text pt='2' fontSize='lg' as='b' color='#5f5525'>
-                                🍨 $ 300
+                                <Text pt='2' fontSize='xl' as='b' color='#5f5525'>
+                                    🍨 Precio: $ 300
                                 </Text>
                             </Box>
-                            <ButtonGroup gap='4' flexDirection='column'>
-                                <Button variant='solid' colorScheme='pink'>
+                            <ButtonGroup
+                                gap='4'
+                                flexDirection={{ base: 'column', md: 'row', lg: 'row' }}
+                                alignItems='baseline'
+                            >
+                                <Button variant='solid' colorScheme='pink' w='90%'>
                                     Ver más productos
                                 </Button>
-                                <Button variant='solid' colorScheme='pink'>
+                                <Button variant='solid' colorScheme='pink' w='90%' marginLeft='0'>
                                     Realizar compra
                                 </Button>
                             </ButtonGroup>
