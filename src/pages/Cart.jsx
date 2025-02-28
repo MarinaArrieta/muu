@@ -24,7 +24,7 @@ import {
     addDoc
 } from "firebase/firestore";
 import { db } from "../firebase/config";
-import { getProducts, getProductsFromCart } from "../services/products"
+import { getProductsFromCart } from "../services/products"
 
 const createItemCart = async (id_product, id_user) => {
     console.log("id_product:", id_product)
@@ -53,9 +53,10 @@ export const addToCart = async (product_id, user_id) => {
 export const Cart = () => {
 
     const [products, setProducts] = useState([])
-    const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const { user } = useAuth()
+
+    console.log('el user', user)
 
     useEffect(() => {
         const getData = async () => {
@@ -68,8 +69,6 @@ export const Cart = () => {
             } catch (error) {
                 setError(true)
                 console.log(error)
-            } finally {
-                setLoading(false)
             }
         }
         if (user) {
@@ -78,6 +77,7 @@ export const Cart = () => {
         }
     }, [user])
 
+    console.log('soy user',user)
     const [count, setCount] = useState(1)
     const minValue = 0
     const maxValue = 1000
@@ -99,8 +99,7 @@ export const Cart = () => {
     return (
         <VStack p='35px'>
             {error && <Text as='b' color='#ff2600'>There was an error</Text>}
-            {loading && <Text as='b' color='#ed5940'>Loading...</Text>}
-            {products.map((product) => (
+            {!user ? <Text as='b' color='#ed5940'>Registrate para comprar 😉 </Text> : products.map((product) => (
                 <Card
                     key={product.id}
                     direction={{ base: 'column', sm: 'row' }}
@@ -124,13 +123,6 @@ export const Cart = () => {
                             <Text py='2' color='#5f5525'>
                                 Elejí la cantidad de MUU que quieras comprar
                             </Text>
-                            {/* <Select
-                                borderColor='#f7b3cd'
-                                focusBorderColor='#ffbb00'
-                            >
-
-                                <option value={product.stock}>{product.stock}</option>
-                            </Select> */}
                             <InputGroup size='md'>
                                 <Input
                                     pr='4.5rem'
