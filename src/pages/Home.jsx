@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
-import { getProducts, getUsers } from "../services/products"
+import { getProducts } from "../services/products"
 import {
-  Box,
   Button,
   ButtonGroup,
   Card,
@@ -10,13 +9,13 @@ import {
   Divider,
   Grid,
   Heading,
-  HStack,
   Image,
   Stack,
   Text,
   VStack
 } from "@chakra-ui/react"
 import { useAuth } from "../context/AuthContext"
+import { NavLink } from "react-router-dom"
 
 const Home = () => {
 
@@ -75,9 +74,11 @@ const Home = () => {
             <Divider />
             <CardFooter justify='end'>
               <ButtonGroup spacing='2'>
-                <Button variant='solid' colorScheme='pink'>
-                  Ver detalles
-                </Button>
+                <NavLink as='button' to="product-detail" fontSize='lg' variant='solid' colorScheme='pink'>
+                        <Button variant='solid' colorScheme='pink'>
+                            Ver detalle
+                        </Button>
+                </NavLink>
               </ButtonGroup>
             </CardFooter>
           </Card>
