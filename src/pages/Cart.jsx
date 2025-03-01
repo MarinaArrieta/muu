@@ -14,8 +14,8 @@ import {
     Stack,
     StackDivider,
     Text,
+    useToast,
     VStack,
-    useDisclosure
 } from "@chakra-ui/react";
 import {
     addDoc,
@@ -68,9 +68,7 @@ const deleteItemCart = async (id_product, id_user) => {
         querySnapshot.forEach(async (docSnap) => {
             const docRef = doc(db, "cart_item", docSnap.id);
             await deleteDoc(docRef);
-            console.log(`Deleted cart item with ID: ${docSnap.id}`);
         });
-        console.log("Successfully deleted the cart items");
     } catch (error) {
         console.error("Error deleting cart items: ", error);
     }
@@ -83,7 +81,7 @@ export const Cart = () => {
     const [products, setProducts] = useState([])
     const [error, setError] = useState(false)
     const { user } = useAuth()
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const toast = useToast()
 
     const handlePurchase = async (user, products) => {
         try {
@@ -95,6 +93,7 @@ export const Cart = () => {
                 if (!productSnap.exists()) {
                     return;
                 }
+
                 const amount = product.count;
                 const newStock = product.stock - amount
                 batch.update(productRef, { stock: newStock })
@@ -104,6 +103,15 @@ export const Cart = () => {
                 await deleteItemCart(product.id, user)
             }
             setProducts([])
+            toast({
+                title: 'La compra se realizó con éxito',
+                description: "Disfrute su 🍨",
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+                position:"top"
+            })
+
 
         } catch (error) {
             console.error("Error:", error)
@@ -219,7 +227,7 @@ export const Cart = () => {
                     </Stack>
                 </Card>
             ))}
-            {!products && <Text>No products available</Text>}
+            {!products.length && <Text></Text>}
             {!user ? '' :
                 <VStack w='100%'>
                     <Card w='100%'>
@@ -230,19 +238,23 @@ export const Cart = () => {
                             <Stack divider={<StackDivider />} spacing='4'>
                                 <Box display='flex' alignItems='center' justify='center'>
                                     <Text pt='2' fontSize='xl' as='b' color='#5f5525'>
-                                        🍨 Precio: $ {totalPrice()}
+                                        {totalPrice() > 0 ? <>🍨 Precio: $ {totalPrice()}</> : <> <Text>Carrito vacío 🥺</Text> <Button variant='solid' colorScheme='pink' w='90%' marginTop='20px'>
+                                            <Link to={`/`}>Ver más productos</Link>
+                                        </Button></> }
                                     </Text>
                                 </Box>
-                                <ButtonGroup
-                                    gap='4'
-                                    flexDirection={{ base: 'column', md: 'row', lg: 'row' }}
-                                    alignItems='baseline'
-                                >
-                                    <Button variant='solid' colorScheme='pink' w='90%'>
-                                        <Link to={`/`}>Ver más productos</Link>
-                                    </Button>
-                                    <Button onClick={confirmPurchase} variant='solid' colorScheme='pink' w='90%'>Comprar</Button>
-                                </ButtonGroup>
+                                {totalPrice() > 0 && (
+                                    <ButtonGroup
+                                        gap='4'
+                                        flexDirection={{ base: 'column', md: 'row', lg: 'row' }}
+                                        alignItems='baseline'
+                                    >
+                                        <Button variant='solid' colorScheme='pink' w='90%'>
+                                            <Link to={`/`}>Ver más productos</Link>
+                                        </Button>
+                                        <Button onClick={confirmPurchase} variant='solid' colorScheme='pink' w='90%'>Comprar</Button>
+                                    </ButtonGroup>
+                                )}
                             </Stack>
                         </CardBody>
                     </Card>
