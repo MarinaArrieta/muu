@@ -27,8 +27,6 @@ const ProductDetail = () => {
     useEffect(() => {
         getProducts().then(
             (data) => {
-                console.log('data:', data)
-                // const product = data.find((e) => id === e.uid)
                 const product = data.find((product) => product.id === id)
                 setProduct(product)
             })
@@ -36,12 +34,9 @@ const ProductDetail = () => {
 
 
     const addToCartClick = (e) => {
-        alert("aca2")
         let product_id = e.target.dataset.id
         let user_id = user
-        console.log(user_id)
-        console.log(user)
-        console.log("+++++++++++")
+
         addToCart(product_id, user_id)
     }
 
@@ -79,7 +74,6 @@ const ProductDetail = () => {
                     </CardFooter>
                 </Card>
             </VStack>
-            {/* {!product && <Text>No products available</Text>} */}
         </Grid>
     )
 }

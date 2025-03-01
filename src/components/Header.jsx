@@ -30,11 +30,9 @@ const Header = () => {
     return (
         <VStack>
             <Stack direction='column'>
-                {/* w={{ base: "40%", lg: "28%" }}  */}
                 <Image
                     position="absolute"
                     left="0"
-                    // w='40%'
                     w={{ base: "40%", md: '40%', lg: "28%" }}
                     src={helado}
                     filter='opacity(0.5)'

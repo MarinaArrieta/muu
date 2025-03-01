@@ -20,11 +20,11 @@ export const Register = () => {
     const { errors } = formState;
 
     const { registerUser } = useAuth();
-    console.log(errors);
 
     const onSubmit = (data) => {
         registerUser(data);
-    };
+    }
+
     return (
         <Box maxW="400px" mx="auto" mt="10">
             <form onSubmit={handleSubmit(onSubmit)}>

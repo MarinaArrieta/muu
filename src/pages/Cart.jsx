@@ -15,6 +15,7 @@ import {
     StackDivider,
     Text,
     VStack,
+    useToast,
 } from "@chakra-ui/react";
 import { RiDeleteBinFill } from "react-icons/ri";
 import { useAuth } from '../context/AuthContext'
@@ -27,17 +28,15 @@ import { db } from "../firebase/config";
 import { getProductsFromCart } from "../services/products"
 
 const createItemCart = async (id_product, id_user) => {
-    console.log("id_product:", id_product)
-    console.log("id_user:", id_user)
     const doc = await addDoc(collection(db, "cart_item"), {
         id_product,
         id_user
     });
-    console.log("Hola, Document written with ID: ", doc.id);
     return doc;
 }
 
 export const addToCart = async (product_id, user_id) => {
+    const toast = useToast()
     try {
         alert("adding: " + product_id + user_id)
         const item_cart = await createItemCart(
@@ -46,7 +45,13 @@ export const addToCart = async (product_id, user_id) => {
         )
 
     } catch (error) {
-        console.log(error)
+        toast({
+            title: 'Hubo un error',
+            description: "Vuelve a intentarlo",
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+        })
     }
 }
 
@@ -56,28 +61,22 @@ export const Cart = () => {
     const [error, setError] = useState(false)
     const { user } = useAuth()
 
-    console.log('el user', user)
-
     useEffect(() => {
         const getData = async () => {
             try {
-                console.log('algo, user:', user)
                 const data = await getProductsFromCart(user)
-                console.log(data)
                 data.map((product) => console.log(product))
                 setProducts(data)
             } catch (error) {
                 setError(true)
-                console.log(error)
             }
         }
         if (user) {
-            console.log("user qui:", user)
             getData()
         }
     }, [user])
 
-    console.log('soy user',user)
+    console.log('soy user', user)
     const [count, setCount] = useState(1)
     const minValue = 0
     const maxValue = 1000
@@ -154,34 +153,34 @@ export const Cart = () => {
             ))}
             {!products && <Text>No products available</Text>}
             {!user ? '' :
-            <VStack w='100%'>
-                <Card w='100%'>
-                    <CardHeader bg='#5f5525'>
-                        <Heading size='md' color='#f2e8d7'>Total en mi carrito</Heading>
-                    </CardHeader>
-                    <CardBody bg='#f2e8d7'>
-                        <Stack divider={<StackDivider />} spacing='4'>
-                            <Box display='flex' alignItems='center' justify='center'>
-                                <Text pt='2' fontSize='xl' as='b' color='#5f5525'>
-                                    🍨 Precio: $ 300
-                                </Text>
-                            </Box>
-                            <ButtonGroup
-                                gap='4'
-                                flexDirection={{ base: 'column', md: 'row', lg: 'row' }}
-                                alignItems='baseline'
-                            >
-                                <Button variant='solid' colorScheme='pink' w='90%'>
-                                    Ver más productos
-                                </Button>
-                                <Button variant='solid' colorScheme='pink' w='90%' marginLeft='0' onClick={addToCart}>
-                                    Realizar compra
-                                </Button>
-                            </ButtonGroup>
-                        </Stack>
-                    </CardBody>
-                </Card>
-            </VStack>}
+                <VStack w='100%'>
+                    <Card w='100%'>
+                        <CardHeader bg='#5f5525'>
+                            <Heading size='md' color='#f2e8d7'>Total en mi carrito</Heading>
+                        </CardHeader>
+                        <CardBody bg='#f2e8d7'>
+                            <Stack divider={<StackDivider />} spacing='4'>
+                                <Box display='flex' alignItems='center' justify='center'>
+                                    <Text pt='2' fontSize='xl' as='b' color='#5f5525'>
+                                        🍨 Precio: $ 300
+                                    </Text>
+                                </Box>
+                                <ButtonGroup
+                                    gap='4'
+                                    flexDirection={{ base: 'column', md: 'row', lg: 'row' }}
+                                    alignItems='baseline'
+                                >
+                                    <Button variant='solid' colorScheme='pink' w='90%'>
+                                        Ver más productos
+                                    </Button>
+                                    <Button variant='solid' colorScheme='pink' w='90%' marginLeft='0' onClick={addToCart}>
+                                        Realizar compra
+                                    </Button>
+                                </ButtonGroup>
+                            </Stack>
+                        </CardBody>
+                    </Card>
+                </VStack>}
         </VStack>
     );
 };

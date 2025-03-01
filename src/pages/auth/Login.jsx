@@ -7,6 +7,7 @@ import {
     Input,
     InputGroup,
     InputRightElement,
+    useToast,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -21,18 +22,30 @@ export const Login = () => {
     const { errors } = formState;
     const { login, signInWithGoogle } = useAuth()
     const navigate = useNavigate();
-    console.log(errors);
+    const toast = useToast()
 
     const handleGoogleSignIn = async () => {
         const user = await signInWithGoogle();
         if (user) {
-            console.log("Usuario autenticado con Google:", user);
+            toast({
+                title: 'Usuario registrado',
+                description: "Gracias por registrarte",
+                status: 'info',
+                duration: 9000,
+                isClosable: true,
+            })
         }
     };
 
     const onSubmit = (data) => {
-        console.log('data del user', data)
         login(data)
+        toast({
+            title: 'Usuario registrado',
+            description: "Gracias por registrarte",
+            status: 'info',
+            duration: 9000,
+            isClosable: true,
+        })
         navigate('/')
     }
 

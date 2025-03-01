@@ -66,7 +66,6 @@ export const AuthProvider = ({ children }) => {
         };
     }
 
-    console.log("Soy user del state", user)
     const login = ({ email, password }) => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -83,7 +82,7 @@ export const AuthProvider = ({ children }) => {
             })
             .catch((error) => {
                 toast({
-                    title: 'Hubo un error al cerrar la sesión',
+                    title: 'Hubo un error al iniciar la sesión',
                     description: 'Vuelve a intentarlo',
                     position: 'top',
                     status: 'error',

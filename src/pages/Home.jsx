@@ -12,6 +12,7 @@ import {
   Select,
   Stack,
   Text,
+  useToast,
   VStack
 } from "@chakra-ui/react"
 import { useAuth } from "../context/AuthContext"
@@ -23,18 +24,23 @@ const Home = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const { user } = useAuth()
+  const toast = useToast()
 
   useEffect(() => {
     const getData = async () => {
       try {
-        console.log('algo')
         const data = await getProducts(products)
-        console.log(data)
         data.map((product) => console.log(product))
         setProducts(data)
       } catch (error) {
         setError(true)
-        console.log(error)
+        toast({
+          title: 'Hubo un error',
+          description: "Vuleve a intentarlo",
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+      })
       } finally {
         setLoading(false)
       }
