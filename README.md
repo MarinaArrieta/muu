@@ -38,7 +38,8 @@ simple-import-sort: Herramienta para organizar automáticamente las importacione
 
 Clona el repositorio en tu máquina local:
 
-git clone https://github.com/Natalia-Schwindt/proyectoFinalReact.git
+git@github.com:MarinaArrieta/muu.git
+
 
 Navega al directorio del proyecto:
 
