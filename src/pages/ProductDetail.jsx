@@ -44,7 +44,7 @@ const ProductDetail = () => {
             title: 'Se agregó al carrito 😀',
             position: 'top',
             status: 'info',
-            duration: 9000,
+            duration: 3000,
             isClosable: true,
         })
 
