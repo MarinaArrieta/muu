@@ -80,13 +80,6 @@ const Header = () => {
                         Registrarse
                     </Text>
                 </NavLink>
-                <NavLink as={Link} to="create" fontSize='lg'>
-                    <Text
-                        fontSize={{ base: '18px', md: '25px', lg: '29px' }}
-                    >
-                        Orden
-                    </Text>
-                </NavLink>
                 {isAuthenticated ? (
                     <NavLink as="button" onClick={logout} fontSize='lg'>
                         <Text
