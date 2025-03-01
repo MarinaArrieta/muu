@@ -27,7 +27,6 @@ export const getProducts = async () => {
 }
 
 export const getProductsFromCart = async (userId) => {
-    alert(userId)
     const q = query(collection(db, "cart_item"), where("id_user", "==", userId));
     const cartSnapshot = await getDocs(q);
 

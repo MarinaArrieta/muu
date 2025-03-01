@@ -39,7 +39,6 @@ const createItemCart = async (id_product, id_user) => {
 export const addToCart = async (product_id, user_id) => {
     const toast = useToast()
     try {
-        alert("adding: " + product_id + user_id)
         const item_cart = await createItemCart(
             product_id,
             user_id
