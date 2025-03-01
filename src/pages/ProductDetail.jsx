@@ -40,6 +40,10 @@ const ProductDetail = () => {
         addToCart(product_id, user_id)
     }
 
+    if (!product) {
+        return <Text>Producto no encontrado</Text>
+    }
+
     return (
         <Grid
             templateColumns={{ base: "1fr", sm: "1fr", lg: "repeat(3, 1fr)" }}

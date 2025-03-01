@@ -1,8 +1,9 @@
-import { Register } from '../pages/auth/Register'
 import { Route, Routes } from 'react-router-dom'
-import Home from '../pages/Home'
 import { Login } from '../pages/auth/Login'
+import { Register } from '../pages/auth/Register'
 import { Cart } from '../pages/Cart'
+import Home from '../pages/Home'
+import NotFound from '../pages/NotFound'
 import ProductDetail from '../pages/ProductDetail'
 
 const Rounting = () => {
@@ -13,6 +14,7 @@ const Rounting = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/product-detail/:id' element={<ProductDetail />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
   )
 }
