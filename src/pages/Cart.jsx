@@ -15,7 +15,15 @@ import {
     StackDivider,
     Text,
     VStack,
-    useDisclosure
+    useDisclosure,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+
 } from "@chakra-ui/react";
 import {
     addDoc,
@@ -96,27 +104,27 @@ export const Cart = () => {
         try {
             alert("here han 01");
             const batch = writeBatch(db);  // Crea un batch de Firestore
-    
+
             // Itera sobre los productos
             for (const product of products) {
                 alert("here han 02: " + product.id);
-    
+
                 // Verifica si el producto existe en Firestore antes de intentar actualizarlo
                 const productRef = doc(db, "productos", product.id);
                 const productSnap = await getDoc(productRef);
-    
+
                 // Si el producto no existe, muestra un error
                 if (!productSnap.exists()) {
                     alert("Product does not exist: " + product.id);
                     return;  // Detén la función si algún producto no existe
                 }
-    
+
                 const amount = product.count;
                 const newStock = product.stock - amount;
                 // Actualiza el stock del producto
                 batch.update(productRef, { stock: newStock });
             }
-    
+
             // Realiza el commit del batch
             await batch.commit();
             for (const product of products) {
@@ -124,13 +132,13 @@ export const Cart = () => {
             }
             setProducts([])
             alert("here han 03: Purchase successful!");
-    
+
         } catch (error) {
             console.error("Error during purchase handling:", error);
             alert("Error during purchase: " + error.message);
         }
     };
-    
+
 
     useEffect(() => {
         const getData = async () => {
@@ -178,23 +186,7 @@ export const Cart = () => {
         try {
 
             await handlePurchase(user, products);
-            // toast({
-            //     title: 'Compra realizada con éxito',
-            //     description: "Gracias por tu compra",
-            //     status: 'success',
-            //     duration: 9000,
-            //     isClosable: true,
-            // });
-            // Clear the cart after purchase
-            // setProducts([]);
         } catch (error) {
-            // toast({
-            //     title: 'Hubo un error',
-            //     description: "Vuelve a intentarlo",
-            //     status: 'error',
-            //     duration: 9000,
-            //     isClosable: true,
-            // });
         }
     };
 
@@ -278,7 +270,7 @@ export const Cart = () => {
                                     <Button variant='solid' colorScheme='pink' w='90%'>
                                         <Link to={`/`}>Ver más productos</Link>
                                     </Button>
-                                    <Button onClick={confirmPurchase}>aca</Button>
+                                    <Button onClick={confirmPurchase} variant='solid' colorScheme='pink' w='90%'>Comprar</Button>
                                 </ButtonGroup>
                             </Stack>
                         </CardBody>
