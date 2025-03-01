@@ -1,12 +1,12 @@
-Proyecto Final React
+# Proyecto Final React
 
 Este proyecto es una aplicación web para la visualización y gestión de productos desde una base de datos. Cuenta con funcionalidades como búsqueda, filtrado por precio y favoritos. Utiliza Firebase como backend y Chakra UI para el diseño de la interfaz.
 
-🚀 Comenzando
+## 🚀 Comenzando
 
 Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas.
 
-📋 Pre-requisitos
+## 📋 Pre-requisitos
 
 Asegúrate de tener instalados los siguientes requisitos antes de ejecutar el proyecto:
 
@@ -16,7 +16,7 @@ npm (incluido con Node.js)
 
 Firebase
 
-Dependencias principales:
+## Dependencias principales:
 
 @chakra-ui/react: Biblioteca para diseño y componentes accesibles.
 
@@ -34,20 +34,20 @@ react-icons: Conjunto de iconos populares.
 
 simple-import-sort: Herramienta para organizar automáticamente las importaciones.
 
-🔧 Instalación
+## 🔧 Instalación
 
 Clona el repositorio en tu máquina local:
 
-git@github.com:MarinaArrieta/muu.git
+```git clone git@github.com:MarinaArrieta/muu.git```
 
 
 Navega al directorio del proyecto:
 
-cd proyectoFinalReact
+```cd proyectoFinalReact```
 
 Instala las dependencias necesarias:
 
-npm install
+```npm install```
 
 Configura Firebase:
 
@@ -57,9 +57,9 @@ Agrega tus credenciales de Firebase siguiendo las variables proporcionadas en .e
 
 Ejecuta el proyecto en modo desarrollo:
 
-npm run dev
+```npm run dev```
 
-🛠️ Construido con
+## 🛠️ Construido con
 
 React - Biblioteca de JavaScript para la interfaz de usuario.
 
