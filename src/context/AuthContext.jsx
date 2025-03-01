@@ -26,9 +26,7 @@ export const AuthProvider = ({ children }) => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 const uid = user.uid;
-                const email = user.email;
-                console.log('Usuario logueado:', email)
-                setUser(uid, email)
+                setUser(uid)
             } else {
                 setUser(null)
             }

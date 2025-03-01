@@ -67,7 +67,7 @@ const Home = () => {
         gap={6}
         flexDirection='column'
       >
-        {error && <Text as='b' color='#ff2600'>There was an error</Text>}
+        {error && <Text as='b' color='#ff2600'>Hubo un error  😓</Text>}
         {loading && <Text as='b' color='#ed5940'>Loading...</Text>}
         {products.map((product) => (
           <VStack key={product.id}>

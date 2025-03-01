@@ -76,7 +76,6 @@ export const Cart = () => {
         }
     }, [user])
 
-    console.log('soy user', user)
     const [count, setCount] = useState(1)
     const minValue = 0
     const maxValue = 1000
@@ -97,7 +96,7 @@ export const Cart = () => {
 
     return (
         <VStack p='35px'>
-            {error && <Text as='b' color='#ff2600'>There was an error</Text>}
+            {error && <Text as='b' color='#ff2600'>Hubo un error 😓</Text>}
             {!user ? <Text as='b' color='#ed5940'>Registrate para comprar 😉 </Text> : products.map((product) => (
                 <Card
                     key={product.id}
@@ -120,7 +119,7 @@ export const Cart = () => {
                                 Precio: $ {product.price}
                             </Text>
                             <Text py='2' color='#5f5525'>
-                                Elejí la cantidad de MUU que quieras comprar
+                                Elegí la cantidad de MUU que quieras comprar
                             </Text>
                             <InputGroup size='md'>
                                 <Input
