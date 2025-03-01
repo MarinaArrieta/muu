@@ -30,7 +30,15 @@ import { useAuth } from '../context/AuthContext'
 import { useEffect, useState } from 'react'
 import {
     collection,
-    addDoc
+    addDoc,
+    doc,
+    getDoc,
+    updateDoc,
+    query,
+    where,
+    getDocs,
+    deleteDoc,
+    writeBatch,
 } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { getProductsFromCart } from "../services/products"
@@ -45,7 +53,7 @@ const createItemCart = async (id_product, id_user) => {
 }
 
 export const addToCart = async (product_id, user_id) => {
-    const toast = useToast()
+    // const toast = useToast()
     try {
         const item_cart = await createItemCart(
             product_id,
@@ -53,15 +61,38 @@ export const addToCart = async (product_id, user_id) => {
         )
 
     } catch (error) {
-        toast({
-            title: 'Hubo un error',
-            description: "Vuelve a intentarlo",
-            status: 'error',
-            duration: 9000,
-            isClosable: true,
-        })
+        // toast({
+        //     title: 'Hubo un error',
+        //     description: "Vuelve a intentarlo",
+        //     status: 'error',
+        //     duration: 9000,
+        //     isClosable: true,
+        // })
     }
 }
+
+const deleteItemCart = async (id_product, id_user) => {
+    try {
+        const cartItemsRef = collection(db, "cart_item");
+        const q = query(
+            cartItemsRef,
+            where("id_product", "==", id_product),
+            where("id_user", "==", id_user)
+        );
+
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach(async (docSnap) => {
+            const docRef = doc(db, "cart_item", docSnap.id);
+            await deleteDoc(docRef);
+            console.log(`Deleted cart item with ID: ${docSnap.id}`);
+        });
+        console.log("Successfully deleted the cart items");
+    } catch (error) {
+        console.error("Error deleting cart items: ", error);
+    }
+};
+
+
 
 export const Cart = () => {
 
@@ -69,6 +100,47 @@ export const Cart = () => {
     const [error, setError] = useState(false)
     const { user } = useAuth()
     const { isOpen, onOpen, onClose } = useDisclosure()
+
+    const handlePurchase = async (user, products) => {
+        try {
+            alert("here han 01");
+            const batch = writeBatch(db);  // Crea un batch de Firestore
+    
+            // Itera sobre los productos
+            for (const product of products) {
+                alert("here han 02: " + product.id);
+    
+                // Verifica si el producto existe en Firestore antes de intentar actualizarlo
+                const productRef = doc(db, "productos", product.id);
+                const productSnap = await getDoc(productRef);
+    
+                // Si el producto no existe, muestra un error
+                if (!productSnap.exists()) {
+                    alert("Product does not exist: " + product.id);
+                    return;  // Detén la función si algún producto no existe
+                }
+    
+                const amount = 1;
+                const newStock = product.stock - amount;
+    
+                // Actualiza el stock del producto
+                batch.update(productRef, { stock: newStock });
+            }
+    
+            // Realiza el commit del batch
+            await batch.commit();
+            for (const product of products) {
+                await deleteItemCart(product.id, user);
+            }
+            setProducts([])
+            alert("here han 03: Purchase successful!");
+    
+        } catch (error) {
+            console.error("Error during purchase handling:", error);
+            alert("Error during purchase: " + error.message);
+        }
+    };
+    
 
     useEffect(() => {
         const getData = async () => {
@@ -102,6 +174,32 @@ export const Cart = () => {
             handleIncrease(count) + 0
         } else handleIncrease(count) - 0
     }
+
+    const confirmPurchase = async (ev) => {
+        ev.preventDefault();
+        try {
+
+            await handlePurchase(user, products);
+            alert("here5")
+            // toast({
+            //     title: 'Compra realizada con éxito',
+            //     description: "Gracias por tu compra",
+            //     status: 'success',
+            //     duration: 9000,
+            //     isClosable: true,
+            // });
+            // Clear the cart after purchase
+            // setProducts([]);
+        } catch (error) {
+            // toast({
+            //     title: 'Hubo un error',
+            //     description: "Vuelve a intentarlo",
+            //     status: 'error',
+            //     duration: 9000,
+            //     isClosable: true,
+            // });
+        }
+    };
 
     return (
         <VStack p='35px'>
@@ -170,7 +268,7 @@ export const Cart = () => {
                             <Stack divider={<StackDivider />} spacing='4'>
                                 <Box display='flex' alignItems='center' justify='center'>
                                     <Text pt='2' fontSize='xl' as='b' color='#5f5525'>
-                                        🍨 Precio: $ 300
+                                        🍨 Precio: $ {products.reduce((total, product) => total + product.price * count, 0)}
                                     </Text>
                                 </Box>
                                 <ButtonGroup
@@ -181,7 +279,8 @@ export const Cart = () => {
                                     <Button variant='solid' colorScheme='pink' w='90%'>
                                         <Link to={`/`}>Ver más productos</Link>
                                     </Button>
-                                    <Button variant='solid' colorScheme='pink' w='90%' marginLeft='0' onClick={onOpen}>Comprar</Button>
+                                    <Button onClick={confirmPurchase}>aca</Button>
+                                    {/* <Button variant='solid' colorScheme='pink' w='90%' marginLeft='0' onClick={onOpen}>Comprar</Button>
                                     <Modal isOpen={isOpen} onClose={onClose}>
                                         <ModalOverlay />
                                         <ModalContent bg='#ffd8e5'>
@@ -196,7 +295,7 @@ export const Cart = () => {
                                                 </Button>
                                             </ModalFooter>
                                         </ModalContent>
-                                    </Modal>
+                                    </Modal> */}
                                 </ButtonGroup>
                             </Stack>
                         </CardBody>
