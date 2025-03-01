@@ -40,13 +40,6 @@ const Footer = () => {
                         Registrarse
                     </Text>
                 </NavLink>
-                <NavLink as={Link} to="create" fontSize='lg'>
-                    <Text
-                        fontSize={{ base: '15px', md: '18px' }}
-                    >
-                        Orden
-                    </Text>
-                </NavLink>
                 <NavLink as={Link} to="cart">
                     <Text fontSize={{ base: '15px', md: '18px' }}>
                         <RiShoppingCartFill />
