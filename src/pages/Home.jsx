@@ -23,6 +23,7 @@ const Home = () => {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+  const [filter, setFilter] = useState('')
   const { user } = useAuth()
   const toast = useToast()
 
@@ -50,12 +51,22 @@ const Home = () => {
     getData()
   }, [])
 
+  const handleFilterChange = (event) => {
+    setFilter(event.target.value)
+  }
+
+  const filteredProducts = products.filter(product => {
+    if (!filter) return true
+    return product.category === filter
+  })
+
   return (
     <VStack>
       <Select
         placeholder="Filtrar por..."
         borderColor='#f7b3cd'
         focusBorderColor='#ffbb00'
+        onChange={handleFilterChange}
       >
         <option value='palito'>Helado palitos</option>
         <option value='cucurucho'>Cucuruchos</option>
@@ -68,7 +79,7 @@ const Home = () => {
       >
         {error && <Text as='b' color='#ff2600'>Hubo un error  😓</Text>}
         {loading && <Text as='b' color='#ed5940'>Loading...</Text>}
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <VStack key={product.id}>
             <Card maxW='sm' bg='#f2e8d700' shadow='unset'>
               <CardBody>
@@ -94,7 +105,7 @@ const Home = () => {
             </Card>
           </VStack>
         ))}
-        {!products && <Text>No products available</Text>}
+        {!filteredProducts.length && <Text>No products available</Text>}
       </Grid>
     </VStack>
   )
