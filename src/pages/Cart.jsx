@@ -15,34 +15,25 @@ import {
     StackDivider,
     Text,
     VStack,
-    useToast,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    useDisclosure,
+    useDisclosure
 } from "@chakra-ui/react";
-import { RiDeleteBinFill } from "react-icons/ri";
-import { useAuth } from '../context/AuthContext'
-import { useEffect, useState } from 'react'
 import {
-    collection,
     addDoc,
+    collection,
+    deleteDoc,
     doc,
     getDoc,
-    updateDoc,
+    getDocs,
     query,
     where,
-    getDocs,
-    deleteDoc,
-    writeBatch,
+    writeBatch
 } from "firebase/firestore";
-import { db } from "../firebase/config";
-import { getProductsFromCart } from "../services/products"
+import { useEffect, useState } from 'react';
+import { RiDeleteBinFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { useAuth } from '../context/AuthContext';
+import { db } from "../firebase/config";
+import { getProductsFromCart } from "../services/products";
 
 const createItemCart = async (id_product, id_user) => {
     const doc = await addDoc(collection(db, "cart_item"), {
@@ -169,6 +160,15 @@ export const Cart = () => {
         }
     };
 
+    const handleDelete = async (product) => {
+        try {
+            await deleteItemCart(product.id, user);
+            setProducts(products.filter(p => p.id !== product.id));
+        } catch (error) {
+            console.error("Error deleting product from cart: ", error);
+        }
+    };
+
     const totalPrice = () => {
         return products.reduce((total, product) => total + product.price * product.count, 0);
     };
@@ -249,7 +249,7 @@ export const Cart = () => {
                             </Text>
                         </CardBody>
                         <CardFooter gap='5px' justify='end'>
-                            <Button variant='solid' colorScheme='orange'>
+                            <Button variant='solid' colorScheme='orange' onClick={() => handleDelete(product)}>
                                 <RiDeleteBinFill />
                             </Button>
                         </CardFooter>
