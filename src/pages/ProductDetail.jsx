@@ -13,17 +13,20 @@ import {
     Image,
     Stack,
     Text,
+    useToast,
     VStack
 } from "@chakra-ui/react"
-import { IoMdCart } from "react-icons/io";
 import { useParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 
 const ProductDetail = () => {
+
     const [product, setProduct] = useState({})
     const { id } = useParams()
     const { user } = useAuth()
+    const toast = useToast()
+
     useEffect(() => {
         getProducts().then(
             (data) => {
@@ -37,16 +40,24 @@ const ProductDetail = () => {
         let product_id = e.target.dataset.id
         let user_id = user
 
+        toast({
+            title: 'Se agregó al carrito 😀',
+            position: 'top',
+            status: 'info',
+            duration: 9000,
+            isClosable: true,
+        })
+
         addToCart(product_id, user_id)
     }
 
     if (!product) {
-        return <Text>Producto no encontrado</Text>
+        return <Text color='#ed5940' fontSize='2xl'>Producto no encontrado 😓</Text>
     }
 
     return (
         <Grid
-            templateColumns={{ base: "1fr", sm: "1fr", lg: "repeat(3, 1fr)" }}
+            templateColumns={{ base: "1fr", sm: "1fr", lg: "repeat(1, 1fr)" }}
             gap={6}
         >
             <VStack>
@@ -71,8 +82,8 @@ const ProductDetail = () => {
                     <Divider />
                     <CardFooter justify='end'>
                         <ButtonGroup spacing='2'>
-                            <Button variant='solid' colorScheme='pink'  onClick={addToCartClick} data-id={product.id}>
-                                Agregar al <IoMdCart />
+                            <Button variant='solid' colorScheme='pink' onClick={addToCartClick} data-id={product.id}>
+                                Agregar al carrito
                             </Button>
                         </ButtonGroup>
                     </CardFooter>
