@@ -15,15 +15,7 @@ import {
     StackDivider,
     Text,
     VStack,
-    useDisclosure,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-
+    useDisclosure
 } from "@chakra-ui/react";
 import {
     addDoc,
@@ -52,7 +44,6 @@ const createItemCart = async (id_product, id_user) => {
 }
 
 export const addToCart = async (product_id, user_id) => {
-    // const toast = useToast()
     try {
         const item_cart = await createItemCart(
             product_id,
@@ -60,13 +51,7 @@ export const addToCart = async (product_id, user_id) => {
         )
 
     } catch (error) {
-        // toast({
-        //     title: 'Hubo un error',
-        //     description: "Vuelve a intentarlo",
-        //     status: 'error',
-        //     duration: 9000,
-        //     isClosable: true,
-        // })
+
     }
 }
 
@@ -102,40 +87,26 @@ export const Cart = () => {
 
     const handlePurchase = async (user, products) => {
         try {
-            alert("here han 01");
-            const batch = writeBatch(db);  // Crea un batch de Firestore
-
-            // Itera sobre los productos
+            const batch = writeBatch(db)
             for (const product of products) {
-                alert("here han 02: " + product.id);
-
-                // Verifica si el producto existe en Firestore antes de intentar actualizarlo
-                const productRef = doc(db, "productos", product.id);
+                const productRef = doc(db, "productos", product.id)
                 const productSnap = await getDoc(productRef);
 
-                // Si el producto no existe, muestra un error
                 if (!productSnap.exists()) {
-                    alert("Product does not exist: " + product.id);
-                    return;  // Detén la función si algún producto no existe
+                    return;
                 }
-
                 const amount = product.count;
-                const newStock = product.stock - amount;
-                // Actualiza el stock del producto
-                batch.update(productRef, { stock: newStock });
+                const newStock = product.stock - amount
+                batch.update(productRef, { stock: newStock })
             }
-
-            // Realiza el commit del batch
             await batch.commit();
             for (const product of products) {
-                await deleteItemCart(product.id, user);
+                await deleteItemCart(product.id, user)
             }
             setProducts([])
-            alert("here han 03: Purchase successful!");
 
         } catch (error) {
-            console.error("Error during purchase handling:", error);
-            alert("Error during purchase: " + error.message);
+            console.error("Error:", error)
         }
     };
 
@@ -145,7 +116,7 @@ export const Cart = () => {
             try {
                 const data = await getProductsFromCart(user)
                 data.map((product) => console.log(product))
-                const productsWithCount = data.map(product => ({ ...product, count: product.count || 1 }));
+                const productsWithCount = data.map(product => ({ ...product, count: product.count || 1 }))
                 setProducts(productsWithCount)
             } catch (error) {
                 setError(true)
@@ -158,27 +129,27 @@ export const Cart = () => {
 
     const handleIncrease = (product) => {
         if (product.count < product.stock) {
-            setProducts(products.map(p => p.id === product.id ? { ...p, count: p.count + 1 } : p));
+            setProducts(products.map(p => p.id === product.id ? { ...p, count: p.count + 1 } : p))
         }
     };
 
     const handleDecrease = (product) => {
         if (product.count > 1) {
-            setProducts(products.map(p => p.id === product.id ? { ...p, count: p.count - 1 } : p));
+            setProducts(products.map(p => p.id === product.id ? { ...p, count: p.count - 1 } : p))
         }
     };
 
     const handleDelete = async (product) => {
         try {
-            await deleteItemCart(product.id, user);
-            setProducts(products.filter(p => p.id !== product.id));
+            await deleteItemCart(product.id, user)
+            setProducts(products.filter(p => p.id !== product.id))
         } catch (error) {
-            console.error("Error deleting product from cart: ", error);
+            console.error("Error deleting product from cart: ", error)
         }
     };
 
     const totalPrice = () => {
-        return products.reduce((total, product) => total + product.price * product.count, 0);
+        return products.reduce((total, product) => total + product.price * product.count, 0)
     };
 
     const confirmPurchase = async (ev) => {
