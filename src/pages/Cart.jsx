@@ -120,9 +120,8 @@ export const Cart = () => {
                     return;  // Detén la función si algún producto no existe
                 }
     
-                const amount = 1;
+                const amount = product.count;
                 const newStock = product.stock - amount;
-    
                 // Actualiza el stock del producto
                 batch.update(productRef, { stock: newStock });
             }
@@ -147,7 +146,8 @@ export const Cart = () => {
             try {
                 const data = await getProductsFromCart(user)
                 data.map((product) => console.log(product))
-                setProducts(data)
+                const productsWithCount = data.map(product => ({ ...product, count: product.count || 1 }));
+                setProducts(productsWithCount)
             } catch (error) {
                 setError(true)
             }
@@ -157,30 +157,27 @@ export const Cart = () => {
         }
     }, [user])
 
-    const [count, setCount] = useState(1)
-    const minValue = 0
-    const maxValue = 1000
-
-    const handleIncrease = () => {
-        if (count < maxValue) setCount(count + 1)
+    const handleIncrease = (product) => {
+        if (product.count < product.stock) {
+            setProducts(products.map(p => p.id === product.id ? { ...p, count: p.count + 1 } : p));
+        }
     };
 
-    const handleDecrease = () => {
-        if (count > minValue) setCount(count - 1)
+    const handleDecrease = (product) => {
+        if (product.count > 1) {
+            setProducts(products.map(p => p.id === product.id ? { ...p, count: p.count - 1 } : p));
+        }
     };
 
     const totalPrice = () => {
-        if (handleIncrease) {
-            handleIncrease(count) + 0
-        } else handleIncrease(count) - 0
-    }
+        return products.reduce((total, product) => total + product.price * product.count, 0);
+    };
 
     const confirmPurchase = async (ev) => {
         ev.preventDefault();
         try {
 
             await handlePurchase(user, products);
-            alert("here5")
             // toast({
             //     title: 'Compra realizada con éxito',
             //     description: "Gracias por tu compra",
@@ -232,15 +229,17 @@ export const Cart = () => {
                                 <Input
                                     pr='4.5rem'
                                     type='number'
-                                    placeholder='Enter password'
-                                    value={count}
-                                    onChange={(e) => setCount(Number(e.target.value))}
+                                    min={1}
+                                    max={product.stock}
+                                    value={product.count}
+                                    readOnly
+                                    onChange={(e) => setProducts(products.map(p => p.id === product.id ? { ...p, count: Number(e.target.value) } : p))}
                                 />
                                 <InputRightElement width='4.5rem'>
-                                    <Button h='1.75rem' size='sm' onClick={handleDecrease} disabled={count === minValue}>
+                                    <Button h='1.75rem' size='sm' onClick={() => handleDecrease(product)} disabled={product.count === 1}>
                                         -
                                     </Button>
-                                    <Button h='1.75rem' size='sm' onClick={handleIncrease} disabled={count === maxValue}>
+                                    <Button h='1.75rem' size='sm' onClick={() => handleIncrease(product)} disabled={product.count === product.stock}>
                                         +
                                     </Button>
                                 </InputRightElement>
@@ -268,7 +267,7 @@ export const Cart = () => {
                             <Stack divider={<StackDivider />} spacing='4'>
                                 <Box display='flex' alignItems='center' justify='center'>
                                     <Text pt='2' fontSize='xl' as='b' color='#5f5525'>
-                                        🍨 Precio: $ {products.reduce((total, product) => total + product.price * count, 0)}
+                                        🍨 Precio: $ {totalPrice()}
                                     </Text>
                                 </Box>
                                 <ButtonGroup
@@ -280,22 +279,6 @@ export const Cart = () => {
                                         <Link to={`/`}>Ver más productos</Link>
                                     </Button>
                                     <Button onClick={confirmPurchase}>aca</Button>
-                                    {/* <Button variant='solid' colorScheme='pink' w='90%' marginLeft='0' onClick={onOpen}>Comprar</Button>
-                                    <Modal isOpen={isOpen} onClose={onClose}>
-                                        <ModalOverlay />
-                                        <ModalContent bg='#ffd8e5'>
-                                            <ModalHeader color='#ed5940'>Compra realizada con éxito 😃</ModalHeader>
-                                            <ModalCloseButton />
-                                            <ModalBody color='#5f5525'>
-                                                Gracias por la compra, vuelve pronto 🧡
-                                            </ModalBody>
-                                            <ModalFooter>
-                                                <Button colorScheme='pink' mr={3} onClick={onClose}>
-                                                    Cerrar
-                                                </Button>
-                                            </ModalFooter>
-                                        </ModalContent>
-                                    </Modal> */}
                                 </ButtonGroup>
                             </Stack>
                         </CardBody>
