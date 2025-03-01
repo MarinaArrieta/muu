@@ -16,6 +16,14 @@ import {
     Text,
     VStack,
     useToast,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    useDisclosure,
 } from "@chakra-ui/react";
 import { RiDeleteBinFill } from "react-icons/ri";
 import { useAuth } from '../context/AuthContext'
@@ -60,6 +68,7 @@ export const Cart = () => {
     const [products, setProducts] = useState([])
     const [error, setError] = useState(false)
     const { user } = useAuth()
+    const { isOpen, onOpen, onClose } = useDisclosure()
 
     useEffect(() => {
         const getData = async () => {
@@ -172,9 +181,22 @@ export const Cart = () => {
                                     <Button variant='solid' colorScheme='pink' w='90%'>
                                         <Link to={`/`}>Ver más productos</Link>
                                     </Button>
-                                    <Button variant='solid' colorScheme='pink' w='90%' marginLeft='0' onClick={addToCart}>
-                                        Realizar compra
-                                    </Button>
+                                    <Button variant='solid' colorScheme='pink' w='90%' marginLeft='0' onClick={onOpen}>Comprar</Button>
+                                    <Modal isOpen={isOpen} onClose={onClose}>
+                                        <ModalOverlay />
+                                        <ModalContent bg='#ffd8e5'>
+                                            <ModalHeader color='#ed5940'>Compra realizada con éxito 😃</ModalHeader>
+                                            <ModalCloseButton />
+                                            <ModalBody color='#5f5525'>
+                                                Gracias por la compra, vuelve pronto 🧡
+                                            </ModalBody>
+                                            <ModalFooter>
+                                                <Button colorScheme='pink' mr={3} onClick={onClose}>
+                                                    Cerrar
+                                                </Button>
+                                            </ModalFooter>
+                                        </ModalContent>
+                                    </Modal>
                                 </ButtonGroup>
                             </Stack>
                         </CardBody>
