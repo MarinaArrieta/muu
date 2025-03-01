@@ -30,7 +30,6 @@ const Home = () => {
     const getData = async () => {
       try {
         const data = await getProducts(products)
-        data.map((product) => console.log(product))
         setProducts(data)
       } catch (error) {
         setError(true)

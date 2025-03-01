@@ -26,6 +26,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { getProductsFromCart } from "../services/products"
+import { Link } from "react-router-dom";
 
 const createItemCart = async (id_product, id_user) => {
     const doc = await addDoc(collection(db, "cart_item"), {
@@ -170,7 +171,7 @@ export const Cart = () => {
                                     alignItems='baseline'
                                 >
                                     <Button variant='solid' colorScheme='pink' w='90%'>
-                                        Ver más productos
+                                        <Link to={`/`}>Ver más productos</Link>
                                     </Button>
                                     <Button variant='solid' colorScheme='pink' w='90%' marginLeft='0' onClick={addToCart}>
                                         Realizar compra
