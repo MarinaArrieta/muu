@@ -4,6 +4,7 @@ import {
     Stack,
     VStack,
     Text,
+    Divider,
 } from '@chakra-ui/react'
 import { Link, NavLink, Link as RouterLink } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
@@ -73,6 +74,9 @@ const Header = () => {
                         Home
                     </Text>
                 </Link>
+                <Stack direction='row' h='32px' p={4} gap='unset' padding='0px'>
+                    <Divider orientation='vertical' border='1px solid #f7b3cd' />
+                </Stack>
                 <NavLink as={Link} to="register" fontSize='lg'>
                     <Text
                         fontSize={{ base: '18px', md: '25px', lg: '29px' }}
@@ -80,6 +84,9 @@ const Header = () => {
                         Registrarse
                     </Text>
                 </NavLink>
+                <Stack direction='row' h='32px' p={4} gap='unset' padding='0px'>
+                    <Divider orientation='vertical' border='1px solid #f7b3cd' />
+                </Stack>
                 {isAuthenticated ? (
                     <NavLink as="button" onClick={logout} fontSize='lg'>
                         <Text
@@ -97,6 +104,9 @@ const Header = () => {
                         </Text>
                     </NavLink>
                 )}
+                <Stack direction='row' h='32px' p={4} gap='unset' padding='0px'>
+                    <Divider orientation='vertical' border='1px solid #f7b3cd'/>
+                </Stack>
                 <NavLink as={Link} to="cart">
                     <Text fontSize={{ base: '18px', md: '25px', lg: '29px' }}>
                         <RiShoppingCartFill />
