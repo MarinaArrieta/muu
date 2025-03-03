@@ -8,7 +8,7 @@ const NotFound = () => {
       <Image
         boxSize='170px'
         objectFit='cover'
-        w='300px'
+        w={{ base: '300px', md: '480px', lg: '560px' }}
         h='unset'
         src={error}
         alt='Logo vaca'
