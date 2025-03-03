@@ -52,6 +52,7 @@ const Header = () => {
                     boxSize='170px'
                     objectFit='cover'
                     h='205px'
+                    m='15px 0px'
                     filter='drop-shadow(0px 0px 10px #ffff00)'
                     src={logo}
                     alt='Logo vaca'
