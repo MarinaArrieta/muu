@@ -1,10 +1,18 @@
-import { Text, VStack } from "@chakra-ui/react"
+import { Image, Text, VStack } from "@chakra-ui/react"
+import error from '../assets/error-404.png'
 
 const NotFound = () => {
   return (
     <VStack>
-      <Text color='#ed5940' fontSize='2xl'>404 - Pagina no encontrada 🥴</Text>
-      <Text color='#5f5525' fontSize='2xl'>La pagina que estas buscando no se encuentra...</Text>
+      <Text color='#5f5525' fontSize='2xl'>La página que estas buscando no se encuentra</Text>
+      <Image
+        boxSize='170px'
+        objectFit='cover'
+        w='300px'
+        h='unset'
+        src={error}
+        alt='Logo vaca'
+      />
     </VStack>
   )
 }
