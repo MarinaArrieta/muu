@@ -11,6 +11,7 @@ import {
   HStack,
   Image,
   Select,
+  Spinner,
   Stack,
   Text,
   useToast,
@@ -66,18 +67,18 @@ const Home = () => {
       <HStack
         color='#7e6909'
       >
-      <Select
-        color='#7e6909'
-        placeholder="Filtrar por..."
-        borderColor='#f8a5c5'
-        bg='#ffdfe4'
-        focusBorderColor='#ffbb00'
-        onChange={handleFilterChange}
-      >
-        <option value='palito'>Helado palitos</option>
-        <option value='cucurucho'>Cucuruchos</option>
-        <option value='pote'>Potes</option>
-      </Select>
+        <Select
+          color='#7e6909'
+          placeholder="Filtrar por..."
+          borderColor='#f8a5c5'
+          bg='#ffdfe4'
+          focusBorderColor='#ffbb00'
+          onChange={handleFilterChange}
+        >
+          <option value='palito'>Helado palitos</option>
+          <option value='cucurucho'>Cucuruchos</option>
+          <option value='pote'>Potes</option>
+        </Select>
       </HStack>
       <Grid
         templateColumns={{ base: "1fr", sm: "1fr", lg: "repeat(3, 1fr)" }}
@@ -85,7 +86,10 @@ const Home = () => {
         flexDirection='column'
       >
         {error && <Text as='b' color='#ff2600'>Hubo un error  😓</Text>}
-        {loading && <Text as='b' color='#ed5940'>Loading...</Text>}
+        {loading &&
+          <HStack marginTop='35px'>
+            <Spinner size='xl' color='#ed5940' filter='drop-shadow(2px 5px 4px #ffb5a8)' thickness= '10px' />
+          </HStack>}
         {filteredProducts.map((product) => (
           <VStack key={product.id}>
             <Card maxW='sm' bg='#f2e8d700' shadow='unset'>
@@ -112,7 +116,7 @@ const Home = () => {
             </Card>
           </VStack>
         ))}
-        {!filteredProducts.length && <Text>No products available</Text>}
+        {/* {!filteredProducts.length && <Text>No hay productos</Text>} */}
       </Grid>
     </VStack>
   )
