@@ -75,8 +75,6 @@ const deleteItemCart = async (id_product, id_user) => {
     }
 };
 
-
-
 export const Cart = () => {
 
     const [products, setProducts] = useState([])
@@ -112,13 +110,10 @@ export const Cart = () => {
                 isClosable: true,
                 position: "top"
             })
-
-
         } catch (error) {
             console.error("Error:", error)
         }
     };
-
 
     useEffect(() => {
         const getData = async () => {
@@ -161,8 +156,8 @@ export const Cart = () => {
         return products.reduce((total, product) => total + product.price * product.count, 0)
     };
 
-    const confirmPurchase = async (ev) => {
-        ev.preventDefault();
+    const confirmPurchase = async (e) => {
+        e.preventDefault();
         try {
 
             await handlePurchase(user, products);
@@ -190,7 +185,7 @@ export const Cart = () => {
                     />
                     <Stack>
                         <CardBody>
-                            <Heading size='md' color='#ff77ad'>The perfect latte</Heading>
+                            <Heading size='md' color='#ff77ad'>{product.name}</Heading>
                             <Text py='2' color='#5f5525'>
                                 Precio: $ {product.price}
                             </Text>

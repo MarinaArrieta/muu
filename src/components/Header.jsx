@@ -88,7 +88,7 @@ const Header = () => {
                 <Stack direction='row' h='32px' p={4} gap='unset' padding='0px'>
                     <Divider orientation='vertical' border='1px solid #f7b3cd' />
                 </Stack>
-                {isAuthenticated ? (
+                { isAuthenticated ? (
                     <NavLink as="button" onClick={logout} fontSize='lg'>
                         <Text
                             fontSize={{ base: '18px', md: '25px', lg: '29px' }}

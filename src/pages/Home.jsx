@@ -8,6 +8,7 @@ import {
   Divider,
   Grid,
   Heading,
+  HStack,
   Image,
   Select,
   Stack,
@@ -40,7 +41,7 @@ const Home = () => {
           status: 'error',
           duration: 9000,
           isClosable: true,
-      })
+        })
       } finally {
         setLoading(false)
       }
@@ -61,10 +62,15 @@ const Home = () => {
   })
 
   return (
-    <VStack>
+    <VStack marginTop='15px'>
+      <HStack
+        color='#7e6909'
+      >
       <Select
+        color='#7e6909'
         placeholder="Filtrar por..."
-        borderColor='#f7b3cd'
+        borderColor='#f8a5c5'
+        bg='#ffdfe4'
         focusBorderColor='#ffbb00'
         onChange={handleFilterChange}
       >
@@ -72,6 +78,7 @@ const Home = () => {
         <option value='cucurucho'>Cucuruchos</option>
         <option value='pote'>Potes</option>
       </Select>
+      </HStack>
       <Grid
         templateColumns={{ base: "1fr", sm: "1fr", lg: "repeat(3, 1fr)" }}
         gap={6}
