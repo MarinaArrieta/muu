@@ -242,18 +242,20 @@ export const Cart = () => {
                                         {totalPrice() > 0 ?
                                             <>🍨 Precio: $ {totalPrice()}</>
                                             :
-                                            <>
-                                                <CardBody>
+                                            <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
+                                                <CardBody p='0'>
                                                     <Image
                                                         src={carritoVacio}
                                                         alt='Desierto error carrito vacio'
                                                         borderRadius='lg'
                                                     />
                                                 </CardBody>
-                                                <Button variant='solid' colorScheme='pink' w='90%' marginTop='20px'>
-                                                    <Link to={`/`}>Ver más productos</Link>
-                                                </Button>
-                                            </>}
+                                                <CardFooter p='0' justifyContent='center'>
+                                                    <Button variant='solid' colorScheme='pink' w='90%' marginTop='20px'>
+                                                        <Link to={`/`}>Ver más productos</Link>
+                                                    </Button>
+                                                </CardFooter>
+                                            </Card>}
                                     </Text>
                                 </Box>
                                 {totalPrice() > 0 && (
