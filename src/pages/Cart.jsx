@@ -34,6 +34,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from '../context/AuthContext';
 import { db } from "../firebase/config";
 import { getProductsFromCart } from "../services/products";
+import carritoVacio from '../assets/carrito-vacio.png'
 
 const createItemCart = async (id_product, id_user) => {
     const doc = await addDoc(collection(db, "cart_item"), {
@@ -109,7 +110,7 @@ export const Cart = () => {
                 status: 'success',
                 duration: 3000,
                 isClosable: true,
-                position:"top"
+                position: "top"
             })
 
 
@@ -238,9 +239,21 @@ export const Cart = () => {
                             <Stack divider={<StackDivider />} spacing='4'>
                                 <Box display='flex' alignItems='center' justify='center'>
                                     <Text pt='2' fontSize='xl' as='b' color='#5f5525'>
-                                        {totalPrice() > 0 ? <>🍨 Precio: $ {totalPrice()}</> : <> <Text>Carrito vacío 🥺</Text> <Button variant='solid' colorScheme='pink' w='90%' marginTop='20px'>
-                                            <Link to={`/`}>Ver más productos</Link>
-                                        </Button></> }
+                                        {totalPrice() > 0 ?
+                                            <>🍨 Precio: $ {totalPrice()}</>
+                                            :
+                                            <>
+                                                <CardBody>
+                                                    <Image
+                                                        src={carritoVacio}
+                                                        alt='Desierto error carrito vacio'
+                                                        borderRadius='lg'
+                                                    />
+                                                </CardBody>
+                                                <Button variant='solid' colorScheme='pink' w='90%' marginTop='20px'>
+                                                    <Link to={`/`}>Ver más productos</Link>
+                                                </Button>
+                                            </>}
                                     </Text>
                                 </Box>
                                 {totalPrice() > 0 && (
