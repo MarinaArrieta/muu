@@ -2,9 +2,11 @@ import { Divider, HStack, Image, Stack, Text, VStack } from '@chakra-ui/react'
 import logo from '../../public/logo3.png'
 import { Link, NavLink, Link as RouterLink } from 'react-router-dom'
 import { RiShoppingCartFill } from "react-icons/ri";
-import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { MdOutlineEmail } from 'react-icons/md';
 
 const Footer = () => {
+
     return (
         <HStack marginTop='50px'>
             <Image
@@ -61,8 +63,8 @@ const Footer = () => {
                     </a>
                 </Text>
                 <Text fontSize={{ base: '20px', md: '25px' }}>
-                    <a href='https://www.instagram.com/marina.arrieta_?utm_source=qr&igsh=MXgwNzIwOXI1bnNobw=='>
-                        <FaInstagram color='#ed5940' />
+                    <a href="mailto:arrietamarina12@gmail.com">
+                        <MdOutlineEmail color='#ed5940' />
                     </a>
                 </Text>
             </VStack>
