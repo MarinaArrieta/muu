@@ -83,4 +83,10 @@ Ejecuta el proyecto en modo desarrollo:
 * [Firebase - Plataforma para autenticación y base de datos en tiempo real.](https://firebase.google.com)  
 * [React Router - Sistema de enrutamiento para la aplicación.](https://reactrouter.com/)  
 * [React Icons - Conjunto de iconos listos para usar en React.](https://react-icons.github.io/react-icons/)  
-* [React Hook Form - Librería para la gestión eficiente de formularios en React.](https://react-hook-form.com/)  
+* [React Hook Form - Librería para la gestión eficiente de formularios en React.](https://react-hook-form.com/)
+
+  ## 🖌️ Edición de imágenes, construido con
+
+* [Canva - Plataforma en línea para diseño gráfico y creación de contenido visual.](https://www.canva.com/)  
+* [GIMP - Software de edición de imágenes de código abierto con potentes herramientas de retoque y manipulación.](https://www.gimp.org/)  
+* [Leonardo AI - Generador de imágenes con inteligencia artificial para la creación de arte digital y gráficos personalizados.](https://app.leonardo.ai/)  
