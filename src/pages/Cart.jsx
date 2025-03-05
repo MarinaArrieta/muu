@@ -43,6 +43,7 @@ import { db } from "../firebase/config";
 import { getProductsFromCart } from "../services/products";
 import carritoVacio from '../assets/carrito-vacio.png'
 import purchase from '../assets/compra.png'
+import register from '../assets/registrate.png'
 
 const createItemCart = async (id_product, id_user) => {
     const doc = await addDoc(collection(db, "cart_item"), {
@@ -166,61 +167,75 @@ export const Cart = () => {
     return (
         <VStack p='35px'>
             {error && <Text as='b' color='#ff2600'>Hubo un error 😓</Text>}
-            {!user ? <Text as='b' color='#ed5940'>Registrate para comprar 😉 </Text> : products.map((product) => (
-                <Card
-                    key={product.id}
-                    direction={{ base: 'column', sm: 'row' }}
-                    overflow='hidden'
-                    variant='outline'
-                    bg='#f2e8d700'
-                    border='1px solid #5f5525'
-                >
-                    <Image
-                        objectFit='cover'
-                        maxW={{ base: '100%', sm: '200px' }}
-                        src={product.image_url}
-                        alt={product.name}
-                    />
-                    <Stack>
-                        <CardBody>
-                            <Heading size='md' color='#ff77ad'>{product.name}</Heading>
-                            <Text py='2' color='#5f5525'>
-                                Precio: $ {product.price}
-                            </Text>
-                            <Text py='2' color='#5f5525'>
-                                Elegí la cantidad de MUU que quieras comprar
-                            </Text>
-                            <InputGroup size='md'>
-                                <Input
-                                    pr='4.5rem'
-                                    type='number'
-                                    min={1}
-                                    max={product.stock}
-                                    value={product.count}
-                                    readOnly
-                                    onChange={(e) => setProducts(products.map(p => p.id === product.id ? { ...p, count: Number(e.target.value) } : p))}
-                                />
-                                <InputRightElement width='4.5rem'>
-                                    <Button h='1.75rem' size='sm' onClick={() => handleDecrease(product)} disabled={product.count === 1}>
-                                        -
-                                    </Button>
-                                    <Button h='1.75rem' size='sm' onClick={() => handleIncrease(product)} disabled={product.count === product.stock}>
-                                        +
-                                    </Button>
-                                </InputRightElement>
-                            </InputGroup>
-                            <Text py='2' color='#5f5525'>
-                                Stock disponible: {product.stock}
-                            </Text>
+            {!user ?
+                // <Text as='b' color='#ed5940'>Registrate para comprar 😉 </Text>
+                <VStack p='9px'>
+                    <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
+                        <CardBody p='0'>
+                            <Image
+                                src={register}
+                                alt='Vaca en un jardin'
+                                borderRadius='lg'
+                            />
                         </CardBody>
-                        <CardFooter gap='5px' justify='end'>
-                            <Button variant='solid' colorScheme='orange' onClick={() => handleDelete(product)}>
-                                <RiDeleteBinFill />
-                            </Button>
-                        </CardFooter>
-                    </Stack>
-                </Card>
-            ))}
+                    </Card>
+                </VStack>
+                :
+                products.map((product) => (
+                    <Card
+                        key={product.id}
+                        direction={{ base: 'column', sm: 'row' }}
+                        overflow='hidden'
+                        variant='outline'
+                        bg='#f2e8d700'
+                        border='1px solid #5f5525'
+                    >
+                        <Image
+                            objectFit='cover'
+                            maxW={{ base: '100%', sm: '200px' }}
+                            src={product.image_url}
+                            alt={product.name}
+                        />
+                        <Stack>
+                            <CardBody>
+                                <Heading size='md' color='#ff77ad'>{product.name}</Heading>
+                                <Text py='2' color='#5f5525'>
+                                    Precio: $ {product.price}
+                                </Text>
+                                <Text py='2' color='#5f5525'>
+                                    Elegí la cantidad de MUU que quieras comprar
+                                </Text>
+                                <InputGroup size='md'>
+                                    <Input
+                                        pr='4.5rem'
+                                        type='number'
+                                        min={1}
+                                        max={product.stock}
+                                        value={product.count}
+                                        readOnly
+                                        onChange={(e) => setProducts(products.map(p => p.id === product.id ? { ...p, count: Number(e.target.value) } : p))}
+                                    />
+                                    <InputRightElement width='4.5rem'>
+                                        <Button h='1.75rem' size='sm' onClick={() => handleDecrease(product)} disabled={product.count === 1}>
+                                            -
+                                        </Button>
+                                        <Button h='1.75rem' size='sm' onClick={() => handleIncrease(product)} disabled={product.count === product.stock}>
+                                            +
+                                        </Button>
+                                    </InputRightElement>
+                                </InputGroup>
+                                <Text py='2' color='#5f5525'>
+                                    Stock disponible: {product.stock}
+                                </Text>
+                            </CardBody>
+                            <CardFooter gap='5px' justify='end'>
+                                <Button variant='solid' colorScheme='orange' onClick={() => handleDelete(product)}>
+                                    <RiDeleteBinFill />
+                                </Button>
+                            </CardFooter>
+                        </Stack>
+                    </Card>
+                ))}
             {!products.length && <Text></Text>}
             {!user ? '' :
                 <VStack w='100%'>
@@ -266,8 +281,8 @@ export const Cart = () => {
                                             w='90%'>
                                             Comprar
                                             <Modal isOpen={isOpen} onClose={onClose}>
-                                                <ModalOverlay bg='#f2e8d7'/>
-                                                <ModalContent bg='#f2e8d7' border='1px solid #5f5525' w='90%'>
+                                                <ModalOverlay bg='#f2e8d7' />
+                                                <ModalContent bg='#f2e8d7' border='1px solid #ffffff' w='90%'>
                                                     <ModalHeader color='#ff77ad'>Compra realizada con éxito</ModalHeader>
                                                     <ModalCloseButton />
                                                     <ModalBody>
@@ -282,7 +297,7 @@ export const Cart = () => {
                                                         </Card>
                                                     </ModalBody>
                                                     <ModalFooter>
-                                                        <Button variant='solid' colorScheme='pink' mr={3} onClick={()=>{onClose(), confirmPurchase()}}>
+                                                        <Button variant='solid' colorScheme='pink' mr={3} onClick={() => { onClose(), confirmPurchase() }}>
                                                             Cerrar
                                                         </Button>
                                                     </ModalFooter>
