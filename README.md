@@ -42,21 +42,19 @@ chakra
 
 Firebase
 
-## Dependencias principales:
+## Dependencias principales
 
-@chakra-ui/react - Biblioteca para diseño y componentes accesibles.
+npm i @chakra-ui/react@2 @emotion/react @emotion/styled framer-motion : Biblioteca para diseño y componentes accesibles.
 
-@emotion/react y @emotion/styled - Requisitos para Chakra UI.
+npm install react-hook-form : Manejo de formularios eficiente.
 
-react-hook-form - Manejo de formularios eficiente.
+npm install react-router-dom : Manejo de rutas y navegación.
 
-react-router-dom - Manejo de rutas y navegación.
+npm install react-icons --save : Conjunto de iconos populares.
 
-react-icons - Conjunto de iconos populares.
+npm create vite@latest : Entorno de desarrollo rápido para aplicaciones modernas.  
 
-vite@latest - Entorno de desarrollo rápido para aplicaciones modernas.  
-
-firebase - Plataforma para autenticación y base de datos en tiempo real.  
+npm install firebase : Plataforma para autenticación y base de datos en tiempo real.  
 
 
 ## 🔧 Instalación
@@ -68,7 +66,7 @@ firebase - Plataforma para autenticación y base de datos en tiempo real.
 
 * Navega al directorio del proyecto:
 
-```cd proyectoFinalReact```
+```cd muu```
 
 * Instala las dependencias necesarias:
 
