@@ -1,20 +1,21 @@
 [![muu.png](https://i.postimg.cc/L8cbxvcG/muu.png)](https://postimg.cc/MnY5T0KY)
 
 
-# Proyecto Final React
+# Proyecto Final React: MUU Helados
 
 Descripción:
 MUU Helados es una tienda en línea especializada en la venta de helados de alta calidad. Nuestra plataforma ofrece una experiencia de compra fácil y rápida, permitiendo a los usuarios explorar una variedad de sabores y presentaciones.
 
-Funciones Principales:
-✅ Visualización de Productos: Explora nuestro catálogo con imágenes atractivas, descripciones detalladas y precios actualizados.
-✅ Compra en Línea: Agrega tus helados favoritos al carrito.
-✅ Carrito de Compras: Administra fácilmente tus productos seleccionados antes de finalizar tu pedido.
-✅ Filtros de Búsqueda: Encuentra rápidamente lo que buscas con opciones de filtrado por tipo de helado:
+Funciones Principales:  
 
-👉 Palitos: Perfectos para un antojo rápido y refrescante.
-👉 Cucuruchos: Disfruta de un helado clásico con una crujiente galleta.
-👉 Potes: Ideales para compartir o disfrutar en casa.
+✅ Visualización de Productos: Explora nuestro catálogo con imágenes atractivas, descripciones detalladas y precios actualizados.  
+✅ Compra en Línea: Agrega tus helados favoritos al carrito.  
+✅ Carrito de Compras: Administra fácilmente tus productos seleccionados antes de finalizar tu pedido.  
+✅ Filtros de Búsqueda: Encuentra rápidamente lo que buscas con opciones de filtrado por tipo de helado:  
+
+👉 Palitos: Perfectos para un antojo rápido y refrescante.  
+👉 Cucuruchos: Disfruta de un helado clásico con una crujiente galleta.  
+👉 Potes: Ideales para compartir o disfrutar en casa.  
 
 💪 Objetivo:
 Brindar a los amantes del helado una plataforma intuitiva y atractiva donde puedan descubrir, elegir y comprar sus sabores favoritos desde la comodidad de su hogar.
