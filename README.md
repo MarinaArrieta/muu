@@ -40,39 +40,39 @@ Firebase
 
 @emotion/react y @emotion/styled: Requisitos para Chakra UI.
 
-framer-motion: Biblioteca para animaciones (requerida por Chakra UI).
-
 react-hook-form: Manejo de formularios eficiente.
 
 react-router-dom: Manejo de rutas y navegación.
 
-axios: Librería para realizar solicitudes HTTP.
-
 react-icons: Conjunto de iconos populares.
+
+vite@latest - Entorno de desarrollo rápido para aplicaciones modernas.  
+
+firebase - Plataforma para autenticación y base de datos en tiempo real.  
 
 
 ## 🔧 Instalación
 
-Clona el repositorio en tu máquina local:
+* Clona el repositorio en tu máquina local:
 
 ```git clone git@github.com:MarinaArrieta/muu.git```
 
 
-Navega al directorio del proyecto:
+* Navega al directorio del proyecto:
 
 ```cd proyectoFinalReact```
 
-Instala las dependencias necesarias:
+* Instala las dependencias necesarias:
 
 ```npm install```
 
-Configura Firebase:
+* Configura Firebase:
 
 Abre el archivo .env.example en la raíz del proyecto.
 
 Agrega tus credenciales de Firebase siguiendo las variables proporcionadas en .env.example.
 
-Ejecuta el proyecto en modo desarrollo:
+* Ejecuta el proyecto en modo desarrollo:
 
 ```npm run dev```
 
@@ -85,8 +85,12 @@ Ejecuta el proyecto en modo desarrollo:
 * [React Icons - Conjunto de iconos listos para usar en React.](https://react-icons.github.io/react-icons/)  
 * [React Hook Form - Librería para la gestión eficiente de formularios en React.](https://react-hook-form.com/)
 
-  ## 🖌️ Edición de imágenes, construido con
+## 🖌️ Edición de imágenes
 
 * [Canva - Plataforma en línea para diseño gráfico y creación de contenido visual.](https://www.canva.com/)  
 * [GIMP - Software de edición de imágenes de código abierto con potentes herramientas de retoque y manipulación.](https://www.gimp.org/)  
-* [Leonardo AI - Generador de imágenes con inteligencia artificial para la creación de arte digital y gráficos personalizados.](https://app.leonardo.ai/)  
+* [Leonardo AI - Generador de imágenes con inteligencia artificial para la creación de arte digital y gráficos personalizados.](https://app.leonardo.ai/)
+
+## 🔗 Obtención de links para imágenes
+
+* [Postimage - Sitio web gratuito que permite subir imágenes y obtener una URL para insertarlas en blogs, redes sociales o foros.](https://postimages.org/)  
