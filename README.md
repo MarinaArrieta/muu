@@ -18,7 +18,7 @@ Funciones Principales:
 👉 Potes: Ideales para compartir o disfrutar en casa.  
 
 💪 Objetivo:
-Brindar a los amantes del helado una plataforma intuitiva y atractiva donde puedan descubrir, elegir y comprar sus sabores favoritos desde la comodidad de su hogar.
+Brindar a los amantes del helado una plataforma intuitiva y atractiva donde puedan descubrir, elegir y comprar sus sabores favoritos con toda comodidad.
 
 ## 🚀 Comenzando
 
