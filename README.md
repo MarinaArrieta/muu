@@ -78,10 +78,9 @@ Ejecuta el proyecto en modo desarrollo:
 
 ## 🛠️ Construido con
 
-React - Biblioteca de JavaScript para la interfaz de usuario.
-
-Chakra UI - Framework de componentes UI accesibles.
-
-Firebase - Plataforma para autenticación y base de datos en tiempo real.
-
-React Router - Sistema de enrutamiento para la aplicación.
+* [Vite@latest - Entorno de desarrollo rápido para aplicaciones modernas.](https://es.vite.dev/)  
+* [Chakra UI V2 - Framework de componentes UI accesibles.](https://www.chakra-ui.com/)  
+* [Firebase - Plataforma para autenticación y base de datos en tiempo real.](https://firebase.google.com)  
+* [React Router - Sistema de enrutamiento para la aplicación.](https://reactrouter.com/)  
+* [React Icons - Conjunto de iconos listos para usar en React.](https://react-icons.github.io/react-icons/)  
+* [React Hook Form - Librería para la gestión eficiente de formularios en React.](https://react-hook-form.com/)  
