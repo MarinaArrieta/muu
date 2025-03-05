@@ -80,28 +80,28 @@ const Home = () => {
           <option value='pote'>Potes</option>
         </Select>
       </HStack>
+      {loading &&
+        <HStack w='100%' marginTop='35px' alignItems='center' justifyContent='center'>
+          <Spinner size='xl' color='#ed5940' filter='drop-shadow(2px 5px 4px #ffb5a8)' thickness='10px' />
+        </HStack>}
       <Grid
         templateColumns={{ base: "1fr", sm: "1fr", lg: "repeat(3, 1fr)" }}
         gap={6}
         flexDirection='column'
       >
-        {error && 
-        <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
-          <Stack mt='6' spacing='3'>
-            <Text color='#5f5525' fontSize='2xl' m={{ base: '1.25rem', md: 'unset' }}>Inténtalo de nuevo</Text>
-          </Stack>
-          <CardBody>
-            <Image
-              src={error}
-              alt='Desierto error 404'
-              borderRadius='lg'
-            />
-          </CardBody>
-        </Card>}
-        {loading &&
-          <HStack marginTop='35px'>
-            <Spinner size='xl' color='#ed5940' filter='drop-shadow(2px 5px 4px #ffb5a8)' thickness='10px' />
-          </HStack>}
+        {error &&
+          <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
+            <Stack mt='6' spacing='3'>
+              <Text color='#5f5525' fontSize='2xl' m={{ base: '1.25rem', md: 'unset' }}>Inténtalo de nuevo</Text>
+            </Stack>
+            <CardBody>
+              <Image
+                src={error}
+                alt='Desierto error 404'
+                borderRadius='lg'
+              />
+            </CardBody>
+          </Card>}
         {filteredProducts.map((product) => (
           <VStack key={product.id}>
             <Card maxW='sm' bg='#f2e8d700' shadow='unset'>
