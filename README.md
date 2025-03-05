@@ -13,9 +13,9 @@ Funciones Principales:
 ✅ Carrito de Compras: Administra fácilmente tus productos seleccionados antes de finalizar tu pedido.  
 ✅ Filtros de Búsqueda: Encuentra rápidamente lo que buscas con opciones de filtrado por tipo de helado:  
 
-👉 Palitos: Perfectos para un antojo rápido y refrescante.  
-👉 Cucuruchos: Disfruta de un helado clásico con una crujiente galleta.  
-👉 Potes: Ideales para compartir o disfrutar en casa.  
+* Palitos: Perfectos para un antojo rápido y refrescante.  
+* Cucuruchos: Disfruta de un helado clásico con una crujiente galleta.  
+* Potes: Ideales para compartir o disfrutar en casa.  
 
 💪 Objetivo:
 Brindar a los amantes del helado una plataforma intuitiva y atractiva donde puedan descubrir, elegir y comprar sus sabores favoritos con toda comodidad.
@@ -36,15 +36,15 @@ Firebase
 
 ## Dependencias principales:
 
-@chakra-ui/react: Biblioteca para diseño y componentes accesibles.
+@chakra-ui/react - Biblioteca para diseño y componentes accesibles.
 
-@emotion/react y @emotion/styled: Requisitos para Chakra UI.
+@emotion/react y @emotion/styled - Requisitos para Chakra UI.
 
-react-hook-form: Manejo de formularios eficiente.
+react-hook-form - Manejo de formularios eficiente.
 
-react-router-dom: Manejo de rutas y navegación.
+react-router-dom - Manejo de rutas y navegación.
 
-react-icons: Conjunto de iconos populares.
+react-icons - Conjunto de iconos populares.
 
 vite@latest - Entorno de desarrollo rápido para aplicaciones modernas.  
 
