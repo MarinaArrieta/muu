@@ -168,7 +168,6 @@ export const Cart = () => {
         <VStack p='35px'>
             {error && <Text as='b' color='#ff2600'>Hubo un error 😓</Text>}
             {!user ?
-                // <Text as='b' color='#ed5940'>Registrate para comprar 😉 </Text>
                 <VStack p='9px'>
                     <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
                         <CardBody p='0'>

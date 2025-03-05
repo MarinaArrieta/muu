@@ -16,7 +16,7 @@ import {
     useToast,
     VStack
 } from "@chakra-ui/react"
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 
@@ -81,11 +81,23 @@ const ProductDetail = () => {
                     </CardBody>
                     <Divider />
                     <CardFooter justify='end'>
-                        <ButtonGroup spacing='2'>
+                        {!user ?
+                            <VStack alignItems='end'>
+                                <Text color='#5f5525'>Registrate o inicia sesión para poder comprar</Text>
+                                <ButtonGroup spacing='2'>
+                                    <Button variant='solid' colorScheme='pink'>
+                                        <Link to={`/register`}>Registrarse</Link>
+                                    </Button>
+                                    <Button variant='solid' colorScheme='pink'>
+                                        <Link to={`/login`}>Iniciar sesión</Link>
+                                    </Button>
+                                </ButtonGroup>
+                            </VStack>
+                            :
                             <Button variant='solid' colorScheme='pink' onClick={addToCartClick} data-id={product.id}>
                                 Agregar al carrito
                             </Button>
-                        </ButtonGroup>
+                        }
                     </CardFooter>
                 </Card>
             </VStack>

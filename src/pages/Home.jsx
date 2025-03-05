@@ -128,7 +128,6 @@ const Home = () => {
             </Card>
           </VStack>
         ))}
-        {/* {!filteredProducts.length && <Text>No hay productos</Text>} */}
       </Grid>
     </VStack>
   )
