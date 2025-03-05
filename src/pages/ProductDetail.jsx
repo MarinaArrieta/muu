@@ -43,7 +43,7 @@ const ProductDetail = () => {
         toast({
             title: 'Se agregó al carrito 😀',
             position: 'top',
-            status: 'info',
+            status: 'success',
             duration: 3000,
             isClosable: true,
         })

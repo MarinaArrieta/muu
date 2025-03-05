@@ -11,9 +11,17 @@ import {
     Input,
     InputGroup,
     InputRightElement,
+    Modal,
+    ModalBody,
+    ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
     Stack,
     StackDivider,
     Text,
+    useDisclosure,
     useToast,
     VStack,
 } from "@chakra-ui/react";
@@ -35,6 +43,7 @@ import { useAuth } from '../context/AuthContext';
 import { db } from "../firebase/config";
 import { getProductsFromCart } from "../services/products";
 import carritoVacio from '../assets/carrito-vacio.png'
+import purchase from '../assets/compra.png'
 
 const createItemCart = async (id_product, id_user) => {
     const doc = await addDoc(collection(db, "cart_item"), {
@@ -165,6 +174,15 @@ export const Cart = () => {
         }
     };
 
+    const OverlayTwo = () => (
+        <ModalOverlay
+            bg='#f2e8d7'
+        />
+    )
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const [overlay, setOverlay] = useState(<OverlayTwo />)
+
     return (
         <VStack p='35px'>
             {error && <Text as='b' color='#ff2600'>Hubo un error 😓</Text>}
@@ -262,7 +280,37 @@ export const Cart = () => {
                                         <Button variant='solid' colorScheme='pink' w='90%'>
                                             <Link to={`/`}>Ver más productos</Link>
                                         </Button>
-                                        <Button onClick={confirmPurchase} variant='solid' colorScheme='pink' w='90%'>Comprar</Button>
+                                        <Button onClick={() => {
+                                            confirmPurchase()
+                                            setOverlay(<OverlayTwo />)
+                                            onOpen()
+                                        }}
+                                            variant='solid'
+                                            colorScheme='pink'
+                                            w='90%'>
+                                            Comprar
+                                            <Modal isCentered isOpen={isOpen} onClose={onClose}>
+                                                {overlay}
+                                                <ModalContent bg='#f2e8d7' border='1px solid #5f5525' w='90%'>
+                                                    <ModalHeader color='#ff77ad'>Compra realizada con éxito</ModalHeader>
+                                                    <ModalCloseButton />
+                                                    <ModalBody>
+                                                        <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
+                                                            <CardBody p='0'>
+                                                                <Image
+                                                                    src={purchase}
+                                                                    alt='Vaca en un jardin'
+                                                                    borderRadius='lg'
+                                                                />
+                                                            </CardBody>
+                                                        </Card>
+                                                    </ModalBody>
+                                                    <ModalFooter>
+                                                        <Button onClick={onClose} variant='solid' colorScheme='pink'>Cerrar</Button>
+                                                    </ModalFooter>
+                                                </ModalContent>
+                                            </Modal>
+                                        </Button>
                                     </ButtonGroup>
                                 )}
                             </Stack>
