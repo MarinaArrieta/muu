@@ -26,23 +26,9 @@ Estas instrucciones te permitirán obtener una copia del proyecto en funcionamie
 
 ## 📋 Pre-requisitos
 
-Asegúrate de tener instalados los siguientes requisitos antes de ejecutar el proyecto:
+* Asegúrate de tener instalados los siguientes requisitos antes de ejecutar el proyecto:
 
-Node.js (versión recomendada: LTS)
-
-npm (incluido con Node.js)
-
-vite@latest
-
-react-router
-
-react-hook-form
-
-chakra
-
-Firebase
-
-## Dependencias principales
+Node.js (Ve al sitio oficial y descarga la versión recomendada)
 
 npm i @chakra-ui/react@2 @emotion/react @emotion/styled framer-motion : Biblioteca para diseño y componentes accesibles.
 
@@ -84,6 +70,7 @@ Agrega tus credenciales de Firebase siguiendo las variables proporcionadas en .e
 
 ## 🛠️ Construido con
 
+* [Node. js : Entorno de tiempo de ejecución de JavaScript, se utiliza para crear aplicaciones escalables del lado del servidor y de red a través de servidores privados virtuales](https://nodejs.org/es)
 * [Vite@latest - Entorno de desarrollo rápido para aplicaciones modernas.](https://es.vite.dev/)  
 * [Chakra UI V2 - Framework de componentes UI accesibles.](https://www.chakra-ui.com/)  
 * [Firebase - Plataforma para autenticación y base de datos en tiempo real.](https://firebase.google.com)  
