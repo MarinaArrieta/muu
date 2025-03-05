@@ -32,6 +32,14 @@ Node.js (versión recomendada: LTS)
 
 npm (incluido con Node.js)
 
+vite@latest
+
+react-router
+
+react-hook-form
+
+chakra
+
 Firebase
 
 ## Dependencias principales:
