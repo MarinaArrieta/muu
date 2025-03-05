@@ -22,7 +22,6 @@ import {
     StackDivider,
     Text,
     useDisclosure,
-    useToast,
     VStack,
 } from "@chakra-ui/react";
 import {
@@ -89,7 +88,7 @@ export const Cart = () => {
     const [products, setProducts] = useState([])
     const [error, setError] = useState(false)
     const { user } = useAuth()
-    const toast = useToast()
+    const { isOpen, onOpen, onClose } = useDisclosure()
 
     const handlePurchase = async (user, products) => {
         try {
@@ -111,14 +110,6 @@ export const Cart = () => {
                 await deleteItemCart(product.id, user)
             }
             setProducts([])
-            toast({
-                title: 'La compra se realizó con éxito',
-                description: "Disfrute su 🍨",
-                status: 'success',
-                duration: 3000,
-                isClosable: true,
-                position: "top"
-            })
         } catch (error) {
             console.error("Error:", error)
         }
@@ -165,23 +156,12 @@ export const Cart = () => {
         return products.reduce((total, product) => total + product.price * product.count, 0)
     };
 
-    const confirmPurchase = async (e) => {
-        e.preventDefault();
+    const confirmPurchase = async () => {
         try {
-
             await handlePurchase(user, products);
         } catch (error) {
         }
     };
-
-    const OverlayTwo = () => (
-        <ModalOverlay
-            bg='#f2e8d7'
-        />
-    )
-
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const [overlay, setOverlay] = useState(<OverlayTwo />)
 
     return (
         <VStack p='35px'>
@@ -280,17 +260,13 @@ export const Cart = () => {
                                         <Button variant='solid' colorScheme='pink' w='90%'>
                                             <Link to={`/`}>Ver más productos</Link>
                                         </Button>
-                                        <Button onClick={() => {
-                                            confirmPurchase()
-                                            setOverlay(<OverlayTwo />)
-                                            onOpen()
-                                        }}
+                                        <Button onClick={onOpen}
                                             variant='solid'
                                             colorScheme='pink'
                                             w='90%'>
                                             Comprar
-                                            <Modal isCentered isOpen={isOpen} onClose={onClose}>
-                                                {overlay}
+                                            <Modal isOpen={isOpen} onClose={onClose}>
+                                                <ModalOverlay bg='#f2e8d7'/>
                                                 <ModalContent bg='#f2e8d7' border='1px solid #5f5525' w='90%'>
                                                     <ModalHeader color='#ff77ad'>Compra realizada con éxito</ModalHeader>
                                                     <ModalCloseButton />
@@ -306,7 +282,9 @@ export const Cart = () => {
                                                         </Card>
                                                     </ModalBody>
                                                     <ModalFooter>
-                                                        <Button onClick={onClose} variant='solid' colorScheme='pink'>Cerrar</Button>
+                                                        <Button variant='solid' colorScheme='pink' mr={3} onClick={()=>{onClose(), confirmPurchase()}}>
+                                                            Cerrar
+                                                        </Button>
                                                     </ModalFooter>
                                                 </ModalContent>
                                             </Modal>
