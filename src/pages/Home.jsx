@@ -85,10 +85,22 @@ const Home = () => {
         gap={6}
         flexDirection='column'
       >
-        {error && <Text as='b' color='#ff2600'>Hubo un error  😓</Text>}
+        {error && 
+        <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
+          <Stack mt='6' spacing='3'>
+            <Text color='#5f5525' fontSize='2xl' m={{ base: '1.25rem', md: 'unset' }}>Inténtalo de nuevo</Text>
+          </Stack>
+          <CardBody>
+            <Image
+              src={error}
+              alt='Desierto error 404'
+              borderRadius='lg'
+            />
+          </CardBody>
+        </Card>}
         {loading &&
           <HStack marginTop='35px'>
-            <Spinner size='xl' color='#ed5940' filter='drop-shadow(2px 5px 4px #ffb5a8)' thickness= '10px' />
+            <Spinner size='xl' color='#ed5940' filter='drop-shadow(2px 5px 4px #ffb5a8)' thickness='10px' />
           </HStack>}
         {filteredProducts.map((product) => (
           <VStack key={product.id}>
