@@ -30,7 +30,7 @@ Estas instrucciones te permitirán obtener una copia del proyecto en funcionamie
 
 Node.js (Ve al sitio oficial y descarga la versión recomendada)
 
-npm i @chakra-ui/react@2 @emotion/react @emotion/styled framer-motion : Biblioteca para diseño y componentes accesibles.
+npm install @chakra-ui/react@2 @emotion/react @emotion/styled framer-motion : Biblioteca para diseño y componentes accesibles.
 
 npm install react-hook-form : Manejo de formularios eficiente.
 
