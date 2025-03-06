@@ -19,6 +19,7 @@ import {
 } from "@chakra-ui/react"
 import { useAuth } from "../context/AuthContext"
 import { Link } from "react-router-dom"
+import error2 from "../assets/error.png"
 
 const Home = () => {
 
@@ -83,7 +84,8 @@ const Home = () => {
       {loading &&
         <HStack w='100%' marginTop='35px' alignItems='center' justifyContent='center'>
           <Spinner size='xl' color='#ed5940' filter='drop-shadow(2px 5px 4px #ffb5a8)' thickness='10px' />
-        </HStack>}
+        </HStack>
+      }
       <Grid
         templateColumns={{ base: "1fr", sm: "1fr", lg: "repeat(3, 1fr)" }}
         gap={6}
@@ -96,12 +98,13 @@ const Home = () => {
             </Stack>
             <CardBody>
               <Image
-                src={error}
-                alt='Desierto error 404'
+                src={error2}
+                alt='Desierto error'
                 borderRadius='lg'
               />
             </CardBody>
-          </Card>}
+          </Card>
+        }
         {filteredProducts.map((product) => (
           <VStack key={product.id}>
             <Card maxW='sm' bg='#f2e8d700' shadow='unset'>

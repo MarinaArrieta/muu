@@ -44,6 +44,7 @@ import { getProductsFromCart } from "../services/products";
 import carritoVacio from '../assets/carrito-vacio.png'
 import purchase from '../assets/compra.png'
 import register from '../assets/registrate.png'
+import error2 from "../assets/error.png"
 
 const createItemCart = async (id_product, id_user) => {
     const doc = await addDoc(collection(db, "cart_item"), {
@@ -166,7 +167,20 @@ export const Cart = () => {
 
     return (
         <VStack p='35px'>
-            {error && <Text as='b' color='#ff2600'>Hubo un error 😓</Text>}
+            {error &&
+                <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
+                    <Stack mt='6' spacing='3'>
+                        <Text color='#5f5525' fontSize='2xl' m={{ base: '1.25rem', md: 'unset' }}>Inténtalo de nuevo</Text>
+                    </Stack>
+                    <CardBody>
+                        <Image
+                            src={error2}
+                            alt='Desierto error'
+                            borderRadius='lg'
+                        />
+                    </CardBody>
+                </Card>
+            }
             {!user ?
                 <VStack p='9px'>
                     <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
