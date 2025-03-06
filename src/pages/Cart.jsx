@@ -297,7 +297,6 @@ export const Cart = () => {
                                                 <ModalOverlay bg='#f2e8d7' />
                                                 <ModalContent bg='#f2e8d7' border='1px solid #ffffff' w='90%'>
                                                     <ModalHeader color='#ff77ad'>Compra realizada con éxito</ModalHeader>
-                                                    <ModalCloseButton />
                                                     <ModalBody>
                                                         <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
                                                             <CardBody p='0'>
