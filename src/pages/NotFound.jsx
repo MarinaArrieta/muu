@@ -1,10 +1,21 @@
-import { Text, VStack } from "@chakra-ui/react"
+import { Card, CardBody, Image, Stack, Text, VStack } from "@chakra-ui/react"
+import error from '../assets/error-404.png'
 
 const NotFound = () => {
   return (
     <VStack>
-      <Text color='#ed5940' fontSize='2xl'>404 - Pagina no encontrada 🥴</Text>
-      <Text color='#5f5525' fontSize='2xl'>La pagina que estas buscando no se encuentra...</Text>
+      <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
+        <Stack mt='6' spacing='3'>
+          <Text color='#5f5525' fontSize='2xl' m={{base:'1.25rem', md:'unset'}}>La página que estas buscando no se encuentra</Text>
+        </Stack>
+        <CardBody>
+          <Image
+            src={error}
+            alt='Desierto error 404'
+            borderRadius='lg'
+          />
+        </CardBody>
+      </Card>
     </VStack>
   )
 }

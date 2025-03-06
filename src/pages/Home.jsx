@@ -8,8 +8,10 @@ import {
   Divider,
   Grid,
   Heading,
+  HStack,
   Image,
   Select,
+  Spinner,
   Stack,
   Text,
   useToast,
@@ -17,6 +19,7 @@ import {
 } from "@chakra-ui/react"
 import { useAuth } from "../context/AuthContext"
 import { Link } from "react-router-dom"
+import error2 from "../assets/error.png"
 
 const Home = () => {
 
@@ -40,7 +43,7 @@ const Home = () => {
           status: 'error',
           duration: 9000,
           isClosable: true,
-      })
+        })
       } finally {
         setLoading(false)
       }
@@ -61,24 +64,47 @@ const Home = () => {
   })
 
   return (
-    <VStack>
-      <Select
-        placeholder="Filtrar por..."
-        borderColor='#f7b3cd'
-        focusBorderColor='#ffbb00'
-        onChange={handleFilterChange}
+    <VStack marginTop='15px'>
+      <HStack
+        color='#7e6909'
       >
-        <option value='palito'>Helado palitos</option>
-        <option value='cucurucho'>Cucuruchos</option>
-        <option value='pote'>Potes</option>
-      </Select>
+        <Select
+          color='#7e6909'
+          placeholder="Filtrar por..."
+          borderColor='#f8a5c5'
+          bg='#ffdfe4'
+          focusBorderColor='#ffbb00'
+          onChange={handleFilterChange}
+        >
+          <option value='palito'>Helado palitos</option>
+          <option value='cucurucho'>Cucuruchos</option>
+          <option value='pote'>Potes</option>
+        </Select>
+      </HStack>
+      {loading &&
+        <HStack w='100%' marginTop='35px' alignItems='center' justifyContent='center'>
+          <Spinner size='xl' color='#ed5940' filter='drop-shadow(2px 5px 4px #ffb5a8)' thickness='10px' />
+        </HStack>
+      }
       <Grid
         templateColumns={{ base: "1fr", sm: "1fr", lg: "repeat(3, 1fr)" }}
         gap={6}
         flexDirection='column'
       >
-        {error && <Text as='b' color='#ff2600'>Hubo un error  😓</Text>}
-        {loading && <Text as='b' color='#ed5940'>Loading...</Text>}
+        {error &&
+          <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
+            <Stack mt='6' spacing='3'>
+              <Text color='#5f5525' fontSize='2xl' m={{ base: '1.25rem', md: 'unset' }}>Inténtalo de nuevo</Text>
+            </Stack>
+            <CardBody>
+              <Image
+                src={error2}
+                alt='Desierto error'
+                borderRadius='lg'
+              />
+            </CardBody>
+          </Card>
+        }
         {filteredProducts.map((product) => (
           <VStack key={product.id}>
             <Card maxW='sm' bg='#f2e8d700' shadow='unset'>
@@ -105,7 +131,6 @@ const Home = () => {
             </Card>
           </VStack>
         ))}
-        {!filteredProducts.length && <Text>No products available</Text>}
       </Grid>
     </VStack>
   )

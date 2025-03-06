@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }) => {
             toast({
                 title: 'Usuario registrado correctamente',
                 position: 'top',
-                status: 'info',
+                status: 'success',
                 isClosable: true,
                 duration: 3000,
             })
@@ -73,7 +73,7 @@ export const AuthProvider = ({ children }) => {
                     title: 'Iniciaste sesión correctamente',
                     description: 'Bienvenido a MUU',
                     position: 'top',
-                    status: 'info',
+                    status: 'success',
                     isClosable: true,
                     duration: 3000,
                 })
@@ -101,7 +101,7 @@ export const AuthProvider = ({ children }) => {
                 title: 'Iniciaste sesión correctamente',
                 description: 'Bienvenido a MUU',
                 position: 'top',
-                status: 'info',
+                status: 'success',
                 isClosable: true,
                 duration: 3000,
             })
@@ -126,7 +126,7 @@ export const AuthProvider = ({ children }) => {
                     title: 'Se cerró la sesión correctamente',
                     description: 'Vuelve pronto',
                     position: 'top',
-                    status: 'info',
+                    status: 'success',
                     isClosable: true,
                     duration: 3000,
                 })
