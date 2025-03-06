@@ -294,7 +294,7 @@ export const Cart = () => {
                                             w='90%'>
                                             Comprar
                                             <Modal isOpen={isOpen} onClose={onClose}>
-                                                <ModalOverlay bg='#f2e8d7' />
+                                                <ModalOverlay bg='#f2e8d7' w='100%' h='100vh' alignItems='center' />
                                                 <ModalContent bg='#f2e8d7' border='1px solid #ffffff' w='90%'>
                                                     <ModalHeader color='#ff77ad'>Compra realizada con éxito</ModalHeader>
                                                     <ModalBody>
