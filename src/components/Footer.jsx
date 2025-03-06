@@ -1,5 +1,5 @@
 import { Divider, HStack, Image, Stack, Text, VStack } from '@chakra-ui/react'
-import logo from '../../public/logo3.png'
+import logo from '../../public/logo.png'
 import { Link, NavLink, Link as RouterLink } from 'react-router-dom'
 import { RiShoppingCartFill } from "react-icons/ri";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
