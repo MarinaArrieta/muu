@@ -13,7 +13,6 @@ import {
     InputRightElement,
     Modal,
     ModalBody,
-    ModalCloseButton,
     ModalContent,
     ModalFooter,
     ModalHeader,
@@ -46,51 +45,51 @@ import purchase from '../assets/compra.png'
 import register from '../assets/registrate.png'
 import error2 from "../assets/error.png"
 
-const createItemCart = async (id_product, id_user) => {
-    const doc = await addDoc(collection(db, "cart_item"), {
-        id_product,
-        id_user
-    });
-    return doc;
-}
-
-export const addToCart = async (product_id, user_id) => {
-    try {
-        const item_cart = await createItemCart(
-            product_id,
-            user_id
-        )
-
-    } catch (error) {
-
-    }
-}
-
-const deleteItemCart = async (id_product, id_user) => {
-    try {
-        const cartItemsRef = collection(db, "cart_item");
-        const q = query(
-            cartItemsRef,
-            where("id_product", "==", id_product),
-            where("id_user", "==", id_user)
-        );
-
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach(async (docSnap) => {
-            const docRef = doc(db, "cart_item", docSnap.id);
-            await deleteDoc(docRef);
-        });
-    } catch (error) {
-        console.error("Error deleting cart items: ", error);
-    }
-};
-
 export const Cart = () => {
 
     const [products, setProducts] = useState([])
     const [error, setError] = useState(false)
     const { user } = useAuth()
     const { isOpen, onOpen, onClose } = useDisclosure()
+    
+    const createItemCart = async (id_product, id_user) => {
+        const doc = await addDoc(collection(db, "cart_item"), {
+            id_product,
+            id_user
+        });
+        return doc;
+    }
+    
+   const addToCart = async (product_id, user_id) => {
+        try {
+            const item_cart = await createItemCart(
+                product_id,
+                user_id
+            )
+    
+        } catch (error) {
+    
+        }
+    }
+
+    const deleteItemCart = async (id_product, id_user) => {
+        try {
+            const cartItemsRef = collection(db, "cart_item");
+            const q = query(
+                cartItemsRef,
+                where("id_product", "==", id_product),
+                where("id_user", "==", id_user)
+            );
+    
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach(async (docSnap) => {
+                const docRef = doc(db, "cart_item", docSnap.id);
+                await deleteDoc(docRef);
+            });
+        } catch (error) {
+            console.error("Error deleting cart items: ", error);
+        }
+    };
 
     const handlePurchase = async (user, products) => {
         try {

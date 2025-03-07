@@ -1,6 +1,3 @@
-import { getProducts } from "../services/products"
-import { addToCart } from './Cart'
-import { useState, useEffect } from "react"
 import {
     Button,
     ButtonGroup,
@@ -10,17 +7,18 @@ import {
     Divider,
     Grid,
     Heading,
-    HStack,
     Image,
-    Spinner,
     Stack,
     Text,
     useToast,
     VStack
 } from "@chakra-ui/react"
 import { Link, useParams } from 'react-router-dom'
+import { useState, useEffect } from "react"
+import { getProducts } from "../services/products"
+import { Cart } from './Cart'
 import { useAuth } from '../context/AuthContext'
-
+import { auth } from "../firebase/config"
 
 const ProductDetail = () => {
 
@@ -37,7 +35,6 @@ const ProductDetail = () => {
             })
     }, [])
 
-
     const addToCartClick = (e) => {
         let product_id = e.target.dataset.id
         let user_id = user
@@ -50,11 +47,11 @@ const ProductDetail = () => {
             isClosable: true,
         })
 
-        addToCart(product_id, user_id)
+        Cart(product_id, user_id)
     }
 
-    if (!product) {
-        return <Text color='#ed5940' fontSize='2xl'>Producto no encontrado 😓</Text>
+    if (!navigator.onLine) {
+        return <Text color='#ed5940' fontSize='2xl'>no internet 😓</Text>
     }
 
     return (
