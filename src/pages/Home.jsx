@@ -83,7 +83,7 @@ const Home = () => {
       >
         <Select
           color='#7e6909'
-          placeholder="Filtrar por..."
+          placeholder="Todos"
           borderColor='#f8a5c5'
           bg='#ffdfe4'
           focusBorderColor='#ffbb00'
