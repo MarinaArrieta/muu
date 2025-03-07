@@ -44,6 +44,7 @@ import carritoVacio from '../assets/carrito-vacio.png'
 import purchase from '../assets/compra.png'
 import register from '../assets/registrate.png'
 import error2 from "../assets/error.png"
+import conection from "../assets/conection.png"
 
 export const Cart = () => {
 
@@ -51,7 +52,7 @@ export const Cart = () => {
     const [error, setError] = useState(false)
     const { user } = useAuth()
     const { isOpen, onOpen, onClose } = useDisclosure()
-    
+
     const createItemCart = async (id_product, id_user) => {
         const doc = await addDoc(collection(db, "cart_item"), {
             id_product,
@@ -59,16 +60,16 @@ export const Cart = () => {
         });
         return doc;
     }
-    
-   const addToCart = async (product_id, user_id) => {
+
+    const addToCart = async (product_id, user_id) => {
         try {
             const item_cart = await createItemCart(
                 product_id,
                 user_id
             )
-    
+
         } catch (error) {
-    
+
         }
     }
 
@@ -80,7 +81,7 @@ export const Cart = () => {
                 where("id_product", "==", id_product),
                 where("id_user", "==", id_user)
             );
-    
+
             const querySnapshot = await getDocs(q);
             querySnapshot.forEach(async (docSnap) => {
                 const docRef = doc(db, "cart_item", docSnap.id);
@@ -165,7 +166,15 @@ export const Cart = () => {
     };
 
     if (!navigator.onLine) {
-        return <Text color='#ed5940' fontSize='2xl'>no internet 😓</Text>
+        return <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
+            <CardBody>
+                <Image
+                    src={conection}
+                    alt='Desierto error'
+                    borderRadius='lg'
+                />
+            </CardBody>
+        </Card>
     }
 
     return (

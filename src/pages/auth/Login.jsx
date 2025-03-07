@@ -1,9 +1,12 @@
 import {
     Box,
     Button,
+    Card,
+    CardBody,
     FormControl,
     FormErrorMessage,
     FormLabel,
+    Image,
     Input,
     InputGroup,
     InputRightElement,
@@ -13,6 +16,7 @@ import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { email, password } from "../../components/utils/validation";
 import { useNavigate } from 'react-router-dom';
+import conection from "../../assets/conection.png"
 
 export const Login = () => {
 
@@ -30,6 +34,18 @@ export const Login = () => {
     const onSubmit = (data) => {
         login(data)
         navigate('/')
+    }
+
+    if (!navigator.onLine) {
+        return <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
+            <CardBody>
+                <Image
+                    src={conection}
+                    alt='Desierto error'
+                    borderRadius='lg'
+                />
+            </CardBody>
+        </Card>
     }
 
     return (

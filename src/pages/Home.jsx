@@ -20,6 +20,7 @@ import {
 import { useAuth } from "../context/AuthContext"
 import { Link } from "react-router-dom"
 import error2 from "../assets/error.png"
+import conection from "../assets/conection.png"
 
 const Home = () => {
 
@@ -64,7 +65,15 @@ const Home = () => {
   })
 
   if (!navigator.onLine) {
-    return <Text color='#ed5940' fontSize='2xl'>no internet 😓</Text>
+    return <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
+      <CardBody>
+        <Image
+          src={conection}
+          alt='Desierto error'
+          borderRadius='lg'
+        />
+      </CardBody>
+    </Card>
   }
 
   return (

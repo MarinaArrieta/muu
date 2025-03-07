@@ -19,6 +19,7 @@ import { getProducts } from "../services/products"
 import { Cart } from './Cart'
 import { useAuth } from '../context/AuthContext'
 import { auth } from "../firebase/config"
+import conection from "../assets/conection.png"
 
 const ProductDetail = () => {
 
@@ -51,7 +52,15 @@ const ProductDetail = () => {
     }
 
     if (!navigator.onLine) {
-        return <Text color='#ed5940' fontSize='2xl'>no internet 😓</Text>
+        return <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
+            <CardBody>
+                <Image
+                    src={conection}
+                    alt='Desierto error'
+                    borderRadius='lg'
+                />
+            </CardBody>
+        </Card>
     }
 
     return (

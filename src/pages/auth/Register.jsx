@@ -1,9 +1,12 @@
 import {
     Box,
     Button,
+    Card,
+    CardBody,
     FormControl,
     FormErrorMessage,
     FormLabel,
+    Image,
     Input,
     InputGroup,
     InputRightElement,
@@ -12,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { password, email } from "../../components/utils/validation";
 import { useAuth } from "../../context/AuthContext";
+import conection from "../../assets/conection.png"
 
 export const Register = () => {
     const [show, setShow] = useState(false);
@@ -23,6 +27,18 @@ export const Register = () => {
 
     const onSubmit = (data) => {
         registerUser(data);
+    }
+
+    if (!navigator.onLine) {
+        return <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
+            <CardBody>
+                <Image
+                    src={conection}
+                    alt='Desierto error'
+                    borderRadius='lg'
+                />
+            </CardBody>
+        </Card>
     }
 
     return (
