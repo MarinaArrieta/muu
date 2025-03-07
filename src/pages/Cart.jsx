@@ -164,6 +164,10 @@ export const Cart = () => {
         }
     };
 
+    if (!navigator.onLine) {
+        return <Text color='#ed5940' fontSize='2xl'>no internet 😓</Text>
+    }
+
     return (
         <VStack p='35px'>
             {error &&
