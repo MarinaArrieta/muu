@@ -14,7 +14,6 @@ import {
   Spinner,
   Stack,
   Text,
-  useToast,
   VStack
 } from "@chakra-ui/react"
 import { useAuth } from "../context/AuthContext"
@@ -29,7 +28,6 @@ const Home = () => {
   const [error, setError] = useState(false)
   const [filter, setFilter] = useState('')
   const { user } = useAuth()
-  const toast = useToast()
 
   useEffect(() => {
     const getData = async () => {
@@ -38,13 +36,6 @@ const Home = () => {
         setProducts(data)
       } catch (error) {
         setError(true)
-        toast({
-          title: 'Hubo un error',
-          description: "Vuleve a intentarlo",
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-        })
       } finally {
         setLoading(false)
       }
@@ -99,25 +90,25 @@ const Home = () => {
           <Spinner size='xl' color='#ed5940' filter='drop-shadow(2px 5px 4px #ffb5a8)' thickness='10px' />
         </HStack>
       }
+      {error &&
+        <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
+          <Stack mt='6' spacing='3'>
+            <Text color='#5f5525' fontSize='2xl' textAlign='center' m={{ base: '1.25rem', md: 'unset' }}>Inténtalo de nuevo</Text>
+          </Stack>
+          <CardBody>
+            <Image
+              src={error2}
+              alt='Desierto error'
+              borderRadius='lg'
+            />
+          </CardBody>
+        </Card>
+      }
       <Grid
         templateColumns={{ base: "1fr", sm: "1fr", lg: "repeat(3, 1fr)" }}
         gap={6}
         flexDirection='column'
       >
-        {error &&
-          <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
-            <Stack mt='6' spacing='3'>
-              <Text color='#5f5525' fontSize='2xl' m={{ base: '1.25rem', md: 'unset' }}>Inténtalo de nuevo</Text>
-            </Stack>
-            <CardBody>
-              <Image
-                src={error2}
-                alt='Desierto error'
-                borderRadius='lg'
-              />
-            </CardBody>
-          </Card>
-        }
         {filteredProducts.map((product) => (
           <VStack key={product.id}>
             <Card maxW='sm' bg='#f2e8d700' shadow='unset'>

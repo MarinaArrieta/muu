@@ -9,16 +9,22 @@ import {
 
 import { db } from "../firebase/config";
 
-export const createProduct = async (name, uid) => {
-    const doc = await addDoc(collection(db, "products"), {
-        name,
-        uid,
-    });
-    return doc;
-}
+// export const createProduct = async (name, uid) => {
+//     const doc = await addDoc(collection(db, "products"), {
+//         name,
+//         uid,
+//     });
+//     return doc;
+// }
 
 export const getProducts = async () => {
-    const data = await getDocs(collection(db, "productos"));
+    let data = []
+    try {
+        data = await getDocs(collection(db, "productos"));
+    } catch (error) {
+        console.error("Error fetching products: ", error);
+        throw error;
+    }
     let products = [];
     data.forEach((doc) => {
         products.push({ ...doc.data(), id: doc.id });
@@ -27,8 +33,14 @@ export const getProducts = async () => {
 }
 
 export const getProductsFromCart = async (userId) => {
-    const q = query(collection(db, "cart_item"), where("id_user", "==", userId));
-    const cartSnapshot = await getDocs(q);
+    let cartSnapshot = null
+    try {
+        const q = query(collection(db, "cart_item"), where("id_user", "==", userId));
+        cartSnapshot = await getDocs(q);
+    } catch (error) {
+        console.error("Error fetching products: ", error);
+        throw error;
+    }
 
     const productIds = cartSnapshot.docs.map(doc => doc.data().id_product);
 
@@ -45,7 +57,6 @@ export const getProductsFromCart = async (userId) => {
 
     return products;
 }
-
 
 export const getUsers = async (uid) => {
     const q = query(collection(db, "productos"), where("uid", "==", uid));

@@ -16,9 +16,9 @@ import {
 import { Link, useParams } from 'react-router-dom'
 import { useState, useEffect } from "react"
 import { getProducts } from "../services/products"
-import { Cart } from './Cart'
 import { useAuth } from '../context/AuthContext'
 import { auth } from "../firebase/config"
+import { addToCart } from './Cart'
 import conection from "../assets/conection.png"
 
 const ProductDetail = () => {
@@ -48,7 +48,7 @@ const ProductDetail = () => {
             isClosable: true,
         })
 
-        Cart(product_id, user_id)
+        addToCart(product_id, user_id)
     }
 
     if (!navigator.onLine) {
