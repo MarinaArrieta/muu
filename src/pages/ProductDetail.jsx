@@ -35,9 +35,10 @@ const ProductDetail = () => {
         getProducts().then(
             (data) => {
                 const product = data.find((product) => product.id === id)
-                setProduct(product)
+                setProduct( product)
+                window.scrollTo(0, 0)
             })
-    }, [])
+    }, [id])
 
     const addToCartClick = (e) => {
         let product_id = e.target.dataset.id
@@ -83,7 +84,7 @@ const ProductDetail = () => {
         </Card>
     }
 
-    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([])
 
     useEffect(() => {
         if (product?.category) {

@@ -69,9 +69,7 @@ const Home = () => {
 
   return (
     <VStack marginTop='15px'>
-      <HStack
-        color='#7e6909'
-      >
+      <HStack color='#7e6909'>
         <Select
           color='#7e6909'
           placeholder="Todos"
