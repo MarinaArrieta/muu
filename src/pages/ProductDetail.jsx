@@ -136,35 +136,40 @@ const ProductDetail = () => {
                 </Card>
             </VStack>
             <VStack spacing={4}>
-                {filteredProducts.length > 0 ? (
-                    filteredProducts.map((item) => (
-                        <Card key={item.id} maxW='sm'>
-                        <CardBody>
-                          <Image
-                            src={item.image_url}
-                            alt={item.name}
-                            borderRadius='lg'
-                          />
-                          <Stack mt='6' spacing='3'>
-                            <Heading size='md'>{item.name}</Heading>
-                            <Text color='blue.600' fontSize='2xl'>
-                              {item.price}
-                            </Text>
-                          </Stack>
-                        </CardBody>
-                        <Divider />
-                        <CardFooter>
-                          <ButtonGroup spacing='2'>
-                            <Button variant='solid' colorScheme='blue'>
-                              Ver más
-                            </Button>
-                          </ButtonGroup>
-                        </CardFooter>
-                      </Card>
-                    ))
-                ) : (
-                    <Text color="gray.500">No hay productos en esta categoría.</Text>
-                )}
+                <Text fontSize='2xl' color='#5f5525' as='i' bgGradient='linear(to-r, #fbeaec, #f5ebc4, #fbeaec)' p='5px' borderRadius='11px' >También te puede interesar...</Text>
+                <VStack
+                    gap={{sm:'70px', lg:'152px'}}
+                    flexDirection={{base:'column', sm:'row'}}
+                >
+                    {
+                        filteredProducts.map((item) => (
+                            <Card key={item.id} maxW='sm' bg='#f2e8d700' shadow='unset' w='263px' borderColor='#bd996b'>
+                                <CardBody>
+                                    <Image
+                                        src={item.image_url}
+                                        alt={item.name}
+                                        filter='drop-shadow(2px 5px 4px #211714)'
+                                        borderRadius='lg'
+                                    />
+                                    <Stack mt='6' spacing='3'>
+                                        <Heading size='md' color='#ff77ad'>{item.name}</Heading>
+                                        <Text color='#ed5940' fontSize='2xl'>
+                                            $ {item.price} c/u
+                                        </Text>
+                                    </Stack>
+                                </CardBody>
+                                <Divider />
+                                <CardFooter justify='end'>
+                                    <ButtonGroup spacing='2'>
+                                        <Button variant='solid' colorScheme='pink'>
+                                            <Link to={`/product-detail/${product.id}`}>Ver más</Link>
+                                        </Button>
+                                    </ButtonGroup>
+                                </CardFooter>
+                            </Card>
+                        ))
+                    }
+                </VStack>
             </VStack>
 
         </Grid>
