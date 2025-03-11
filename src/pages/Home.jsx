@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react"
-import { getProducts } from "../services/products"
 import {
   Button,
   Card,
@@ -16,6 +14,8 @@ import {
   Text,
   VStack
 } from "@chakra-ui/react"
+import { useState, useEffect } from "react"
+import { getProducts } from "../services/products"
 import { useAuth } from "../context/AuthContext"
 import { Link } from "react-router-dom"
 import error2 from "../assets/error.png"
