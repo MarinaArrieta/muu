@@ -150,7 +150,16 @@ const ProductDetail = () => {
                         borderRadius='20px'
                         p='15px'
                     >
-                        <Text fontSize='2xl' color='#5f5525' as='i' p='35px 0px 0px' borderRadius='11px' >También te puede interesar...</Text>
+                        <Text
+                            fontSize='2xl'
+                            color='#5f5525'
+                            as='i'
+                            p='35px 0px 0px'
+                            borderRadius='11px'
+                            textShadow='1px 2px 0px #ffffff'
+                        >
+                            También te puede interesar...
+                        </Text>
                         <VStack
                             gap={{ sm: '70px', lg: '90px' }}
                             flexDirection={{ base: 'column', sm: 'row' }}
