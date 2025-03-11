@@ -111,7 +111,12 @@ const Home = () => {
       >
         {filteredProducts.map((product) => (
           <VStack key={product.id}>
-            <Card maxW='sm' bg='#f2e8d700' shadow='unset'>
+            <Card
+              maxW='sm'
+              bg='#f2e8d700'
+              shadow='unset'
+              h='100%'
+            >
               <CardBody>
                 <Image
                   src={product.image_url}
