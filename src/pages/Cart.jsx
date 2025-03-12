@@ -262,9 +262,6 @@ export const Cart = () => {
                                 </Stack>
                             </Card>
                         ))}
-
-                        {!products.length && <Text>No hay productos en el carrito</Text>}
-
                         <VStack w='100%'>
                             <Card w='100%'>
                                 <CardHeader bg='#5f5525'>
