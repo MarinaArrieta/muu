@@ -16,6 +16,7 @@ import { useState } from "react";
 import { password, email } from "../../components/utils/validation";
 import { useAuth } from "../../context/AuthContext";
 import conection from "../../assets/conection.png"
+import { PiEyeClosedBold, PiEyes } from "react-icons/pi";
 
 export const Register = () => {
     const [show, setShow] = useState(false);
@@ -72,7 +73,7 @@ export const Register = () => {
                         />
                         <InputRightElement width="4.5rem">
                             <Button h="1.75rem" size="sm" colorScheme='orange' onClick={handleClick}>
-                                {show ? "Hide" : "Show"}
+                                {show ? <PiEyes /> : <PiEyeClosedBold />}
                             </Button>
                         </InputRightElement>
                     </InputGroup>

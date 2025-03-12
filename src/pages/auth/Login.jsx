@@ -19,6 +19,9 @@ import { email, password } from "../../components/utils/validation";
 import { useNavigate } from 'react-router-dom';
 import conection from "../../assets/conection.png"
 import registerUser from '../../assets/registrate.png'
+import { LuEyeClosed } from "react-icons/lu";
+import { RiEyeCloseLine } from "react-icons/ri";
+import { PiEyeClosedBold, PiEyeClosedDuotone, PiEyes, PiEyesFill } from "react-icons/pi";
 
 export const Login = () => {
 
@@ -86,7 +89,7 @@ export const Login = () => {
                         />
                         <InputRightElement width="4.5rem">
                             <Button h="1.75rem" size="sm" colorScheme='orange' onClick={handleClick}>
-                                {show ? "Hide" : "Show"}
+                                {show ? <PiEyes /> : <PiEyeClosedBold />}
                             </Button>
                         </InputRightElement>
                     </InputGroup>
