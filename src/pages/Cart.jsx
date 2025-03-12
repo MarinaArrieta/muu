@@ -62,6 +62,14 @@ export const addToCart = async (product_id, user_id) => {
         )
 
     } catch (error) {
+        toast({
+            title: 'Hubo un error',
+            description: 'Inténtalo de nuevo',
+            position: 'top',
+            status: 'error',
+            duration: 3000,
+            isClosable: true,
+        })
 
     }
 }
@@ -81,7 +89,14 @@ const deleteItemCart = async (id_product, id_user) => {
             await deleteDoc(docRef);
         });
     } catch (error) {
-        console.error("Error deleting cart items: ", error);
+        toast({
+            title: 'Hubo un error',
+            description: 'Inténtalo de nuevo',
+            position: 'top',
+            status: 'error',
+            duration: 3000,
+            isClosable: true,
+        })
     }
 }
 
@@ -113,7 +128,14 @@ export const Cart = () => {
             }
             setProducts([])
         } catch (error) {
-            console.error("Error:", error)
+            toast({
+                title: 'Hubo un error',
+                description: 'Inténtalo de nuevo',
+                position: 'top',
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+            })
         }
     };
 
@@ -121,7 +143,6 @@ export const Cart = () => {
         const getData = async () => {
             try {
                 const data = await getProductsFromCart(user)
-                data.map((product) => console.log(product))
                 const productsWithCount = data.map(product => ({ ...product, count: product.count || 1 }))
                 setProducts(productsWithCount)
             } catch (error) {
@@ -137,33 +158,40 @@ export const Cart = () => {
         if (product.count < product.stock) {
             setProducts(products.map(p => p.id === product.id ? { ...p, count: p.count + 1 } : p))
         }
-    };
+    }
 
     const handleDecrease = (product) => {
         if (product.count > 1) {
             setProducts(products.map(p => p.id === product.id ? { ...p, count: p.count - 1 } : p))
         }
-    };
+    }
 
     const handleDelete = async (product) => {
         try {
             await deleteItemCart(product.id, user)
             setProducts(products.filter(p => p.id !== product.id))
         } catch (error) {
-            console.error("Error deleting product from cart: ", error)
+            toast({
+                title: 'Hubo un error',
+                description: 'Inténtalo de nuevo',
+                position: 'top',
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+            })
         }
-    };
+    }
 
     const totalPrice = () => {
         return products.reduce((total, product) => total + product.price * product.count, 0)
-    };
+    }
 
     const confirmPurchase = async () => {
         try {
             await handlePurchase(user, products);
         } catch (error) {
         }
-    };
+    }
 
     if (!navigator.onLine) {
         return <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>

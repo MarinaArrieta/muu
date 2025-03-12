@@ -35,7 +35,7 @@ const ProductDetail = () => {
         getProducts().then(
             (data) => {
                 const product = data.find((product) => product.id === id)
-                setProduct( product)
+                setProduct(product)
                 window.scrollTo(0, 0)
             })
     }, [id])
@@ -147,7 +147,20 @@ const ProductDetail = () => {
                     </VStack>
                     <VStack
                         spacing={4}
-                        bg='radial-gradient(17% 23% at 92% 16%, #fcdba8 0%, rgb(255 200 218) 80%, rgb(158 158 158 / 0%) 209%), radial-gradient(44% 67% at 108% 51%, #ffddaa 40%, rgb(255 218 231 / 63%) 71%, rgba(76, 175, 80, 0) 121%), radial-gradient(41% 54% at 3% -6%, #ffeac6 14%, rgb(255 208 224) 28%, rgb(76 175 80 / 0%) 121%), radial-gradient(18% 55% at 49% 80%, rgb(235 241 180) 7%, rgb(255 234 198) 100%)'
+                        bg='radial-gradient(17% 23% at 92% 16%, 
+                        #fcdba8 0%, 
+                        rgb(255 200 218 / 62%) 80%, 
+                        rgb(158 158 158 / 0%) 209%), 
+                        radial-gradient(44% 67% at 108% 51%, 
+                        #ffddaa 40%, rgb(255 218 231 / 80%) 71%, 
+                        rgba(76, 175, 80, 0) 121%), 
+                        radial-gradient(41% 54% at 3% -6%, 
+                        #ffeac6 14%, 
+                        rgb(255 208 224 / 79%) 28%, 
+                        rgb(76 175 80 / 0%) 121%), 
+                        radial-gradient(18% 55% at 49% 80%, 
+                        rgb(235 241 180) 7%, 
+                        rgb(255 234 198) 100%)'
                         borderRadius='20px'
                         p='15px'
                         marginTop='55px'

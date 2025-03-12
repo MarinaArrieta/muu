@@ -5,17 +5,8 @@ import {
     where,
     query,
     documentId,
-} from "firebase/firestore";
-
-import { db } from "../firebase/config";
-
-// export const createProduct = async (name, uid) => {
-//     const doc = await addDoc(collection(db, "products"), {
-//         name,
-//         uid,
-//     });
-//     return doc;
-// }
+} from "firebase/firestore"
+import { db } from "../firebase/config"
 
 export const getProducts = async () => {
     let data = []
