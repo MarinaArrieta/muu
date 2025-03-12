@@ -279,11 +279,13 @@ export const Cart = () => {
                                         </Box>
                                         {totalPrice() > 0 && (
                                             <ButtonGroup gap='4' flexDirection={{ base: 'column', md: 'row', lg: 'row' }} alignItems='baseline'>
-                                                <Button variant='solid' colorScheme='pink' as={NavLink} to='/' w='90%'>Ver más productos</Button>
+                                                <Button variant='solid' colorScheme='pink' as={NavLink} to='/' w='90%'>
+                                                Ver más productos
+                                                </Button>
                                                 <Button onClick={onOpen} variant='solid' colorScheme='pink' w='90%'>
                                                     Comprar
-                                                    <Modal isOpen={isOpen} onClose={onClose}>
-                                                        <ModalOverlay bg='#f2e8d7' />
+                                                    <Modal isOpen={isOpen} onClose={onClose} isCentered >
+                                                        <ModalOverlay bg='#f2e8d7' display='flex'/>
                                                         <ModalContent bg='#f2e8d7' border='1px solid #ffffff' w='90%'>
                                                             <ModalHeader color='#ff77ad'>Compra realizada con éxito</ModalHeader>
                                                             <ModalBody>
