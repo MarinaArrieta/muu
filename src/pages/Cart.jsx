@@ -212,174 +212,116 @@ export const Cart = () => {
 
     return (
         <VStack p='35px'>
-        {error && (
-            <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
-                <Stack mt='6' spacing='3'>
-                    <Text color='#5f5525' fontSize='2xl' m={{ base: '1.25rem', md: 'unset' }}>
-                        Inténtalo de nuevo
-                    </Text>
-                </Stack>
-                <CardBody>
-                    <Image
-                        src={error2}
-                        alt='Error en la conexión'
-                        borderRadius='lg'
-                    />
-                </CardBody>
-            </Card>
-        )}
-        {loading && (
-            <HStack w='100%' marginTop='35px' alignItems='center' justifyContent='center'>
-                <Spinner size='xl' color='#ed5940' filter='drop-shadow(2px 5px 4px #ffb5a8)' thickness='10px' />
-            </HStack>
-        )}
-        {!error && !loading && (
-            <>
-                {!user ? (
+                {error ? (
+                    <HStack w='100%' marginTop='35px' alignItems='center' justifyContent='center'>
+                        <Text color='#5f5525' fontSize='2xl'>Inténtalo de nuevo</Text>
+                    </HStack>
+                ) : !user ? (
                     <VStack p='9px'>
                         <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
                             <CardBody p='0'>
-                                <Image
-                                    src={register}
-                                    alt='Vaca en un jardín'
-                                    borderRadius='lg'
-                                />
+                                <Image src={register} alt='Vaca en un jardín' borderRadius='lg' />
                             </CardBody>
                         </Card>
                     </VStack>
+                ) : loading ? (
+                    <HStack w='100%' marginTop='35px' alignItems='center' justifyContent='center'>
+                        <Spinner size='xl' color='#ed5940' filter='drop-shadow(2px 5px 4px #ffb5a8)' thickness='10px' />
+                    </HStack>
                 ) : (
-                    products.map((product) => (
-                        <Card
-                            key={product.id}
-                            direction={{ base: 'column', sm: 'row' }}
-                            overflow='hidden'
-                            variant='outline'
-                            bg='#f2e8d700'
-                            border='1px solid #5f5525'
-                        >
-                            <Image
-                                objectFit='cover'
-                                maxW={{ base: '100%', sm: '200px' }}
-                                src={product.image_url}
-                                alt={product.name}
-                            />
-                            <Stack>
-                                <CardBody>
-                                    <Heading size='md' color='#ff77ad'>{product.name}</Heading>
-                                    <Text py='2' color='#5f5525'>
-                                        Precio: $ {product.price}
-                                    </Text>
-                                    <Text py='2' color='#5f5525'>
-                                        Elegí la cantidad de MUU que quieras comprar
-                                    </Text>
-                                    <InputGroup size='md'>
-                                        <Input
-                                            pr='4.5rem'
-                                            type='number'
-                                            min={1}
-                                            max={product.stock}
-                                            value={product.count}
-                                            readOnly
-                                            onChange={(e) => setProducts(products.map(p => p.id === product.id ? { ...p, count: Number(e.target.value) } : p))}
-                                        />
-                                        <InputRightElement width='4.5rem'>
-                                            <Button h='1.75rem' size='sm' onClick={() => handleDecrease(product)} disabled={product.count === 1}>
-                                                -
-                                            </Button>
-                                            <Button h='1.75rem' size='sm' onClick={() => handleIncrease(product)} disabled={product.count === product.stock}>
-                                                +
-                                            </Button>
-                                        </InputRightElement>
-                                    </InputGroup>
-                                    <Text py='2' color='#5f5525'>
-                                        Stock disponible: {product.stock}
-                                    </Text>
-                                </CardBody>
-                                <CardFooter gap='5px' justify='end'>
-                                    <Button variant='solid' colorScheme='orange' onClick={() => handleDelete(product)}>
-                                        <RiDeleteBinFill />
-                                    </Button>
-                                </CardFooter>
-                            </Stack>
-                        </Card>
-                    ))
-                )}
-                {!user ? '' : (
-                    <VStack w='100%'>
-                        <Card w='100%'>
-                            <CardHeader bg='#5f5525'>
-                                <Heading size='md' color='#f2e8d7'>Total en mi carrito</Heading>
-                            </CardHeader>
-                            <CardBody bg='#f2e8d7'>
-                                <Stack divider={<StackDivider />} spacing='4'>
-                                    <Box display='flex' alignItems='center' justify='center'>
-                                        <Text pt='2' fontSize='xl' as='b' color='#5f5525'>
-                                            {totalPrice() > 0 ? (
-                                                <>🍨 Precio: $ {totalPrice()}</>
-                                            ) : (
-                                                <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
-                                                    <CardBody p='0'>
-                                                        <Image
-                                                            src={carritoVacio}
-                                                            alt='Carrito vacío'
-                                                            borderRadius='lg'
-                                                        />
-                                                    </CardBody>
-                                                    <CardFooter p='0' justifyContent='center'>
-                                                        <Button variant='solid' colorScheme='pink' w='90%' marginTop='20px'>
-                                                            <Link to={`/`}>Ver más productos</Link>
-                                                        </Button>
-                                                    </CardFooter>
-                                                </Card>
-                                            )}
-                                        </Text>
-                                    </Box>
-                                    {totalPrice() > 0 && (
-                                        <ButtonGroup
-                                            gap='4'
-                                            flexDirection={{ base: 'column', md: 'row', lg: 'row' }}
-                                            alignItems='baseline'
-                                        >
-                                            <Button variant='solid' colorScheme='pink' w='90%'>
-                                                <Link to={`/`}>Ver más productos</Link>
-                                            </Button>
-                                            <Button onClick={onOpen}
-                                                variant='solid'
-                                                colorScheme='pink'
-                                                w='90%'>
-                                                Comprar
-                                                <Modal isOpen={isOpen} onClose={onClose}>
-                                                    <ModalOverlay bg='#f2e8d7' />
-                                                    <ModalContent bg='#f2e8d7' border='1px solid #ffffff' w='90%'>
-                                                        <ModalHeader color='#ff77ad'>Compra realizada con éxito</ModalHeader>
-                                                        <ModalBody>
-                                                            <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
-                                                                <CardBody p='0'>
-                                                                    <Image
-                                                                        src={purchase}
-                                                                        alt='Vaca en un jardín'
-                                                                        borderRadius='lg'
-                                                                    />
-                                                                </CardBody>
-                                                            </Card>
-                                                        </ModalBody>
-                                                        <ModalFooter>
-                                                            <Button variant='solid' colorScheme='pink' mr={3} onClick={() => { onClose(), confirmPurchase() }}>
-                                                                Cerrar
-                                                            </Button>
-                                                        </ModalFooter>
-                                                    </ModalContent>
-                                                </Modal>
-                                            </Button>
-                                        </ButtonGroup>
-                                    )}
+                    <>
+                        {products.map((product) => (
+                            <Card
+                                key={product.id}
+                                direction={{ base: 'column', sm: 'row' }}
+                                overflow='hidden'
+                                variant='outline'
+                                bg='#f2e8d700'
+                                border='1px solid #5f5525'
+                            >
+                                <Image objectFit='cover' maxW={{ base: '100%', sm: '200px' }} src={product.image_url} alt={product.name} />
+                                <Stack>
+                                    <CardBody>
+                                        <Heading size='md' color='#ff77ad'>{product.name}</Heading>
+                                        <Text py='2' color='#5f5525'>Precio: $ {product.price}</Text>
+                                        <Text py='2' color='#5f5525'>Elegí la cantidad de MUU que quieras comprar</Text>
+                                        <InputGroup size='md'>
+                                            <Input pr='4.5rem' type='number' min={1} max={product.stock} value={product.count} readOnly />
+                                            <InputRightElement width='4.5rem'>
+                                                <Button h='1.75rem' size='sm' onClick={() => handleDecrease(product)} disabled={product.count === 1}>-</Button>
+                                                <Button h='1.75rem' size='sm' onClick={() => handleIncrease(product)} disabled={product.count === product.stock}>+</Button>
+                                            </InputRightElement>
+                                        </InputGroup>
+                                        <Text py='2' color='#5f5525'>Stock disponible: {product.stock}</Text>
+                                    </CardBody>
+                                    <CardFooter gap='5px' justify='end'>
+                                        <Button variant='solid' colorScheme='orange' onClick={() => handleDelete(product)}>
+                                            <RiDeleteBinFill />
+                                        </Button>
+                                    </CardFooter>
                                 </Stack>
-                            </CardBody>
-                        </Card>
-                    </VStack>
+                            </Card>
+                        ))}
+
+                        {!products.length && <Text>No hay productos en el carrito</Text>}
+
+                        <VStack w='100%'>
+                            <Card w='100%'>
+                                <CardHeader bg='#5f5525'>
+                                    <Heading size='md' color='#f2e8d7'>Total en mi carrito</Heading>
+                                </CardHeader>
+                                <CardBody bg='#f2e8d7'>
+                                    <Stack divider={<StackDivider />} spacing='4'>
+                                        <Box display='flex' alignItems='center' justify='center'>
+                                            <Text pt='2' fontSize='xl' as='b' color='#5f5525'>
+                                                {totalPrice() > 0 ? <>🍨 Precio: $ {totalPrice()}</> : (
+                                                    <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
+                                                        <CardBody p='0'>
+                                                            <Image src={carritoVacio} alt='Carrito vacío' borderRadius='lg' />
+                                                        </CardBody>
+                                                        <CardFooter p='0' justifyContent='center'>
+                                                            <Button variant='solid' colorScheme='pink' w='90%' marginTop='20px'>
+                                                                <Link to={`/`}>Ver más productos</Link>
+                                                            </Button>
+                                                        </CardFooter>
+                                                    </Card>
+                                                )}
+                                            </Text>
+                                        </Box>
+                                        {totalPrice() > 0 && (
+                                            <ButtonGroup gap='4' flexDirection={{ base: 'column', md: 'row', lg: 'row' }} alignItems='baseline'>
+                                                <Button variant='solid' colorScheme='pink' w='90%'>
+                                                    <Link to={`/`}>Ver más productos</Link>
+                                                </Button>
+                                                <Button onClick={onOpen} variant='solid' colorScheme='pink' w='90%'>
+                                                    Comprar
+                                                    <Modal isOpen={isOpen} onClose={onClose}>
+                                                        <ModalOverlay bg='#f2e8d7' />
+                                                        <ModalContent bg='#f2e8d7' border='1px solid #ffffff' w='90%'>
+                                                            <ModalHeader color='#ff77ad'>Compra realizada con éxito</ModalHeader>
+                                                            <ModalBody>
+                                                                <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
+                                                                    <CardBody p='0'>
+                                                                        <Image src={purchase} alt='Vaca en un jardín' borderRadius='lg' />
+                                                                    </CardBody>
+                                                                </Card>
+                                                            </ModalBody>
+                                                            <ModalFooter>
+                                                                <Button variant='solid' colorScheme='pink' mr={3} onClick={() => { onClose(); confirmPurchase(); }}>
+                                                                    Cerrar
+                                                                </Button>
+                                                            </ModalFooter>
+                                                        </ModalContent>
+                                                    </Modal>
+                                                </Button>
+                                            </ButtonGroup>
+                                        )}
+                                    </Stack>
+                                </CardBody>
+                            </Card>
+                        </VStack>
+                    </>
                 )}
-            </>
-        )}
-    </VStack>
+        </VStack >
     );
 };
