@@ -228,7 +228,7 @@ export const Cart = () => {
                 </CardBody>
             </Card>
         )}
-        {!error && loading && (
+        {loading && (
             <HStack w='100%' marginTop='35px' alignItems='center' justifyContent='center'>
                 <Spinner size='xl' color='#ed5940' filter='drop-shadow(2px 5px 4px #ffb5a8)' thickness='10px' />
             </HStack>
