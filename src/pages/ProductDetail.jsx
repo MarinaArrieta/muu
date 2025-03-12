@@ -202,9 +202,7 @@ const ProductDetail = () => {
                                         <Divider />
                                         <CardFooter justify='end'>
                                             <ButtonGroup spacing='2'>
-                                                <Button variant='solid' colorScheme='pink'>
-                                                    <Link to={`/product-detail/${product.id}`}>Ver más</Link>
-                                                </Button>
+                                                <Button variant='solid' colorScheme='pink' as={Link} to={`/product-detail/${product.id}`}>Ver más</Button>
                                             </ButtonGroup>
                                         </CardFooter>
                                     </Card>
