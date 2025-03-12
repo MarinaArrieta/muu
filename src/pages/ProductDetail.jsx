@@ -138,9 +138,12 @@ const ProductDetail = () => {
                                         </ButtonGroup>
                                     </VStack>
                                     :
-                                    <Button variant='solid' colorScheme='pink' onClick={addToCartClick} data-id={product.id}>
-                                        Agregar al carrito
-                                    </Button>
+                                    <HStack>
+                                        <Button variant='solid' colorScheme='pink' as={Link} to='/'>Volver</Button>
+                                        <Button variant='solid' colorScheme='pink' onClick={addToCartClick} data-id={product.id}>
+                                            Agregar al carrito
+                                        </Button>
+                                    </HStack>
                                 }
                             </CardFooter>
                         </Card>
