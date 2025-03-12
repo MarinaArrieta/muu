@@ -49,13 +49,6 @@ const Footer = () => {
                         Home
                     </Text>
                 </Link>
-                {/* <NavLink as={Link} to="register" fontSize='lg'>
-                    <Text
-                        fontSize={{ base: '15px', md: '18px' }}
-                    >
-                        Registrarse
-                    </Text>
-                </NavLink> */}
                 {isAuthenticated ? ''
                     :
                     <>
