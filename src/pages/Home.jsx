@@ -17,7 +17,7 @@ import {
 import { useState, useEffect } from "react"
 import { getProducts } from "../services/products"
 import { useAuth } from "../context/AuthContext"
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import error2 from "../assets/error.png"
 import conection from "../assets/conection.png"
 
@@ -131,7 +131,7 @@ const Home = () => {
               </CardBody>
               <Divider />
               <CardFooter justify='end'>
-                <Button variant='solid' colorScheme='pink' as={Link} to={`/product-detail/${product.id}`}>Ver más</Button>
+                <Button variant='solid' colorScheme='pink' as={NavLink} to={`/product-detail/${product.id}`}>Ver más</Button>
               </CardFooter>
             </Card>
           </VStack>

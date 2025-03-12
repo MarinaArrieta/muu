@@ -15,7 +15,7 @@ import {
     useToast,
     VStack
 } from "@chakra-ui/react"
-import { Link, useParams } from 'react-router-dom'
+import { Link, NavLink, useNavigate, useParams } from 'react-router-dom'
 import { useState, useEffect } from "react"
 import { getProducts } from "../services/products"
 import { useAuth } from '../context/AuthContext'
@@ -27,6 +27,7 @@ const ProductDetail = () => {
     const [product, setProduct] = useState({})
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
+    const navigate = useNavigate()
     const { id } = useParams()
     const { user } = useAuth()
     const toast = useToast()
@@ -139,7 +140,11 @@ const ProductDetail = () => {
                                     </VStack>
                                     :
                                     <HStack>
-                                        <Button variant='solid' colorScheme='pink' as={Link} to='/'>Volver</Button>
+                                        <Button
+                                            variant='solid'
+                                            colorScheme='pink'
+                                            onClick={() => navigate(-1)}
+                                        >Volver</Button>
                                         <Button variant='solid' colorScheme='pink' onClick={addToCartClick} data-id={product.id}>
                                             Agregar al carrito
                                         </Button>
@@ -202,7 +207,7 @@ const ProductDetail = () => {
                                         <Divider />
                                         <CardFooter justify='end'>
                                             <ButtonGroup spacing='2'>
-                                                <Button variant='solid' colorScheme='pink' as={Link} to={`/product-detail/${product.id}`}>Ver más</Button>
+                                                <Button variant='solid' colorScheme='pink' as={NavLink} to={`/product-detail/${product.id}`}>Ver más</Button>
                                             </ButtonGroup>
                                         </CardFooter>
                                     </Card>

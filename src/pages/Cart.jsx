@@ -38,14 +38,13 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from 'react';
 import { RiDeleteBinFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useAuth } from '../context/AuthContext';
 import { db } from "../firebase/config";
 import { getProductsFromCart } from "../services/products";
 import carritoVacio from '../assets/carrito-vacio.png'
 import purchase from '../assets/compra.png'
 import register from '../assets/registrate.png'
-import error2 from "../assets/error.png"
 import conection from "../assets/conection.png"
 
 const createItemCart = async (id_product, id_user) => {
@@ -277,8 +276,8 @@ export const Cart = () => {
                                                             <Image src={carritoVacio} alt='Carrito vacío' borderRadius='lg' />
                                                         </CardBody>
                                                         <CardFooter p='0' justifyContent='center'>
-                                                            <Button variant='solid' colorScheme='pink' w='90%' marginTop='20px'>
-                                                                <Link to={`/`}>Ver más productos</Link>
+                                                            <Button variant='solid' colorScheme='pink' w='90%' marginTop='20px' as={NavLink} to={`/`}>
+                                                                Ver más productos
                                                             </Button>
                                                         </CardFooter>
                                                     </Card>
@@ -287,7 +286,7 @@ export const Cart = () => {
                                         </Box>
                                         {totalPrice() > 0 && (
                                             <ButtonGroup gap='4' flexDirection={{ base: 'column', md: 'row', lg: 'row' }} alignItems='baseline'>
-                                                <Button variant='solid' colorScheme='pink' as={Link} to='/' w='90%'>Ver más productos</Button>
+                                                <Button variant='solid' colorScheme='pink' as={NavLink} to='/' w='90%'>Ver más productos</Button>
                                                 <Button onClick={onOpen} variant='solid' colorScheme='pink' w='90%'>
                                                     Comprar
                                                     <Modal isOpen={isOpen} onClose={onClose}>
@@ -319,4 +318,4 @@ export const Cart = () => {
                 )}
         </VStack >
     );
-};
+}
