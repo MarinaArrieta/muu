@@ -10,6 +10,7 @@ import {
     Input,
     InputGroup,
     InputRightElement,
+    VStack,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -17,6 +18,7 @@ import { useAuth } from "../../context/AuthContext";
 import { email, password } from "../../components/utils/validation";
 import { useNavigate } from 'react-router-dom';
 import conection from "../../assets/conection.png"
+import registerUser from '../../assets/registrate.png'
 
 export const Login = () => {
 
@@ -49,14 +51,19 @@ export const Login = () => {
     }
 
     return (
-        <Box maxW="300px" mx="auto" mt="10">
+        <Box maxW="300px" mx="auto" mt="10" marginTop='10px'>
+            <Card maxW='sm' bg='#f2e8d7' boxShadow='none' marginBottom='10px'>
+                <CardBody p='0'>
+                    <Image src={registerUser} alt='Vaca en un jardín' borderRadius='lg' />
+                </CardBody>
+            </Card>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <FormControl isInvalid={errors.email}>
                     <FormLabel htmlFor="email" color='#ed5940'>Usuario</FormLabel>
                     <Input
                         type="email"
                         id="email"
-                        placeholder="Ingresa tu nombre/usuario"
+                        placeholder="Ingresa tu usuario"
                         _placeholder={{ color: '#8d803e' }}
                         borderColor='#f7b3cd'
                         focusBorderColor='#ffbb00'
@@ -71,7 +78,7 @@ export const Login = () => {
                             id="password"
                             pr="4.5rem"
                             type={show ? "text" : "password"}
-                            placeholder="Ingrese su contraseña"
+                            placeholder="Ingresa tu contraseña"
                             _placeholder={{ color: '#8d803e' }}
                             borderColor='#f7b3cd'
                             focusBorderColor='#ffbb00'

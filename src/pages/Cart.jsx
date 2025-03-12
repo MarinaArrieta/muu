@@ -38,7 +38,7 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from 'react';
 import { RiDeleteBinFill } from "react-icons/ri";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useAuth } from '../context/AuthContext';
 import { db } from "../firebase/config";
 import { getProductsFromCart } from "../services/products";
@@ -142,22 +142,22 @@ export const Cart = () => {
     };
 
     useEffect(() => {
-        if (!user) return; // Evita ejecutar si no hay usuario
+        if (!user) return;
     
         const getData = async () => {
             try {
-                const data = await getProductsFromCart(user);
-                const productsWithCount = data.map(product => ({ ...product, count: product.count || 1 }));
-                setProducts(productsWithCount);
+                const data = await getProductsFromCart(user)
+                const productsWithCount = data.map(product => ({ ...product, count: product.count || 1 }))
+                setProducts(productsWithCount)
             } catch (error) {
-                setError(true);
+                setError(true)
             } finally {
-                setLoading(false);
+                setLoading(false)
             }
-        };
+        }
     
-        getData();
-    }, [user]);
+        getData()
+    }, [user])
 
     const handleIncrease = (product) => {
         if (product.count < product.stock) {
@@ -216,14 +216,6 @@ export const Cart = () => {
                     <HStack w='100%' marginTop='35px' alignItems='center' justifyContent='center'>
                         <Text color='#5f5525' fontSize='2xl'>Inténtalo de nuevo</Text>
                     </HStack>
-                ) : !user ? (
-                    <VStack p='9px'>
-                        <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
-                            <CardBody p='0'>
-                                <Image src={register} alt='Vaca en un jardín' borderRadius='lg' />
-                            </CardBody>
-                        </Card>
-                    </VStack>
                 ) : loading ? (
                     <HStack w='100%' marginTop='35px' alignItems='center' justifyContent='center'>
                         <Spinner size='xl' color='#ed5940' filter='drop-shadow(2px 5px 4px #ffb5a8)' thickness='10px' />
@@ -278,7 +270,7 @@ export const Cart = () => {
                                                         </CardBody>
                                                         <CardFooter p='0' justifyContent='center'>
                                                             <Button variant='solid' colorScheme='pink' w='90%' marginTop='20px' as={NavLink} to={`/`}>
-                                                                Ver más productos
+                                                                Ver productos
                                                             </Button>
                                                         </CardFooter>
                                                     </Card>

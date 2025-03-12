@@ -14,11 +14,9 @@ const Rounting = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/product-detail/:id" element={<ProductDetail />} />
-
       <Route element={<ProtectedRoute />}>
         <Route path="/cart" element={<Cart />} />
       </Route>
-
       <Route path="*" element={<NotFound />} />
     </Routes>
   )
