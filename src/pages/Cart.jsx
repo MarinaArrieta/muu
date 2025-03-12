@@ -142,21 +142,22 @@ export const Cart = () => {
     };
 
     useEffect(() => {
+        if (!user) return; // Evita ejecutar si no hay usuario
+    
         const getData = async () => {
             try {
-                const data = await getProductsFromCart(user)
-                const productsWithCount = data.map(product => ({ ...product, count: product.count || 1 }))
-                setProducts(productsWithCount)
+                const data = await getProductsFromCart(user);
+                const productsWithCount = data.map(product => ({ ...product, count: product.count || 1 }));
+                setProducts(productsWithCount);
             } catch (error) {
-                setError(true)
+                setError(true);
             } finally {
-                setLoading(false)
+                setLoading(false);
             }
-        }
-        if (user) {
-            getData()
-        }
-    }, [user])
+        };
+    
+        getData();
+    }, [user]);
 
     const handleIncrease = (product) => {
         if (product.count < product.stock) {
