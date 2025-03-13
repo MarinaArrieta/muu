@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react"
-import { getProducts } from "../services/products"
 import {
   Button,
   Card,
@@ -14,12 +12,14 @@ import {
   Spinner,
   Stack,
   Text,
-  useToast,
   VStack
 } from "@chakra-ui/react"
+import { useState, useEffect } from "react"
+import { getProducts } from "../services/products"
 import { useAuth } from "../context/AuthContext"
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import error2 from "../assets/error.png"
+import conection from "../assets/conection.png"
 
 const Home = () => {
 
@@ -28,7 +28,6 @@ const Home = () => {
   const [error, setError] = useState(false)
   const [filter, setFilter] = useState('')
   const { user } = useAuth()
-  const toast = useToast()
 
   useEffect(() => {
     const getData = async () => {
@@ -37,13 +36,6 @@ const Home = () => {
         setProducts(data)
       } catch (error) {
         setError(true)
-        toast({
-          title: 'Hubo un error',
-          description: "Vuleve a intentarlo",
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-        })
       } finally {
         setLoading(false)
       }
@@ -63,14 +55,24 @@ const Home = () => {
     return product.category === filter
   })
 
+  if (!navigator.onLine) {
+    return <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
+      <CardBody>
+        <Image
+          src={conection}
+          alt='Desierto error'
+          borderRadius='lg'
+        />
+      </CardBody>
+    </Card>
+  }
+
   return (
     <VStack marginTop='15px'>
-      <HStack
-        color='#7e6909'
-      >
+      <HStack color='#7e6909'>
         <Select
           color='#7e6909'
-          placeholder="Filtrar por..."
+          placeholder="Todos"
           borderColor='#f8a5c5'
           bg='#ffdfe4'
           focusBorderColor='#ffbb00'
@@ -86,28 +88,33 @@ const Home = () => {
           <Spinner size='xl' color='#ed5940' filter='drop-shadow(2px 5px 4px #ffb5a8)' thickness='10px' />
         </HStack>
       }
+      {error &&
+        <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
+          <Stack mt='6' spacing='3'>
+            <Text color='#5f5525' fontSize='2xl' textAlign='center' m={{ base: '1.25rem', md: 'unset' }}>Inténtalo de nuevo</Text>
+          </Stack>
+          <CardBody>
+            <Image
+              src={error2}
+              alt='Desierto error'
+              borderRadius='lg'
+            />
+          </CardBody>
+        </Card>
+      }
       <Grid
         templateColumns={{ base: "1fr", sm: "1fr", lg: "repeat(3, 1fr)" }}
         gap={6}
         flexDirection='column'
       >
-        {error &&
-          <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
-            <Stack mt='6' spacing='3'>
-              <Text color='#5f5525' fontSize='2xl' m={{ base: '1.25rem', md: 'unset' }}>Inténtalo de nuevo</Text>
-            </Stack>
-            <CardBody>
-              <Image
-                src={error2}
-                alt='Desierto error'
-                borderRadius='lg'
-              />
-            </CardBody>
-          </Card>
-        }
         {filteredProducts.map((product) => (
           <VStack key={product.id}>
-            <Card maxW='sm' bg='#f2e8d700' shadow='unset'>
+            <Card
+              maxW='sm'
+              bg='#f2e8d700'
+              shadow='unset'
+              h='100%'
+            >
               <CardBody>
                 <Image
                   src={product.image_url}
@@ -124,9 +131,7 @@ const Home = () => {
               </CardBody>
               <Divider />
               <CardFooter justify='end'>
-                <Button variant='solid' colorScheme='pink'>
-                  <Link to={`/product-detail/${product.id}`}>Ver más</Link>
-                </Button>
+                <Button variant='solid' colorScheme='pink' as={NavLink} to={`/product-detail/${product.id}`}>Ver más</Button>
               </CardFooter>
             </Card>
           </VStack>

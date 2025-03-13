@@ -1,13 +1,13 @@
 import { VStack } from '@chakra-ui/react'
 import Header from '../Header'
-import Rounting from '../../routes/Rounting'
 import Footer from '../Footer'
+import Main from '../Main'
 
 const AppLayout = () => {
   return (
     <VStack>
       <Header />
-      <Rounting />
+      <Main />
       <Footer />
     </VStack>
   )

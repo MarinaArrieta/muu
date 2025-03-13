@@ -1,19 +1,19 @@
+import { useToast } from '@chakra-ui/react';
 import {
     createUserWithEmailAndPassword,
+    GoogleAuthProvider,
     onAuthStateChanged,
     signInWithEmailAndPassword,
     signInWithPopup,
     signOut,
-} from 'firebase/auth'
+} from 'firebase/auth';
 import {
     createContext,
     useContext,
     useEffect,
     useState
-} from 'react'
-import { auth } from '../firebase/config'
-import { useToast } from '@chakra-ui/react'
-import { GoogleAuthProvider } from "firebase/auth";
+} from 'react';
+import { auth } from '../firebase/config';
 
 const AuthContext = createContext()
 
@@ -34,15 +34,9 @@ export const AuthProvider = ({ children }) => {
     }, [])
 
     const registerUser = async ({ email, password }) => {
-
         try {
-            const userCredential = await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password
-            )
-
-            const user = userCredential.user
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
             toast({
                 title: 'Usuario registrado correctamente',
                 position: 'top',
@@ -50,7 +44,6 @@ export const AuthProvider = ({ children }) => {
                 isClosable: true,
                 duration: 3000,
             })
-
             return user
         } catch (error) {
             toast({
@@ -61,33 +54,35 @@ export const AuthProvider = ({ children }) => {
                 isClosable: true,
                 duration: 3000,
             })
-        };
+            return null
+        }
     }
 
-    const login = ({ email, password }) => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                setUser(user.uid)
-                toast({
-                    title: 'Iniciaste sesión correctamente',
-                    description: 'Bienvenido a MUU',
-                    position: 'top',
-                    status: 'success',
-                    isClosable: true,
-                    duration: 3000,
-                })
-            })
-            .catch((error) => {
-                toast({
-                    title: 'Hubo un error al iniciar la sesión',
-                    description: 'Vuelve a intentarlo',
-                    position: 'top',
-                    status: 'error',
-                    isClosable: true,
-                    duration: 3000,
-                })
+    const login = async ({ email, password }) => {
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+            setUser(user.uid);
+            toast({
+                title: 'Iniciaste sesión correctamente',
+                description: 'Bienvenido a MUU',
+                position: 'top',
+                status: 'success',
+                isClosable: true,
+                duration: 3000,
             });
+            return user
+        } catch (error) {
+            toast({
+                title: 'Hubo un error al iniciar la sesión',
+                description: 'Vuelve a intentarlo',
+                position: 'top',
+                status: 'error',
+                isClosable: true,
+                duration: 3000,
+            });
+            return null
+        }
     }
 
     const signInWithGoogle = async () => {

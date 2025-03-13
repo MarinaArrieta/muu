@@ -1,16 +1,22 @@
 import {
     Box,
     Button,
+    Card,
+    CardBody,
     FormControl,
     FormErrorMessage,
     FormLabel,
+    Image,
     Input,
     InputGroup,
     InputRightElement,
 } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { password, email } from "../../components/utils/validation";
+import { useForm } from "react-hook-form";
+import { PiEyeClosedBold, PiEyes } from "react-icons/pi";
+import { useNavigate } from 'react-router-dom';
+import conection from "../../assets/conection.png";
+import { email, password } from "../../components/utils/validation";
 import { useAuth } from "../../context/AuthContext";
 
 export const Register = () => {
@@ -18,11 +24,30 @@ export const Register = () => {
     const handleClick = () => setShow(!show);
     const { register, formState, handleSubmit } = useForm();
     const { errors } = formState;
-
+    const navigate = useNavigate();
     const { registerUser } = useAuth();
 
-    const onSubmit = (data) => {
-        registerUser(data);
+    const onSubmit = async (data) => {
+        try {
+            const user = await registerUser(data);
+            if (user) {
+                navigate('/');
+            }
+        } catch (error) {
+            console.error("Error en el registro:", error);
+        }
+    };
+
+    if (!navigator.onLine) {
+        return <Card maxW='sm' bg='#f2e8d7' boxShadow='none'>
+            <CardBody>
+                <Image
+                    src={conection}
+                    alt='Desierto error'
+                    borderRadius='lg'
+                />
+            </CardBody>
+        </Card>
     }
 
     return (
@@ -56,7 +81,7 @@ export const Register = () => {
                         />
                         <InputRightElement width="4.5rem">
                             <Button h="1.75rem" size="sm" colorScheme='orange' onClick={handleClick}>
-                                {show ? "Hide" : "Show"}
+                                {show ? <PiEyes /> : <PiEyeClosedBold />}
                             </Button>
                         </InputRightElement>
                     </InputGroup>

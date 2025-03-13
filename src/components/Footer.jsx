@@ -1,11 +1,25 @@
 import { Divider, HStack, Image, Stack, Text, VStack } from '@chakra-ui/react'
-import logo from '../../public/logo3.png'
+import logo from '../../public/logo.png'
 import { Link, NavLink, Link as RouterLink } from 'react-router-dom'
 import { RiShoppingCartFill } from "react-icons/ri";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { MdOutlineEmail } from 'react-icons/md';
+import { useAuth } from '../context/AuthContext';
+import { useEffect, useState } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../firebase/config';
 
 const Footer = () => {
+
+    const { logout } = useAuth()
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setIsAuthenticated(!!user);
+        });
+        return () => unsubscribe();
+    }, []);
 
     return (
         <HStack marginTop='50px'>
@@ -35,13 +49,35 @@ const Footer = () => {
                         Home
                     </Text>
                 </Link>
-                <NavLink as={Link} to="register" fontSize='lg'>
-                    <Text
-                        fontSize={{ base: '15px', md: '18px' }}
-                    >
-                        Registrarse
-                    </Text>
-                </NavLink>
+                {isAuthenticated ? ''
+                    :
+                    <>
+                        <NavLink as={Link} to="register" fontSize='lg'>
+                            <Text
+                                fontSize={{ base: '15px', md: '18px' }}
+                            >
+                                Registrarse
+                            </Text>
+                        </NavLink>
+                    </>
+                }
+                {isAuthenticated ? (
+                    <NavLink as="button" onClick={logout} fontSize='lg'>
+                        <Text
+                            fontSize={{ base: '15px', md: '18px' }}
+                        >
+                            Logout
+                        </Text>
+                    </NavLink>
+                ) : (
+                    <NavLink as="button" to="login" fontSize='lg'>
+                        <Text
+                            fontSize={{ base: '15px', md: '18px' }}
+                        >
+                            Login
+                        </Text>
+                    </NavLink>
+                )}
                 <NavLink as={Link} to="cart">
                     <Text fontSize={{ base: '15px', md: '18px' }}>
                         <RiShoppingCartFill />

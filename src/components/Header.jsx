@@ -11,10 +11,10 @@ import { useAuth } from '../context/AuthContext'
 import { useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase/config'
-import logo from '../../public/logo3.png'
+import logo from '/logo.png'
 import helado1 from '../assets/helado1.png'
 import helado from '../assets/helado.png'
-import { RiShoppingCartFill } from "react-icons/ri";
+import { RiShoppingCartFill } from "react-icons/ri"
 
 const Header = () => {
 
@@ -78,17 +78,22 @@ const Header = () => {
                 <Stack direction='row' h='32px' p={4} gap='unset' padding='0px'>
                     <Divider orientation='vertical' border='1px solid #f7b3cd' />
                 </Stack>
-                <NavLink as={Link} to="register" fontSize='lg'>
-                    <Text
-                        fontSize={{ base: '18px', md: '25px', lg: '29px' }}
-                    >
-                        Registrarse
-                    </Text>
-                </NavLink>
-                <Stack direction='row' h='32px' p={4} gap='unset' padding='0px'>
-                    <Divider orientation='vertical' border='1px solid #f7b3cd' />
-                </Stack>
-                { isAuthenticated ? (
+                {isAuthenticated ? ''
+                    :
+                    <>
+                        <NavLink as={Link} to="register" fontSize='lg'>
+                            <Text
+                                fontSize={{ base: '18px', md: '25px', lg: '29px' }}
+                            >
+                                Registrarse
+                            </Text>
+                        </NavLink>
+                        <Stack direction='row' h='32px' p={4} gap='unset' padding='0px'>
+                            <Divider orientation='vertical' border='1px solid #f7b3cd' />
+                        </Stack>
+                    </>
+                }
+                {isAuthenticated ? (
                     <NavLink as="button" onClick={logout} fontSize='lg'>
                         <Text
                             fontSize={{ base: '18px', md: '25px', lg: '29px' }}
@@ -106,7 +111,7 @@ const Header = () => {
                     </NavLink>
                 )}
                 <Stack direction='row' h='32px' p={4} gap='unset' padding='0px'>
-                    <Divider orientation='vertical' border='1px solid #f7b3cd'/>
+                    <Divider orientation='vertical' border='1px solid #f7b3cd' />
                 </Stack>
                 <NavLink as={Link} to="cart">
                     <Text fontSize={{ base: '18px', md: '25px', lg: '29px' }}>
