@@ -1,19 +1,19 @@
+import { useToast } from '@chakra-ui/react';
 import {
     createUserWithEmailAndPassword,
+    GoogleAuthProvider,
     onAuthStateChanged,
     signInWithEmailAndPassword,
     signInWithPopup,
     signOut,
-} from 'firebase/auth'
+} from 'firebase/auth';
 import {
     createContext,
     useContext,
     useEffect,
     useState
-} from 'react'
-import { auth } from '../firebase/config'
-import { useToast } from '@chakra-ui/react'
-import { GoogleAuthProvider } from "firebase/auth";
+} from 'react';
+import { auth } from '../firebase/config';
 
 const AuthContext = createContext()
 
@@ -34,15 +34,9 @@ export const AuthProvider = ({ children }) => {
     }, [])
 
     const registerUser = async ({ email, password }) => {
-
         try {
-            const userCredential = await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password
-            )
-
-            const user = userCredential.user
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
             toast({
                 title: 'Usuario registrado correctamente',
                 position: 'top',
@@ -50,7 +44,6 @@ export const AuthProvider = ({ children }) => {
                 isClosable: true,
                 duration: 3000,
             })
-
             return user
         } catch (error) {
             toast({
@@ -61,7 +54,8 @@ export const AuthProvider = ({ children }) => {
                 isClosable: true,
                 duration: 3000,
             })
-        };
+            return null
+        }
     }
 
     const login = async ({ email, password }) => {
