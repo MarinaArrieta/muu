@@ -26,7 +26,6 @@ import {
     VStack,
 } from "@chakra-ui/react";
 import {
-    addDoc,
     collection,
     deleteDoc,
     doc,
@@ -39,67 +38,12 @@ import {
 import { useEffect, useState } from 'react';
 import { RiDeleteBinFill } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
+import carritoVacio from '../assets/carrito-vacio.png';
+import purchase from '../assets/compra.png';
+import conection from "../assets/conection.png";
 import { useAuth } from '../context/AuthContext';
 import { db } from "../firebase/config";
 import { getProductsFromCart } from "../services/products";
-import carritoVacio from '../assets/carrito-vacio.png'
-import purchase from '../assets/compra.png'
-import register from '../assets/registrate.png'
-import conection from "../assets/conection.png"
-
-const createItemCart = async (id_product, id_user) => {
-    const doc = await addDoc(collection(db, "cart_item"), {
-        id_product,
-        id_user
-    });
-    return doc;
-}
-
-export const addToCart = async (product_id, user_id) => {
-    try {
-        const item_cart = await createItemCart(
-            product_id,
-            user_id
-        )
-
-    } catch (error) {
-        toast({
-            title: 'Hubo un error',
-            description: 'Inténtalo de nuevo',
-            position: 'top',
-            status: 'error',
-            duration: 3000,
-            isClosable: true,
-        })
-
-    }
-}
-
-const deleteItemCart = async (id_product, id_user) => {
-    try {
-        const cartItemsRef = collection(db, "cart_item");
-        const q = query(
-            cartItemsRef,
-            where("id_product", "==", id_product),
-            where("id_user", "==", id_user)
-        );
-
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach(async (docSnap) => {
-            const docRef = doc(db, "cart_item", docSnap.id);
-            await deleteDoc(docRef);
-        });
-    } catch (error) {
-        toast({
-            title: 'Hubo un error',
-            description: 'Inténtalo de nuevo',
-            position: 'top',
-            status: 'error',
-            duration: 3000,
-            isClosable: true,
-        })
-    }
-}
 
 export const Cart = () => {
 
@@ -108,6 +52,32 @@ export const Cart = () => {
     const [loading, setLoading] = useState(true)
     const { user } = useAuth()
     const { isOpen, onOpen, onClose } = useDisclosure()
+
+    const deleteItemCart = async (id_product, id_user) => {
+        try {
+            const cartItemsRef = collection(db, "cart_item");
+            const q = query(
+                cartItemsRef,
+                where("id_product", "==", id_product),
+                where("id_user", "==", id_user)
+            );
+    
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach(async (docSnap) => {
+                const docRef = doc(db, "cart_item", docSnap.id);
+                await deleteDoc(docRef);
+            });
+        } catch (error) {
+            toast({
+                title: 'Hubo un error',
+                description: 'Inténtalo de nuevo',
+                position: 'top',
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+            })
+        }
+    }
 
     const handlePurchase = async (user, products) => {
         try {

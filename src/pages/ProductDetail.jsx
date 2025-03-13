@@ -19,7 +19,7 @@ import { Link, NavLink, useNavigate, useParams } from 'react-router-dom'
 import { useState, useEffect } from "react"
 import { getProducts } from "../services/products"
 import { useAuth } from '../context/AuthContext'
-import { addToCart } from './Cart'
+import { addToCart } from '../services/cart'
 import conection from "../assets/conection.png"
 
 const ProductDetail = () => {
