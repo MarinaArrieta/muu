@@ -10,18 +10,15 @@ import {
     Input,
     InputGroup,
     InputRightElement,
-    VStack,
 } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { useAuth } from "../../context/AuthContext";
-import { email, password } from "../../components/utils/validation";
+import { useForm } from "react-hook-form";
+import { PiEyeClosedBold, PiEyes } from "react-icons/pi";
 import { useNavigate } from 'react-router-dom';
-import conection from "../../assets/conection.png"
-import registerUser from '../../assets/registrate.png'
-import { LuEyeClosed } from "react-icons/lu";
-import { RiEyeCloseLine } from "react-icons/ri";
-import { PiEyeClosedBold, PiEyeClosedDuotone, PiEyes, PiEyesFill } from "react-icons/pi";
+import conection from "../../assets/conection.png";
+import registerUser from '../../assets/registrate.png';
+import { password } from "../../components/utils/validation";
+import { useAuth } from "../../context/AuthContext";
 
 export const Login = () => {
 
@@ -29,16 +26,22 @@ export const Login = () => {
     const handleClick = () => setShow(!show);
     const { register, formState, handleSubmit } = useForm();
     const { errors } = formState;
-    const { login, signInWithGoogle } = useAuth()
+    const { login, signInWithGoogle, email } = useAuth()
     const navigate = useNavigate();
 
     const handleGoogleSignIn = async () => {
         const user = await signInWithGoogle();
     };
 
-    const onSubmit = (data) => {
-        login(data)
-        navigate('/')
+    const onSubmit = async (data) => {
+        try {
+            const user = await login(data);
+            if (user) {
+                navigate('/');
+            }
+        } catch (error) {
+            console.error("Login failed:", error);
+        }
     }
 
     if (!navigator.onLine) {
